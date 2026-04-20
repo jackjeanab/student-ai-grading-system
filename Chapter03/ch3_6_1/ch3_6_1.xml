@@ -1,0 +1,78 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <block type="board_initializes_setup" id="0" x="450" y="170">
+    <field name="BOARD_TYPE">ESP32</field>
+    <statement name="CONTENT">
+      <block type="serial_init" id="SO6(=2O(WYvq6Txv2mEC">
+        <field name="SPEED">115200</field>
+      </block>
+    </statement>
+    <next>
+      <block type="initializes_loop" id="1">
+        <statement name="CONTENT">
+          <block type="servermodule_pinwrite" id="fn]T12JxS]W`ywZ.-QQB">
+            <value name="pin">
+              <block type="math_number" id="d#(pd^]Iu+LrP!yEELj$">
+                <field name="NUM">25</field>
+              </block>
+            </value>
+            <value name="val">
+              <block type="math_number" id="yFDah!R/4w;R.L];0p;t">
+                <field name="NUM">1</field>
+              </block>
+            </value>
+            <next>
+              <block type="serial_println" id="#a/)fse%HWJb8ci/vRF3">
+                <value name="CONTENT">
+                  <block type="text" id="SPo={6v`ABy.*StqYOFJ">
+                    <field name="TEXT">輸出高電位</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="delay_custom" id="u_soD@IeJDjN9G:LQS$5">
+                    <value name="DELAY_TIME">
+                      <block type="math_number" id="];LlW7GM3ig^/GXRrk:o">
+                        <field name="NUM">1000</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="servermodule_pinwrite" id="Uk6]$:^.A(/Fgj`9cJQm">
+                        <value name="pin">
+                          <block type="math_number" id="KUF6Zbp;_Llx.xe9ZoTG">
+                            <field name="NUM">25</field>
+                          </block>
+                        </value>
+                        <value name="val">
+                          <block type="math_number" id="N[Ei3X5CK/P%NHuL[nSG">
+                            <field name="NUM">0</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="serial_println" id="d8V8U}7_3X]u3UB$X]nK">
+                            <value name="CONTENT">
+                              <block type="text" id=";(QdG`N-Mvx}i,m%=jaw">
+                                <field name="TEXT">輸出低電位</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="delay_custom" id="x`z^(%}f}^x^8CpDu/Ja">
+                                <value name="DELAY_TIME">
+                                  <block type="math_number" id="xYb2-/]IUQ_oI@@D$.:9">
+                                    <field name="NUM">1000</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </next>
+  </block>
+</xml>

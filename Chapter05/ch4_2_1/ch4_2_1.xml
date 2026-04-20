@@ -1,0 +1,120 @@
+<xml version="F2" board="NodeMCU-32S" xmlns="https://developers.google.com/blockly/xml">
+  <block type="board_initializes_setup" id="0" x="100" y="50">
+    <field name="BOARD_TYPE">ESP32</field>
+    <statement name="CONTENT">
+      <block type="serial_init" id="g2]J+B(@7$=X#!.X^)4K">
+        <field name="SPEED">115200</field>
+        <next>
+          <block type="linkit_wifi_wait_until_ready" id="l%aN7rVmIyNRGHG05jJv">
+            <value name="SSID">
+              <block type="text" id="?76yX8X)$zdF]:g+f+4@">
+                <field name="TEXT">JackJean</field>
+              </block>
+            </value>
+            <value name="PASSWORD">
+              <block type="text" id="S`%xRN|*6nAwVhI)2=m5">
+                <field name="TEXT">0226852016</field>
+              </block>
+            </value>
+            <next>
+              <block type="inout_buildin_led" id="l}Gi4o9v8dkh3W.+0h63">
+                <field name="STAT">HIGH</field>
+                <next>
+                  <block type="set_ntp_time" id="5+SxN)aMm-{KxTCO4:$_">
+                    <field name="TZ">8</field>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <next>
+      <block type="initializes_loop" id="1">
+        <statement name="CONTENT">
+          <block type="serial_print" id="%1K1wQuTrn,)+3R=W}6u">
+            <value name="CONTENT">
+              <block type="text_join" id="p`t1ks`BY@BJH,Mi4kPn">
+                <mutation items="6"></mutation>
+                <value name="ADD0">
+                  <block type="get_RTC_field" id="f9pg^4zLYH-Gy!#|1wls">
+                    <field name="FIELDTYPE">0</field>
+                  </block>
+                </value>
+                <value name="ADD1">
+                  <block type="text" id=".!(-Wj{6P1@@}aFlDhN5">
+                    <field name="TEXT">/</field>
+                  </block>
+                </value>
+                <value name="ADD2">
+                  <block type="get_RTC_field" id="a.^eF;[$yEh[a!se_+h6">
+                    <field name="FIELDTYPE">1</field>
+                  </block>
+                </value>
+                <value name="ADD3">
+                  <block type="text" id="|^~5*Dn.EeguILi7d6wd">
+                    <field name="TEXT">/</field>
+                  </block>
+                </value>
+                <value name="ADD4">
+                  <block type="get_RTC_field" id="*wE[:E58Mv9_{@M`ra3w">
+                    <field name="FIELDTYPE">2</field>
+                  </block>
+                </value>
+                <value name="ADD5">
+                  <block type="text" id="$5myZ/NiLmT{TZIVoa-J">
+                    <field name="TEXT"> </field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="serial_println" id="ddV*w7_sX6-;56vqcN~|">
+                <value name="CONTENT">
+                  <block type="text_join" id="o)Bz5whyqYR}5f^h~DTa">
+                    <mutation items="5"></mutation>
+                    <value name="ADD0">
+                      <block type="get_RTC_field" id="FX-ZGe(2UicGJejNp*s2">
+                        <field name="FIELDTYPE">3</field>
+                      </block>
+                    </value>
+                    <value name="ADD1">
+                      <block type="text" id="Hz!XwM2BTXYA(,a.?.[n">
+                        <field name="TEXT">:</field>
+                      </block>
+                    </value>
+                    <value name="ADD2">
+                      <block type="get_RTC_field" id="vom-6N@#2!]%m1$x0q0c">
+                        <field name="FIELDTYPE">4</field>
+                      </block>
+                    </value>
+                    <value name="ADD3">
+                      <block type="text" id="CCrfr,LR7nwgl9_y!RV1">
+                        <field name="TEXT">:</field>
+                      </block>
+                    </value>
+                    <value name="ADD4">
+                      <block type="get_RTC_field" id="iQTA8@Q3K3Ytkb|VBp/i">
+                        <field name="FIELDTYPE">5</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="delay_custom" id="r,e6TnHx@ckZnkYllpN+">
+                    <value name="DELAY_TIME">
+                      <block type="math_number" id="ID)!5^JMlmZ)PhUKxYFW">
+                        <field name="NUM">1000</field>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </next>
+  </block>
+</xml>

@@ -1,0 +1,61 @@
+<xml version="F2" board="NodeMCU-32S" xmlns="https://developers.google.com/blockly/xml">
+  <block type="board_initializes_setup" id="0" x="430" y="-50">
+    <field name="BOARD_TYPE">ESP32</field>
+    <statement name="CONTENT">
+      <block type="serial_init" id="_Zgv`}R06tzVu+tPV(jA">
+        <field name="SPEED">115200</field>
+        <next>
+          <block type="ir_receiver_pin1" id="_9KWdXfK5G1=%/iX]1GW">
+            <value name="PIN">
+              <block type="math_number" id="@N:8HokFH3W]IC}8RZ+f">
+                <field name="NUM">33</field>
+              </block>
+            </value>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <next>
+      <block type="initializes_loop" id="1">
+        <statement name="CONTENT">
+          <block type="ir_event" id="Cy|@TpK;7m.d|Ma;Rk._">
+            <statement name="IR_EVENT">
+              <block type="serial_println" id="(s6y1X_iXE:K46@sfI(;">
+                <value name="CONTENT">
+                  <block type="text_join" id="56Md8cp^EC)%A}H#8s;^">
+                    <mutation items="2"></mutation>
+                    <value name="ADD0">
+                      <block type="text" id="OD-aXCd,~[2eKrd{D/}[">
+                        <field name="TEXT">訊息類型：</field>
+                      </block>
+                    </value>
+                    <value name="ADD1">
+                      <block type="ir_received_type" id="]gjW`kL?3;$~ATgRZKHM"></block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="serial_println" id="#:94Cc!}f;dWC;SH^`,u">
+                    <value name="CONTENT">
+                      <block type="text_join" id="%/^HZ2Yy9}L,2pM`KCDh">
+                        <mutation items="2"></mutation>
+                        <value name="ADD0">
+                          <block type="text" id="=q`*|[-PX/nyxqg1y%?Q">
+                            <field name="TEXT">訊息：</field>
+                          </block>
+                        </value>
+                        <value name="ADD1">
+                          <block type="ir_received_code" id="Qh@QZ0hOCOYeqIjS?7B."></block>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </statement>
+          </block>
+        </statement>
+      </block>
+    </next>
+  </block>
+</xml>

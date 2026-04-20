@@ -1,0 +1,159 @@
+<xml version="F2" board="NodeMCU-32S" xmlns="https://developers.google.com/blockly/xml">
+  <block type="board_initializes_setup" id="0" x="150" y="50">
+    <field name="BOARD_TYPE">ESP32</field>
+    <next>
+      <block type="initializes_loop" id="1">
+        <statement name="CONTENT">
+          <block type="procedures_callnoreturn" id="#WX9Rbp$6%VYO9s30(0;">
+            <mutation xmlns="http://www.w3.org/1999/xhtml" name="mySong1"></mutation>
+            <value name="VAR">
+              <shadow type="lists_create_with" id="[#d~0h,.O4{oQ3G!IIc3">
+                <mutation items="0"></mutation>
+              </shadow>
+            </value>
+            <next>
+              <block type="procedures_callnoreturn" id="wsjayc2R$AF#iEiaOgul">
+                <mutation xmlns="http://www.w3.org/1999/xhtml" name="mySong2"></mutation>
+                <value name="VAR">
+                  <shadow type="lists_create_with" id="?NUiW`G]vKy|l*$|1Bw:">
+                    <mutation items="0"></mutation>
+                  </shadow>
+                </value>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </next>
+  </block>
+  <block type="procedures_defnoreturn" id="yS%YHsIMg`[Wn:MpMw8;" x="430" y="51">
+    <field name="NAME">mySong1</field>
+    <value name="VAR">
+      <shadow type="lists_create_with" id="o*.}MpLWy|AB/yL}%94~" inline="true">
+        <mutation items="0"></mutation>
+      </shadow>
+    </value>
+    <statement name="STACK">
+      <block type="esp32_buzzer" id=":K+@FzXdDbLie0U0Hrt!">
+        <field name="frequency">784</field>
+        <field name="index">0</field>
+        <value name="pin">
+          <block type="math_number" id="MZO0F!Bghz|B9vi05;UW">
+            <field name="NUM">14</field>
+          </block>
+        </value>
+        <value name="delaytime">
+          <block type="math_number" id="6W.9j)@b{`$;LfC#mh4t">
+            <field name="NUM">500</field>
+          </block>
+        </value>
+        <next>
+          <block type="esp32_buzzer" id="#Xu[0iG8UsvtI*$WobHo">
+            <field name="frequency">659</field>
+            <field name="index">0</field>
+            <value name="pin">
+              <block type="math_number" id="6!x,LaSnT8{ST2]U#UvV">
+                <field name="NUM">14</field>
+              </block>
+            </value>
+            <value name="delaytime">
+              <block type="math_number" id="iD)-PQG)ep{{%e^HF9);">
+                <field name="NUM">500</field>
+              </block>
+            </value>
+            <next>
+              <block type="esp32_buzzer" id="av]co4sTOT4RSe!aIQ1X">
+                <field name="frequency">659</field>
+                <field name="index">0</field>
+                <value name="pin">
+                  <block type="math_number" id="YI92_yLoUIHci3Y_jgo/">
+                    <field name="NUM">14</field>
+                  </block>
+                </value>
+                <value name="delaytime">
+                  <block type="math_number" id="Y)5){N?f2Z2]cdM5sOOF">
+                    <field name="NUM">500</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="delay_custom" id="dY|$*x2oY[tXSXPu[Jp4">
+                    <value name="DELAY_TIME">
+                      <block type="math_number" id="UXRP=DCu@;}QKMW?D_,)">
+                        <field name="NUM">500</field>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="procedures_defnoreturn" id="Yc@ldUs-a6|pYU7]6@E~" x="430" y="270">
+    <field name="NAME">mySong2</field>
+    <value name="VAR">
+      <shadow type="lists_create_with" id="~.W::!S)oxGhH(xW.~?=" inline="true">
+        <mutation items="0"></mutation>
+      </shadow>
+    </value>
+    <statement name="STACK">
+      <block type="esp32_buzzer" id="m;A^X}ZZbe^)/fWV#1hw">
+        <field name="frequency">698</field>
+        <field name="index">0</field>
+        <value name="pin">
+          <block type="math_number" id="_yw;5l}dX.jGX02plsTl">
+            <field name="NUM">14</field>
+          </block>
+        </value>
+        <value name="delaytime">
+          <block type="math_number" id="$sgz3gw.Y0%t(ve5v;_p">
+            <field name="NUM">500</field>
+          </block>
+        </value>
+        <next>
+          <block type="esp32_buzzer" id="(RN(zsAPkF`3=75B)DZ$">
+            <field name="frequency">587</field>
+            <field name="index">0</field>
+            <value name="pin">
+              <block type="math_number" id="IoEf)AE/7dKBm2nu!yR;">
+                <field name="NUM">14</field>
+              </block>
+            </value>
+            <value name="delaytime">
+              <block type="math_number" id="$CowX{V:}RHq|YrNp-OZ">
+                <field name="NUM">500</field>
+              </block>
+            </value>
+            <next>
+              <block type="esp32_buzzer" id="`EH-UfSo`i_m1@EjVVh:">
+                <field name="frequency">587</field>
+                <field name="index">0</field>
+                <value name="pin">
+                  <block type="math_number" id=";KN,S4._)lLm^6ug|0[,">
+                    <field name="NUM">14</field>
+                  </block>
+                </value>
+                <value name="delaytime">
+                  <block type="math_number" id="bwQ(Xx)LG25Af%(_%/mD">
+                    <field name="NUM">500</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="delay_custom" id="c}dLSW$xf[fBRY=z(3-n">
+                    <value name="DELAY_TIME">
+                      <block type="math_number" id="m@F)|r+c^|5KUMA]*4Q)">
+                        <field name="NUM">500</field>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>

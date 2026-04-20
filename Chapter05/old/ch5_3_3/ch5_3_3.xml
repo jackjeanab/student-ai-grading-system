@@ -1,0 +1,73 @@
+<xml version="F2" board="NodeMCU-32S" xmlns="https://developers.google.com/blockly/xml">
+  <block type="board_initializes_setup" id="0" x="100" y="50">
+    <field name="BOARD_TYPE">ESP32</field>
+    <statement name="CONTENT">
+      <block type="serial_init" id="]*:Md-w6%}~DJW|XV4S_">
+        <field name="SPEED">115200</field>
+        <next>
+          <block type="linkit_wifi_wait_until_ready" id="s(=3UPs0$c$aYDQ(-)PV">
+            <value name="SSID">
+              <block type="text" id="w=ag1U=5,W7PiM#ifP(I">
+                <field name="TEXT">JackJean</field>
+              </block>
+            </value>
+            <value name="PASSWORD">
+              <block type="text" id="*~y.Uk`iGM*mNTu4N@gi">
+                <field name="TEXT">0226852016</field>
+              </block>
+            </value>
+            <next>
+              <block type="lineBotInit" id="W3$!O+f2`kmvFy}w2Ddx">
+                <value name="ID">
+                  <block type="text" id="fkMraStMl,._JP{+~tW!">
+                    <field name="TEXT">U46925a783f3611c2dd6d1eb086767a1a</field>
+                  </block>
+                </value>
+                <value name="TOKEN">
+                  <block type="text" id="y+nzX93ApGYlQco(x6gG">
+                    <field name="TEXT">tdyEbxfwzvQ1zPkjtYdXPVGsPIsi2iA2/eD8pJR19UQuCzuKEPmr2sQOtagFgxD+DbKEXQ18g7bQY5L5IYsc9/ABTMEbBNrqzQpDMNqfdfmyHEbZOvjXG6iYA/A2efNOxDOIpWe2rZrMLPPxrjPv7AdB04t89/1O/w1cDnyilFU=</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="sendLineBotSticker" id="ItN/?f[j^7F}/s=L|uu9">
+                    <value name="CONTENT">
+                      <block type="text_join" id="ytWlA^*Z_JNDM/%K7k]y">
+                        <mutation items="3"></mutation>
+                        <value name="ADD0">
+                          <block type="text" id="0N-O~iZHnr-=[=nd[V`l">
+                            <field name="TEXT">JackJean</field>
+                          </block>
+                        </value>
+                        <value name="ADD1">
+                          <block type="breakLine" id="5;oGLxS6}2OKPD.jhau-"></block>
+                        </value>
+                        <value name="ADD2">
+                          <block type="text" id="lN9x%Nb+nQPIAZL^;[Ag">
+                            <field name="TEXT">測試</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <value name="PACKAGEID">
+                      <block type="math_number" id="50/l{BGDm$ZN0s=hy|gJ">
+                        <field name="NUM">1</field>
+                      </block>
+                    </value>
+                    <value name="STICKERID">
+                      <block type="math_number" id="3.-!:ivAo9G5R4zRfYtX">
+                        <field name="NUM">1</field>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <next>
+      <block type="initializes_loop" id="1"></block>
+    </next>
+  </block>
+</xml>

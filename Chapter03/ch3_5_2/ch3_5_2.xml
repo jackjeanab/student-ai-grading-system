@@ -1,0 +1,360 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="T@/y|[:r)TlRGeKO8Liv">Dir</variable>
+    <variable id="PPSjnVn0KCI]SSlw~o`x">Text</variable>
+    <variable id="i7t9O`VQ9=0MP_)*`RIQ">ReData</variable>
+  </variables>
+  <block type="board_initializes_setup" id="0" x="150" y="-150">
+    <field name="BOARD_TYPE">ESP32</field>
+    <statement name="CONTENT">
+      <block type="serial_init" id="_Zgv`}R06tzVu+tPV(jA">
+        <field name="SPEED">115200</field>
+        <next>
+          <block type="ir_receiver_pin1" id="_9KWdXfK5G1=%/iX]1GW">
+            <value name="PIN">
+              <block type="math_number" id="@N:8HokFH3W]IC}8RZ+f">
+                <field name="NUM">33</field>
+              </block>
+            </value>
+            <next>
+              <block type="variables_set" id="Jqn4Eze-,fRI_o^y2{*7">
+                <field name="POSITION">global</field>
+                <field name="TYPE">String</field>
+                <field name="VAR" id="i7t9O`VQ9=0MP_)*`RIQ">ReData</field>
+                <value name="VALUE">
+                  <shadow type="math_number" id="5EkA/Q0)Oz].AXfc}QVv">
+                    <field name="NUM">0</field>
+                  </shadow>
+                  <block type="text" id="KSF$?sqVYjKU-z%7m+Pz">
+                    <field name="TEXT"></field>
+                  </block>
+                </value>
+                <next>
+                  <block type="fu_oled_initial" id="S2$ri8U~.CW[[PfEG*bq">
+                    <field name="format">U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, /* reset=*/ U8X8_PIN_NONE);</field>
+                    <field name="display">U8G2_R0</field>
+                    <field name="utf8">1</field>
+                    <next>
+                      <block type="procedures_callnoreturn" id="5)B]v$~oWD:m+CG~UKyp">
+                        <mutation xmlns="http://www.w3.org/1999/xhtml" name="Display"></mutation>
+                        <value name="VAR">
+                          <block type="lists_create_with" id=")~;7y-B(q?9JsQb$gc81">
+                            <mutation items="2"></mutation>
+                            <value name="ADD0">
+                              <block type="text" id="0:w^qL|8~,9cD/$:PEWH">
+                                <field name="TEXT">未啟動</field>
+                              </block>
+                            </value>
+                            <value name="ADD1">
+                              <block type="math_number" id="$}.fML1W(=XC[$I+=]N4">
+                                <field name="NUM">113</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="initializes_loop" id="1" x="150" y="210">
+    <statement name="CONTENT">
+      <block type="ir_event" id="Cy|@TpK;7m.d|Ma;Rk._">
+        <statement name="IR_EVENT">
+          <block type="variables_set3" id="HTKFt5`T0mUde0=+y];z">
+            <field name="VAR" id="i7t9O`VQ9=0MP_)*`RIQ">ReData</field>
+            <value name="DELTA">
+              <shadow type="math_number" id="@0fz96!$L~=cPk$8{)=O">
+                <field name="NUM">0</field>
+              </shadow>
+              <block type="ir_received_code" id="Qh@QZ0hOCOYeqIjS?7B."></block>
+            </value>
+            <next>
+              <block type="serial_println" id="#:94Cc!}f;dWC;SH^`,u">
+                <value name="CONTENT">
+                  <block type="text_join" id="%/^HZ2Yy9}L,2pM`KCDh">
+                    <mutation items="2"></mutation>
+                    <value name="ADD0">
+                      <block type="text" id="=q`*|[-PX/nyxqg1y%?Q">
+                        <field name="TEXT">訊息：</field>
+                      </block>
+                    </value>
+                    <value name="ADD1">
+                      <block type="variables_get" id="#*G?zp)-fni9Bo9|yzp|">
+                        <field name="VAR" id="i7t9O`VQ9=0MP_)*`RIQ">ReData</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="controls_if" id="$zodBTB7rgEgBIn9anwY">
+                    <mutation elseif="4"></mutation>
+                    <value name="IF0">
+                      <block type="logic_compare" id="3pIZy{,FnhZ5U:Tb?N+1">
+                        <field name="OP">EQ</field>
+                        <value name="A">
+                          <block type="variables_get" id="0k~$)2@b^O]AmPHM3wEU">
+                            <field name="VAR" id="i7t9O`VQ9=0MP_)*`RIQ">ReData</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="text" id="1[lVOCn@|D5K?SxVa/cx">
+                            <field name="TEXT">ff38c7</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="DO0">
+                      <block type="procedures_callnoreturn" id="Z5!w:|T*S-#uDg;OGqtj">
+                        <mutation xmlns="http://www.w3.org/1999/xhtml" name="Display"></mutation>
+                        <value name="VAR">
+                          <block type="lists_create_with" id="S2(?-|/=V|cCd@e+G2[v">
+                            <mutation items="2"></mutation>
+                            <value name="ADD0">
+                              <block type="text" id="(NDv+(O5+^HV.#Hy}v0)">
+                                <field name="TEXT">停車歐</field>
+                              </block>
+                            </value>
+                            <value name="ADD1">
+                              <block type="math_number" id="QYu`#i(?c:G{q7O5]K2b">
+                                <field name="NUM">121</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </statement>
+                    <value name="IF1">
+                      <block type="logic_compare" id="Fq_.|BA_5F?N-(oiN-D~">
+                        <field name="OP">EQ</field>
+                        <value name="A">
+                          <block type="variables_get" id="Yr4hMFJ*PR!T=9+Wv/0q">
+                            <field name="VAR" id="i7t9O`VQ9=0MP_)*`RIQ">ReData</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="text" id="BNRbflqct($?k9jz.?r?">
+                            <field name="TEXT">ff18e7</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="DO1">
+                      <block type="procedures_callnoreturn" id="WVkPit%J0D:y%KBDP+1-">
+                        <mutation xmlns="http://www.w3.org/1999/xhtml" name="Display"></mutation>
+                        <value name="VAR">
+                          <block type="lists_create_with" id="fQTsy!Z.(tQ~G/8^fpPH">
+                            <mutation items="2"></mutation>
+                            <value name="ADD0">
+                              <block type="text" id="dgeQ%X?yF(S~zYL?vR%g">
+                                <field name="TEXT">往前進</field>
+                              </block>
+                            </value>
+                            <value name="ADD1">
+                              <block type="math_number" id="0e*q0o2Be9Q4e=1pu4*+">
+                                <field name="NUM">76</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </statement>
+                    <value name="IF2">
+                      <block type="logic_compare" id="L98ODs9NtH6*,R|+5q~/">
+                        <field name="OP">EQ</field>
+                        <value name="A">
+                          <block type="variables_get" id="[XXA=`wC4~.i;dg`1=]O">
+                            <field name="VAR" id="i7t9O`VQ9=0MP_)*`RIQ">ReData</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="text" id="@L:/BXjPBFJ%w6nyF9:t">
+                            <field name="TEXT">ff4ab5</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="DO2">
+                      <block type="procedures_callnoreturn" id="QSfVC|ZGG8_,C{ZCJfn~">
+                        <mutation xmlns="http://www.w3.org/1999/xhtml" name="Display"></mutation>
+                        <value name="VAR">
+                          <block type="lists_create_with" id="NwTCq`Ne049vji#;k[Ji">
+                            <mutation items="2"></mutation>
+                            <value name="ADD0">
+                              <block type="text" id="OH!fTvFIRqhqv|[$xyQ+">
+                                <field name="TEXT">倒車啦</field>
+                              </block>
+                            </value>
+                            <value name="ADD1">
+                              <block type="math_number" id="C}1+vSpG.A$^sK,I^le@">
+                                <field name="NUM">73</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </statement>
+                    <value name="IF3">
+                      <block type="logic_compare" id="%Ln3)-r#r(`[@@.0Et#w">
+                        <field name="OP">EQ</field>
+                        <value name="A">
+                          <block type="variables_get" id="RZ12xC-476Ys~UetjdB|">
+                            <field name="VAR" id="i7t9O`VQ9=0MP_)*`RIQ">ReData</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="text" id=",Fc;RI!Ta+6O7f%f.*0T">
+                            <field name="TEXT">ff10ef</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="DO3">
+                      <block type="procedures_callnoreturn" id="}4kme$Lx,1ybv/e(WO2C">
+                        <mutation xmlns="http://www.w3.org/1999/xhtml" name="Display"></mutation>
+                        <value name="VAR">
+                          <block type="lists_create_with" id="+Cs[Do3!wbb?7;/B(KO^">
+                            <mutation items="2"></mutation>
+                            <value name="ADD0">
+                              <block type="text" id="X=-3`Dbk}cJa/6gF[MF)">
+                                <field name="TEXT">左轉轉</field>
+                              </block>
+                            </value>
+                            <value name="ADD1">
+                              <block type="math_number" id="GT[VpO/uFPvRk]5KLnQ4">
+                                <field name="NUM">74</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </statement>
+                    <value name="IF4">
+                      <block type="logic_compare" id="nf4A5-bt4)]dx*Ycth+u">
+                        <field name="OP">EQ</field>
+                        <value name="A">
+                          <block type="variables_get" id="l]MoU:$A58?{YZo,__s#">
+                            <field name="VAR" id="i7t9O`VQ9=0MP_)*`RIQ">ReData</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="text" id="V];mjs.HW]45$ujrNb.U">
+                            <field name="TEXT">ff5aa5</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="DO4">
+                      <block type="procedures_callnoreturn" id="Z%C,I#t9n59YLryyoy^D">
+                        <mutation xmlns="http://www.w3.org/1999/xhtml" name="Display"></mutation>
+                        <value name="VAR">
+                          <block type="lists_create_with" id="Kc/yy]eloKWxuOhYY4dr">
+                            <mutation items="2"></mutation>
+                            <value name="ADD0">
+                              <block type="text" id="ce/_9x:W3z.$=G~^ds[^">
+                                <field name="TEXT">右轉轉</field>
+                              </block>
+                            </value>
+                            <value name="ADD1">
+                              <block type="math_number" id="KpUkP5k(!eUQhj|#+(_U">
+                                <field name="NUM">75</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </statement>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+  <block type="procedures_defnoreturn" id="04ag79=rshUs!cE09+_N" x="650" y="230">
+    <field name="NAME">Display</field>
+    <value name="VAR">
+      <shadow type="lists_create_with" inline="true">
+        <mutation items="0"></mutation>
+      </shadow>
+      <block type="lists_create_with" id="$~vI:6:l7_**~oo[8-g)" inline="true">
+        <mutation items="2"></mutation>
+        <value name="ADD0">
+          <block type="variables_set2" id="81/OlPhj92c)?:U*_,B-">
+            <field name="TYPE">String</field>
+            <field name="VAR" id="PPSjnVn0KCI]SSlw~o`x">Text</field>
+          </block>
+        </value>
+        <value name="ADD1">
+          <block type="variables_set2" id="/7YZ;/~Fg(P`70i3mfm_">
+            <field name="TYPE">int</field>
+            <field name="VAR" id="T@/y|[:r)TlRGeKO8Liv">Dir</field>
+          </block>
+        </value>
+      </block>
+    </value>
+    <statement name="STACK">
+      <block type="fu_oled_nextPage" id="jRvzEsM3O_N[~/,8VW)e">
+        <statement name="draw">
+          <block type="fu_oled_setFont_chinese" id="L0bryLeAWbv7m|)EXJS8">
+            <field name="font">u8g2_font_unifont_t_chinese1</field>
+            <next>
+              <block type="fu_oled_drawUTF8" id="(jj#,d8*0fGcGMP,w{{K">
+                <value name="x">
+                  <shadow type="math_number" id="Oo+E1@UO]`7JDaYO)NsL">
+                    <field name="NUM">3</field>
+                  </shadow>
+                </value>
+                <value name="y">
+                  <shadow type="math_number" id="SRE*q/TRqX=*S{?f9,+a">
+                    <field name="NUM">18</field>
+                  </shadow>
+                </value>
+                <value name="str">
+                  <block type="variables_get" id="BQXGUC;C8h41$iiX9`;v">
+                    <field name="VAR" id="PPSjnVn0KCI]SSlw~o`x">Text</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="fu_oled_setFont_icon" id="f$S}$A[6p|grbv_FYUb7">
+                    <field name="font">u8g2_font_open_iconic_all_2x_t</field>
+                    <next>
+                      <block type="fu_oled_drawGlyph" id="#M$kV/[7)n```zNpz]BB">
+                        <value name="x">
+                          <shadow type="math_number" id="CV8hknqWeL57e_i6.ql-">
+                            <field name="NUM">55</field>
+                          </shadow>
+                        </value>
+                        <value name="y">
+                          <shadow type="math_number" id="Y[-E{92RemtYngQ9Z?g,">
+                            <field name="NUM">20</field>
+                          </shadow>
+                        </value>
+                        <value name="position">
+                          <shadow type="math_number" id=".7Y]Qy`dBwY^OC(ZMg~G">
+                            <field name="NUM">73</field>
+                          </shadow>
+                          <block type="variables_get" id="l9)je*Ui!m}|(Fa4q4A$">
+                            <field name="VAR" id="T@/y|[:r)TlRGeKO8Liv">Dir</field>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+</xml>

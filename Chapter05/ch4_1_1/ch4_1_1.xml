@@ -1,0 +1,53 @@
+<xml version="F2" board="NodeMCU-32S" xmlns="https://developers.google.com/blockly/xml">
+  <block type="board_initializes_setup" id="0" x="100" y="50">
+    <field name="BOARD_TYPE">7697</field>
+    <statement name="CONTENT">
+      <block type="serial_init" id="g2]J+B(@7$=X#!.X^)4K">
+        <field name="SPEED">115200</field>
+        <next>
+          <block type="linkit_wifi_wait_until_ready" id="l%aN7rVmIyNRGHG05jJv">
+            <value name="SSID">
+              <block type="text" id="?76yX8X)$zdF]:g+f+4@">
+                <field name="TEXT">你的WiFi熱點帳號</field>
+              </block>
+            </value>
+            <value name="PASSWORD">
+              <block type="text" id="S`%xRN|*6nAwVhI)2=m5">
+                <field name="TEXT">你的WiF熱點密碼</field>
+              </block>
+            </value>
+            <next>
+              <block type="serial_println" id="8gcI`uoa,TyT;W^!6v_(">
+                <value name="CONTENT">
+                  <block type="text" id="L+1:^2;!u*99?kH??IAM">
+                    <field name="TEXT">WiFi連線成功!</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="serial_println" id="@tzNlZ5.Ruw=a{L{c7K.">
+                    <value name="CONTENT">
+                      <block type="text_join" id="D#AwxgHng`.mA[2%k?^c">
+                        <mutation items="2"></mutation>
+                        <value name="ADD0">
+                          <block type="text" id="ejxt^:esdP%+3-nOMa.o">
+                            <field name="TEXT">IP是 </field>
+                          </block>
+                        </value>
+                        <value name="ADD1">
+                          <block type="linkit_wifi_ip_address" id="2i_IS[39G[gf2.3!rxq%"></block>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <next>
+      <block type="initializes_loop" id="1"></block>
+    </next>
+  </block>
+</xml>

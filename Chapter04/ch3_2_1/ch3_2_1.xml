@@ -1,0 +1,70 @@
+<xml version="F2" board="NodeMCU-32S" xmlns="https://developers.google.com/blockly/xml">
+  <block type="board_initializes_setup" id="0" x="-150" y="70">
+    <field name="BOARD_TYPE">ESP32</field>
+    <statement name="CONTENT">
+      <block type="esp32_blekeyboard" id="}pJe0Ct#wjc$i8wvJ1~2">
+        <value name="blename">
+          <block type="text" id="B)VQ;57vU,w7#Gvoi[Kh">
+            <field name="TEXT">ESP32 BLE Keyboard</field>
+          </block>
+        </value>
+      </block>
+    </statement>
+    <next>
+      <block type="initializes_loop" id="1">
+        <statement name="CONTENT">
+          <block type="controls_if" id="*ab`T5ma;GRk{x$i=;0~">
+            <mutation elseif="1"></mutation>
+            <value name="IF0">
+              <block type="fu_ez_digitalread_button" id=";/[#~d5!^[Av|)wrJ6_8">
+                <field name="type">A</field>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="esp32_blekeyboard_press" id="W?JO9|W-7A1s4zZH]y_;">
+                <value name="keycode1">
+                  <block type="esp32_blekeyboard_keycode" id="Kc+6P:1=0G!u0KA-!wZ#">
+                    <field name="keycode">KEY_PAGE_UP</field>
+                  </block>
+                </value>
+                <value name="presstime">
+                  <block type="math_number" id="jmXyncWXM{SjeoW5klE1">
+                    <field name="NUM">100</field>
+                  </block>
+                </value>
+              </block>
+            </statement>
+            <value name="IF1">
+              <block type="fu_ez_digitalread_button" id="Nj-@NF.J=Lh,Fa|i=kNj">
+                <field name="type">B</field>
+              </block>
+            </value>
+            <statement name="DO1">
+              <block type="esp32_blekeyboard_press" id=";VfiwD3`3(k~cg?*D(:j">
+                <value name="keycode1">
+                  <block type="esp32_blekeyboard_keycode" id="Vi6{9P%1YI|_V#(q=_}V">
+                    <field name="keycode">KEY_PAGE_DOWN</field>
+                  </block>
+                </value>
+                <value name="presstime">
+                  <block type="math_number" id=".=^l{k5Mhjo*qH|5OI)k">
+                    <field name="NUM">100</field>
+                  </block>
+                </value>
+              </block>
+            </statement>
+            <next>
+              <block type="delay_custom" id="h5[nic~)kJ7T)?]]|ca,">
+                <value name="DELAY_TIME">
+                  <block type="math_number" id="R*q9d~N#O:S5IYXn_.lP">
+                    <field name="NUM">100</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </next>
+  </block>
+</xml>

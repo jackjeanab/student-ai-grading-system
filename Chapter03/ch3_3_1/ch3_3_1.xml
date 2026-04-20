@@ -1,0 +1,114 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <block type="board_initializes_setup" id="0" x="100" y="50">
+    <field name="BOARD_TYPE">ESP32</field>
+    <next>
+      <block type="initializes_loop" id="1">
+        <statement name="CONTENT">
+          <block type="procedures_callnoreturn" id="^@^T2Dpt*u{ZK:A5~@}G">
+            <mutation xmlns="http://www.w3.org/1999/xhtml" name="Alarm sound"></mutation>
+            <value name="VAR">
+              <shadow type="lists_create_with" id="S5,T)wxYv!eSHNOu!HB{">
+                <mutation items="0"></mutation>
+              </shadow>
+            </value>
+            <next>
+              <block type="delay_custom" id="1A~dpp`5uxSU9^dlj$v~">
+                <value name="DELAY_TIME">
+                  <block type="math_number" id="#FvHME`N6Q+gAD+Jlt$m">
+                    <field name="NUM">1000</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="procedures_callnoreturn" id="Z920JBCD+JnTa,dixT_b">
+                    <mutation xmlns="http://www.w3.org/1999/xhtml" name="Alarm sound"></mutation>
+                    <value name="VAR">
+                      <shadow type="lists_create_with" id="o?~xq_`HC}#jvud/Q~%Z">
+                        <mutation items="0"></mutation>
+                      </shadow>
+                    </value>
+                    <next>
+                      <block type="delay_custom" id="]Mh-xf@71Q(tT,mL`KG#">
+                        <value name="DELAY_TIME">
+                          <block type="math_number" id="y([4ztt=a~eIOI+Y3;7b">
+                            <field name="NUM">500</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="procedures_callnoreturn" id="ynM;?Vz_f.xo}7,SCm*J">
+                            <mutation xmlns="http://www.w3.org/1999/xhtml" name="Alarm sound"></mutation>
+                            <value name="VAR">
+                              <shadow type="lists_create_with" id="46IRp3O$H[K*C9P@./r*">
+                                <mutation items="0"></mutation>
+                              </shadow>
+                            </value>
+                            <next>
+                              <block type="delay_custom" id="?,J;^M_{V0Y#1!LQ3p`U">
+                                <value name="DELAY_TIME">
+                                  <block type="math_number" id="kfpoKj26|CQKas*u4dtK">
+                                    <field name="NUM">2000</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </next>
+  </block>
+  <block type="procedures_defnoreturn" id="bff2,#NF4{{#JHJZNXlw" x="470" y="50">
+    <field name="NAME">Alarm sound</field>
+    <value name="VAR">
+      <shadow type="lists_create_with" id="fQ][(EXEDLrO0treY_!I" inline="true">
+        <mutation items="0"></mutation>
+      </shadow>
+    </value>
+    <statement name="STACK">
+      <block type="esp32_buzzer1" id="YzO%BLs^Dp_`nq2@~mVH">
+        <field name="index">0</field>
+        <value name="pin">
+          <block type="math_number" id="aqC%e~tXB~?K|~)^z/,K">
+            <field name="NUM">14</field>
+          </block>
+        </value>
+        <value name="frequency">
+          <block type="math_number" id="x^#c]6%m*:p|uWQzP0!(">
+            <field name="NUM">523</field>
+          </block>
+        </value>
+        <value name="delaytime">
+          <block type="math_number" id="j|)_4]kmos#aoiek[YXZ">
+            <field name="NUM">800</field>
+          </block>
+        </value>
+        <next>
+          <block type="esp32_buzzer1" id="twRJqHssHjT{R+2S}=@/">
+            <field name="index">0</field>
+            <value name="pin">
+              <block type="math_number" id="`kZH5e^hZKmZnOLhw-{Q">
+                <field name="NUM">14</field>
+              </block>
+            </value>
+            <value name="frequency">
+              <block type="math_number" id="Ur`zZ;A0P{(e@$Icx$ra">
+                <field name="NUM">698</field>
+              </block>
+            </value>
+            <value name="delaytime">
+              <block type="math_number" id="V@0h(JzBKlAr?.V`,PI/">
+                <field name="NUM">800</field>
+              </block>
+            </value>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>

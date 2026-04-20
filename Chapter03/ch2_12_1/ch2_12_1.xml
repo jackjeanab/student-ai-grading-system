@@ -1,0 +1,45 @@
+<xml version="F2" board="NodeMCU-32S" xmlns="https://developers.google.com/blockly/xml">
+  <block type="board_initializes_setup" id="0" x="290" y="110">
+    <field name="BOARD_TYPE">ESP32</field>
+    <statement name="CONTENT">
+      <block type="pn532i2c_init" id="-iR4vQb0is~H/t-{#$Q7">
+        <next>
+          <block type="serial_init" id="axSU)LG(o?0@QPp=Datt">
+            <field name="SPEED">115200</field>
+            <next>
+              <block type="delay_custom" id="IJNac/#8)nb[is?[M-7i">
+                <value name="DELAY_TIME">
+                  <block type="math_number" id="TKFH=HGdFkVnxH2Lt%{3">
+                    <field name="NUM">2000</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <next>
+      <block type="initializes_loop" id="1">
+        <statement name="CONTENT">
+          <block type="pn532i2c_loop" id="C(gjF.am5D(9W7fcY/:R">
+            <next>
+              <block type="controls_if" id="k/,+dn2f0}+Q-uUC2^zK">
+                <value name="IF0">
+                  <block type="pn532i2c_checkUID" id="S~)K`N;jpdQC5Suh/0nB"></block>
+                </value>
+                <statement name="DO0">
+                  <block type="serial_println" id="|pMA$VEvP*RHn_GacNgL">
+                    <value name="CONTENT">
+                      <block type="pn532i2c_getUID" id="pPLz8@,LCXZ=z3%lN6h4"></block>
+                    </value>
+                  </block>
+                </statement>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </next>
+  </block>
+</xml>

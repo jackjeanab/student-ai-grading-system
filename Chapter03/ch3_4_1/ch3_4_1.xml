@@ -1,0 +1,74 @@
+<xml version="F2" board="NodeMCU-32S" xmlns="https://developers.google.com/blockly/xml">
+  <block type="board_initializes_setup" id="0" x="430" y="-50">
+    <field name="BOARD_TYPE">ESP32</field>
+    <statement name="CONTENT">
+      <block type="serial_init" id="_Zgv`}R06tzVu+tPV(jA">
+        <field name="SPEED">115200</field>
+        <next>
+          <block type="dht11_pin" id="x`_m,T2VIDDI-kB75_c|">
+            <value name="pin">
+              <block type="math_number" id="t;~79c^1X4Xf]-=FY985">
+                <field name="NUM">15</field>
+              </block>
+            </value>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <next>
+      <block type="initializes_loop" id="1">
+        <statement name="CONTENT">
+          <block type="dht11_read" id="fAaI}*fBYUeM`Fa.D@XB">
+            <next>
+              <block type="serial_println" id="(s6y1X_iXE:K46@sfI(;">
+                <value name="CONTENT">
+                  <block type="text_join" id="56Md8cp^EC)%A}H#8s;^">
+                    <mutation items="2"></mutation>
+                    <value name="ADD0">
+                      <block type="text" id="OD-aXCd,~[2eKrd{D/}[">
+                        <field name="TEXT">溫度：</field>
+                      </block>
+                    </value>
+                    <value name="ADD1">
+                      <block type="dht11_get" id=":Zff|]5Owu%]{CH0SCzb">
+                        <field name="type">temperature</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="serial_println" id="#:94Cc!}f;dWC;SH^`,u">
+                    <value name="CONTENT">
+                      <block type="text_join" id="%/^HZ2Yy9}L,2pM`KCDh">
+                        <mutation items="2"></mutation>
+                        <value name="ADD0">
+                          <block type="text" id="=q`*|[-PX/nyxqg1y%?Q">
+                            <field name="TEXT">相對濕度：</field>
+                          </block>
+                        </value>
+                        <value name="ADD1">
+                          <block type="dht11_get" id="Co?8(h(8g(yR4|}!Z`Q4">
+                            <field name="type">humidity</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="delay_custom" id=";$BsVt7RfqBmW`Jy[c7p">
+                        <value name="DELAY_TIME">
+                          <block type="math_number" id="_2046207=rv|ymU`^71E">
+                            <field name="NUM">1000</field>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </next>
+  </block>
+</xml>

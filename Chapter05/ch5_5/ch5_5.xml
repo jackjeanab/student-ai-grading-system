@@ -1,0 +1,177 @@
+<xml version="F2" board="NodeMCU-32S" xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="`1+Y5H4nWJF=u@Fa.pgE">ReData</variable>
+  </variables>
+  <block type="board_initializes_setup" id="0" x="470" y="90">
+    <field name="BOARD_TYPE">ESP32</field>
+    <statement name="CONTENT">
+      <block type="serial_init" id="-|cg!:K;c6sZ_}bRf/)F">
+        <field name="SPEED">115200</field>
+        <next>
+          <block type="variables_set" id="MX)iYXFN6+):j2xn6$Ho">
+            <field name="POSITION">global</field>
+            <field name="TYPE">String</field>
+            <field name="VAR" id="`1+Y5H4nWJF=u@Fa.pgE">ReData</field>
+            <value name="VALUE">
+              <shadow type="math_number" id="vTC_2Vw;{vL-!={u^|_S">
+                <field name="NUM">ReData</field>
+              </shadow>
+              <block type="text" id="j#bpZ35e1`:p-E+@3FT^">
+                <field name="TEXT"></field>
+              </block>
+            </value>
+            <next>
+              <block type="linkit_wifi_wait_until_ready" id="_%{bbdh:vw9jsmy{vgtI">
+                <value name="SSID">
+                  <block type="text" id="wZ[wPt.ar/=D5Akc.Qa@">
+                    <field name="TEXT">你的WiF熱點帳號</field>
+                  </block>
+                </value>
+                <value name="PASSWORD">
+                  <block type="text" id="dXV=MO)JC~U#-x~AE)Ve">
+                    <field name="TEXT">你的WiFi熱點密碼</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="inout_buildin_led" id="$|M)t+8oy)Z1(-ewH~P$">
+                    <field name="STAT">HIGH</field>
+                    <next>
+                      <block type="fu_mqtt_setup" id="IrG1wrtEgXh7lAD{:wjt">
+                        <value name="server">
+                          <block type="text" id="?n@$ZIUFk0E6)}#(!noY">
+                            <field name="TEXT">broker.mqttgo.io</field>
+                          </block>
+                        </value>
+                        <value name="port">
+                          <block type="math_number" id="?AT[dE3H%uxO8;9t_]d*">
+                            <field name="NUM">1883</field>
+                          </block>
+                        </value>
+                        <value name="user">
+                          <block type="text" id="3CO[,7~+L:8x6_*NpK=i">
+                            <field name="TEXT"></field>
+                          </block>
+                        </value>
+                        <value name="password">
+                          <block type="text" id="kp6GvyGYC|z42Z8OZVTb">
+                            <field name="TEXT"></field>
+                          </block>
+                        </value>
+                        <value name="clientid">
+                          <block type="text" id="j}+4n5RvRQ|{H],5dykQ">
+                            <field name="TEXT"></field>
+                          </block>
+                        </value>
+                        <statement name="topic_subscribe">
+                          <block type="fu_mqtt_subscribe" id="Yxx]$l?OaB_(ke~^9CIh">
+                            <value name="topic">
+                              <block type="text" id="G7sRP5hq@J,7KuRTD.?f">
+                                <field name="TEXT">Jack/LED</field>
+                              </block>
+                            </value>
+                          </block>
+                        </statement>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <next>
+      <block type="initializes_loop" id="1">
+        <statement name="CONTENT">
+          <block type="fu_mqtt_loop" id="En[7w@31,9dcYloSS%?5">
+            <statement name="topic_getdata">
+              <block type="fu_mqtt_gettopic" id="YUWr?]#8%2vEK98aS%Gz">
+                <value name="topic">
+                  <block type="text" id="p@lK;Kcm{E6o[4RS.3tI">
+                    <field name="TEXT">Jack/LED</field>
+                  </block>
+                </value>
+                <statement name="topic_getdata">
+                  <block type="variables_set3" id="E3!+m(*4^k5+GdOxwYj1">
+                    <field name="VAR" id="`1+Y5H4nWJF=u@Fa.pgE">ReData</field>
+                    <value name="DELTA">
+                      <shadow type="math_number" id="tFhGIQ+bDoQ8B@!-qY-m">
+                        <field name="NUM">0</field>
+                      </shadow>
+                      <block type="fu_mqtt_getdata" id="4X@a:iEwmw7=Z,9/@W=~"></block>
+                    </value>
+                    <next>
+                      <block type="serial_println" id="XacJ%ZsgcyK`c#m~i.-e">
+                        <value name="CONTENT">
+                          <block type="variables_get" id="E)Z2yuwjt$/Uz3nRy^q~">
+                            <field name="VAR" id="`1+Y5H4nWJF=u@Fa.pgE">ReData</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="controls_if" id="TANzbiZAA*{-zcs%H{Av">
+                            <mutation elseif="1"></mutation>
+                            <value name="IF0">
+                              <block type="logic_compare" id="[i7H@3pnZK;_M-EkbHjD">
+                                <field name="OP">EQ</field>
+                                <value name="A">
+                                  <block type="variables_get" id="HLGPViybCjI+ahSUuNVb">
+                                    <field name="VAR" id="`1+Y5H4nWJF=u@Fa.pgE">ReData</field>
+                                  </block>
+                                </value>
+                                <value name="B">
+                                  <block type="text" id="]4%6@8MS)sU?J.~4G+Ro">
+                                    <field name="TEXT">1</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <statement name="DO0">
+                              <block type="fu_ez_digitalwrite_input" id="%4NRxLviv$Lr+bIZ7x5Q">
+                                <field name="led">0</field>
+                                <value name="value">
+                                  <shadow type="math_number" id="/.(7:mU53mFkc_zDhf_3">
+                                    <field name="NUM">1</field>
+                                  </shadow>
+                                </value>
+                              </block>
+                            </statement>
+                            <value name="IF1">
+                              <block type="logic_compare" id="(SM/IKF.=2Y`PBJtKF4?">
+                                <field name="OP">EQ</field>
+                                <value name="A">
+                                  <block type="variables_get" id="#XLaFF#cdMxmVva^S$sy">
+                                    <field name="VAR" id="`1+Y5H4nWJF=u@Fa.pgE">ReData</field>
+                                  </block>
+                                </value>
+                                <value name="B">
+                                  <block type="text" id="iL0b5_cp0a)@hp4g!#AD">
+                                    <field name="TEXT">0</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <statement name="DO1">
+                              <block type="fu_ez_digitalwrite_input" id="AX8yq/3vrQ}u_+#RH(`*">
+                                <field name="led">0</field>
+                                <value name="value">
+                                  <shadow type="math_number" id=")x~B@{bsqAYwSJ)|Af*|">
+                                    <field name="NUM">0</field>
+                                  </shadow>
+                                </value>
+                              </block>
+                            </statement>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+              </block>
+            </statement>
+          </block>
+        </statement>
+      </block>
+    </next>
+  </block>
+</xml>

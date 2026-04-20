@@ -1,0 +1,37 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <block type="board_initializes_setup" id="0" x="530" y="90">
+    <field name="BOARD_TYPE">ESP32</field>
+    <next>
+      <block type="initializes_loop" id="1">
+        <statement name="CONTENT">
+          <block type="inout_buildin_led" id="ZpYK2tqVG.jmx,YQwcRN">
+            <field name="STAT">HIGH</field>
+            <next>
+              <block type="delay_custom" id="nbc2Hbz#`_2$%8mIOcZ8">
+                <value name="DELAY_TIME">
+                  <block type="math_number" id="sRU@|V04-~m2xcz^`+08">
+                    <field name="NUM">1000</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="inout_buildin_led" id="G;6fZHjsc%=v(g3nw.$%">
+                    <field name="STAT">LOW</field>
+                    <next>
+                      <block type="delay_custom" id="@x^RZ!tYlKJT[#ytN!Z$">
+                        <value name="DELAY_TIME">
+                          <block type="math_number" id="i7P(!/FG)`IwC0WBv$0`">
+                            <field name="NUM">1000</field>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </next>
+  </block>
+</xml>

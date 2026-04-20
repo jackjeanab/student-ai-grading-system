@@ -1,0 +1,134 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="`1+Y5H4nWJF=u@Fa.pgE">VR</variable>
+  </variables>
+  <block type="board_initializes_setup" id="0" x="470" y="90">
+    <field name="BOARD_TYPE">ESP32</field>
+    <statement name="CONTENT">
+      <block type="serial_init" id="-|cg!:K;c6sZ_}bRf/)F">
+        <field name="SPEED">115200</field>
+        <next>
+          <block type="variables_set" id="MX)iYXFN6+):j2xn6$Ho">
+            <field name="POSITION">global</field>
+            <field name="TYPE">int</field>
+            <field name="VAR" id="`1+Y5H4nWJF=u@Fa.pgE">VR</field>
+            <value name="VALUE">
+              <shadow type="math_number" id="vTC_2Vw;{vL-!={u^|_S">
+                <field name="NUM">0</field>
+              </shadow>
+            </value>
+            <next>
+              <block type="linkit_wifi_wait_until_ready" id="_%{bbdh:vw9jsmy{vgtI">
+                <value name="SSID">
+                  <block type="text" id="wZ[wPt.ar/=D5Akc.Qa@">
+                    <field name="TEXT">你的WiFi熱點帳號</field>
+                  </block>
+                </value>
+                <value name="PASSWORD">
+                  <block type="text" id="dXV=MO)JC~U#-x~AE)Ve">
+                    <field name="TEXT">你的WiFi熱點密碼</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="inout_buildin_led" id="$|M)t+8oy)Z1(-ewH~P$">
+                    <field name="STAT">HIGH</field>
+                    <next>
+                      <block type="fu_mqtt_setup" id="IrG1wrtEgXh7lAD{:wjt">
+                        <value name="server">
+                          <block type="text" id="?n@$ZIUFk0E6)}#(!noY">
+                            <field name="TEXT">broker.mqttgo.io</field>
+                          </block>
+                        </value>
+                        <value name="port">
+                          <block type="math_number" id="?AT[dE3H%uxO8;9t_]d*">
+                            <field name="NUM">1883</field>
+                          </block>
+                        </value>
+                        <value name="user">
+                          <block type="text" id="3CO[,7~+L:8x6_*NpK=i">
+                            <field name="TEXT"></field>
+                          </block>
+                        </value>
+                        <value name="password">
+                          <block type="text" id="kp6GvyGYC|z42Z8OZVTb">
+                            <field name="TEXT"></field>
+                          </block>
+                        </value>
+                        <value name="clientid">
+                          <block type="text" id="j}+4n5RvRQ|{H],5dykQ">
+                            <field name="TEXT"></field>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <next>
+      <block type="initializes_loop" id="1">
+        <statement name="CONTENT">
+          <block type="variables_set3" id="ewgFRaPm9)GX;)PocWkM">
+            <field name="VAR" id="`1+Y5H4nWJF=u@Fa.pgE">VR</field>
+            <value name="DELTA">
+              <shadow type="math_number" id="3^P)+1e%=1_`j7=q@}SB">
+                <field name="NUM">0</field>
+              </shadow>
+              <block type="fu_ez_analogread_potentiometer" id="?:;_?XghS^oVFd/D.E6y"></block>
+            </value>
+            <next>
+              <block type="controls_if" id="w)4EvC]5[_5SYocC31BX">
+                <value name="IF0">
+                  <block type="fu_ez_digitalread_button" id="c_O@0agqlf,F8g-K1o(y">
+                    <field name="type">A</field>
+                  </block>
+                </value>
+                <statement name="DO0">
+                  <block type="serial_println" id="xnP!7jSo*FPQR[-%w!J7">
+                    <value name="CONTENT">
+                      <block type="variables_get" id="RL?j%_u^QAaNXXVFGbN#">
+                        <field name="VAR" id="`1+Y5H4nWJF=u@Fa.pgE">VR</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="fu_mqtt_senddata" id="i|q2.f!dbFGyx.=~gli8">
+                        <value name="topic">
+                          <block type="text" id="M@,lA#eH_7_X{xrWXn*6">
+                            <field name="TEXT">Jack/VR</field>
+                          </block>
+                        </value>
+                        <value name="text">
+                          <block type="customcode_instruction6" id="!m:$jTfI~lp!y]h`3Z9A">
+                            <field name="instruction">String</field>
+                            <value name="text">
+                              <block type="variables_get" id="n5|{COdr/0ce}]i3aXS]">
+                                <field name="VAR" id="`1+Y5H4nWJF=u@Fa.pgE">VR</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+                <next>
+                  <block type="delay_custom" id="C,$C}zN}kn;@0T9w~JkK">
+                    <value name="DELAY_TIME">
+                      <block type="math_number" id="!~~ps@kJM3ZZbM[MG+zL">
+                        <field name="NUM">100</field>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </next>
+  </block>
+</xml>

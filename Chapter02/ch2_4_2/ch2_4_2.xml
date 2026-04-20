@@ -1,0 +1,109 @@
+<xml version="F2" board="NodeMCU-32S" xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="b|JYzYue~Ivg|YpyqCxI">VR</variable>
+    <variable id="8NO:u-%JdSR1=7j+P!9n">VR2LED</variable>
+  </variables>
+  <block type="board_initializes_setup" id="0" x="310" y="90">
+    <field name="BOARD_TYPE">ESP32</field>
+    <statement name="CONTENT">
+      <block type="serial_init" id=".p8c((+(PLSW%PIQ6%0b">
+        <field name="SPEED">115200</field>
+        <next>
+          <block type="variables_set" id="ycm5cLvpM9Nqiun:kfnQ">
+            <field name="POSITION">global</field>
+            <field name="TYPE">int</field>
+            <field name="VAR" id="b|JYzYue~Ivg|YpyqCxI">VR</field>
+            <value name="VALUE">
+              <shadow type="math_number" id="HZco!+*W;}6@6rh!SxLs">
+                <field name="NUM">0</field>
+              </shadow>
+            </value>
+            <next>
+              <block type="variables_set" id="e38[e8@|OMKOgy,Y/_qs">
+                <field name="POSITION">global</field>
+                <field name="TYPE">int</field>
+                <field name="VAR" id="8NO:u-%JdSR1=7j+P!9n">VR2LED</field>
+                <value name="VALUE">
+                  <shadow type="math_number" id="OaKNzey_ayCNY`k!_[.0">
+                    <field name="NUM">0</field>
+                  </shadow>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <next>
+      <block type="initializes_loop" id="1">
+        <statement name="CONTENT">
+          <block type="variables_set3" id="JbMcIGOx]eV]@]wmS6DZ">
+            <field name="VAR" id="b|JYzYue~Ivg|YpyqCxI">VR</field>
+            <value name="DELTA">
+              <shadow type="math_number" id="QOSuRlWEbKB!Ozb,dq.P">
+                <field name="NUM">0</field>
+              </shadow>
+              <block type="esp32_pinread" id="TbENNrB~G@di#5R]l@j3">
+                <field name="type">analogRead</field>
+                <value name="pin">
+                  <block type="math_number" id="VR_dSFb9lNekj!6j{!KC">
+                    <field name="NUM">34</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="variables_set3" id="q?Ub]C:eEzO_L27]E]Gq">
+                <field name="VAR" id="8NO:u-%JdSR1=7j+P!9n">VR2LED</field>
+                <value name="DELTA">
+                  <shadow type="math_number" id="QiX0sVo3BO=@q;@S^_-#">
+                    <field name="NUM">0</field>
+                  </shadow>
+                  <block type="math_map_int" id="OSOw,tqhVs`,@|e:ue+Q">
+                    <field name="FROMLOW">0</field>
+                    <field name="FROMHIGH">4095</field>
+                    <field name="TOLOW">0</field>
+                    <field name="TOHIGH">255</field>
+                    <value name="VALUE">
+                      <block type="variables_get" id="H|),i%-]3XMj/B$,ge=,">
+                        <field name="VAR" id="b|JYzYue~Ivg|YpyqCxI">VR</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="esp32_analogwrite" id=",Z*ikg~1Wbco;_LoT,PF">
+                    <value name="pin">
+                      <block type="math_number" id="|0M,bnlBZ`+UJ#,1S{-3">
+                        <field name="NUM">16</field>
+                      </block>
+                    </value>
+                    <value name="val">
+                      <block type="variables_get" id="ZCPSy1[fzmq]sUHpho6_">
+                        <field name="VAR" id="8NO:u-%JdSR1=7j+P!9n">VR2LED</field>
+                      </block>
+                    </value>
+                    <value name="channel">
+                      <block type="math_number" id="U@ZJe4GEsxP)Q2hqmi?E">
+                        <field name="NUM">1</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="serial_println" id="$aG]:ok{}@uy{Eo!tdcd">
+                        <value name="CONTENT">
+                          <block type="variables_get" id="xwnM7K73BOW^hSWAOV`D">
+                            <field name="VAR" id="8NO:u-%JdSR1=7j+P!9n">VR2LED</field>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </next>
+  </block>
+</xml>

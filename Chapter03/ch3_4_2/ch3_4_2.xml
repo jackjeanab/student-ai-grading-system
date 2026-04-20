@@ -1,0 +1,62 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <block type="board_initializes_setup" id="0" x="270" y="90">
+    <field name="BOARD_TYPE">ESP32</field>
+    <statement name="CONTENT">
+      <block type="fu_oled_initial" id="|(~e;0aVt`B6O@[vW+//">
+        <field name="format">U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, /* reset=*/ U8X8_PIN_NONE);</field>
+        <field name="display">U8G2_R0</field>
+        <field name="utf8">1</field>
+        <next>
+          <block type="fu_oled_setFont_chinese" id="#5#0r2g2q|#u9!j}fo*Z">
+            <field name="font">u8g2_font_unifont_t_chinese1</field>
+            <next>
+              <block type="fu_oled_nextPage" id="0LgvO0nwj6l*BkoxNylV">
+                <statement name="draw">
+                  <block type="fu_oled_drawUTF8" id="}2*%mpgcNzXRoZ,%J.3~">
+                    <value name="x">
+                      <shadow type="math_number" id="y#:,(x3k[7l4O_)5_.oU">
+                        <field name="NUM">0</field>
+                      </shadow>
+                    </value>
+                    <value name="y">
+                      <shadow type="math_number" id="P/A@#C{|AgF%%vNM|.8w">
+                        <field name="NUM">14</field>
+                      </shadow>
+                    </value>
+                    <value name="str">
+                      <block type="text" id="$`(P@n/k}_U*+*!/(HRj">
+                        <field name="TEXT">溫度：</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="fu_oled_drawUTF8" id="^R`nmm|ht`$}Ab@MzK?9">
+                        <value name="x">
+                          <shadow type="math_number" id="K-}|ou^XzF.![/M02L=N">
+                            <field name="NUM">0</field>
+                          </shadow>
+                        </value>
+                        <value name="y">
+                          <shadow type="math_number" id="k6jA[Xh;sw/Z5F(A37Gq">
+                            <field name="NUM">32</field>
+                          </shadow>
+                        </value>
+                        <value name="str">
+                          <block type="text" id="Lt[XIL++yM+q-3Lhm3^p">
+                            <field name="TEXT">相對濕度：</field>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <next>
+      <block type="initializes_loop" id="1"></block>
+    </next>
+  </block>
+</xml>

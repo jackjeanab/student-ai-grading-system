@@ -1,0 +1,116 @@
+<xml version="F2" board="NodeMCU-32S" xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="3s!R4EoDV{Yu2hJkR72S">ESP32Ble</variable>
+  </variables>
+  <block type="board_initializes_setup" id="0" x="370" y="70">
+    <field name="BOARD_TYPE">ESP32</field>
+    <statement name="CONTENT">
+      <block type="esp32_bluetooth_initial" id="HuaoqT[9cbTp8Pq)!K{!">
+        <field name="baudrate">115200</field>
+        <value name="blename">
+          <block type="text" id="Ffg2qY;H~,ugHlBCOnyu">
+            <field name="TEXT">ESP32 BLE</field>
+          </block>
+        </value>
+        <next>
+          <block type="variables_set" id="MKX5%.5caiR?X5=Ca|Kb">
+            <field name="POSITION">global</field>
+            <field name="TYPE">String</field>
+            <field name="VAR" id="3s!R4EoDV{Yu2hJkR72S">ESP32Ble</field>
+            <value name="VALUE">
+              <shadow type="math_number" id="{m$@ap;J1P6|bh$H8):;">
+                <field name="NUM">0</field>
+              </shadow>
+              <block type="text" id="lg`T:j9Ff^pgdvC!DQX#">
+                <field name="TEXT"></field>
+              </block>
+            </value>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <next>
+      <block type="initializes_loop" id="1">
+        <statement name="CONTENT">
+          <block type="esp32_bluetooth_readdata" id="/ZJC2eR{[p=KnnVn7u~[">
+            <statement name="execute">
+              <block type="variables_set3" id="l4yrcXyD0rGPMjuhxEV#">
+                <field name="VAR" id="3s!R4EoDV{Yu2hJkR72S">ESP32Ble</field>
+                <value name="DELTA">
+                  <shadow type="math_number" id="1?EUsrYq@fG!qg^aNzne">
+                    <field name="NUM">0</field>
+                  </shadow>
+                  <block type="esp32_bluetooth_getdata" id=":mvxpOKXQ1iB1bX{mD?j"></block>
+                </value>
+                <next>
+                  <block type="serial_println" id="J()@Ti0z}N7dUoe%V6l_">
+                    <value name="CONTENT">
+                      <block type="variables_get" id="?m)VIGN|Gv~}8/~@`hH-">
+                        <field name="VAR" id="3s!R4EoDV{Yu2hJkR72S">ESP32Ble</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="controls_if" id="?.R=m}Ku_L;?)LaYM{k3">
+                        <mutation elseif="1"></mutation>
+                        <value name="IF0">
+                          <block type="logic_compare" id="yN={[J$YQX|s+7~OW*|I">
+                            <field name="OP">EQ</field>
+                            <value name="A">
+                              <block type="variables_get" id=";f]Nl=99`gk[_r5n4|qF">
+                                <field name="VAR" id="3s!R4EoDV{Yu2hJkR72S">ESP32Ble</field>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <block type="text" id="Sv4-2NA6|mk5a.t@vJ4L">
+                                <field name="TEXT">1</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <statement name="DO0">
+                          <block type="fu_ez_digitalwrite_input" id="|sKHoY99`^l99S3]Rx7/">
+                            <field name="led">0</field>
+                            <value name="value">
+                              <shadow type="math_number" id="HSlIk6m=Ckio#|3D{f;a">
+                                <field name="NUM">1</field>
+                              </shadow>
+                            </value>
+                          </block>
+                        </statement>
+                        <value name="IF1">
+                          <block type="logic_compare" id="~P,5_I}:(FwO:zc=~-ml">
+                            <field name="OP">EQ</field>
+                            <value name="A">
+                              <block type="variables_get" id="TIvWU|zsQ(dh7b67XMR^">
+                                <field name="VAR" id="3s!R4EoDV{Yu2hJkR72S">ESP32Ble</field>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <block type="text" id="e=(VR#LM7PH*y}7#kF`l">
+                                <field name="TEXT">2</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <statement name="DO1">
+                          <block type="fu_ez_digitalwrite_input" id="DrAWrKaE;;p9w*!bzS0F">
+                            <field name="led">0</field>
+                            <value name="value">
+                              <shadow type="math_number" id="{+w#j!ZbkC:1Bft,ro^S">
+                                <field name="NUM">0</field>
+                              </shadow>
+                            </value>
+                          </block>
+                        </statement>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </statement>
+          </block>
+        </statement>
+      </block>
+    </next>
+  </block>
+</xml>

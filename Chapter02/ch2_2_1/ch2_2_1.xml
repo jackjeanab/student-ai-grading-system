@@ -1,0 +1,37 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <block type="board_initializes_setup" id="0" x="490" y="130">
+    <field name="BOARD_TYPE">ESP32</field>
+    <statement name="CONTENT">
+      <block type="serial_init" id="38}eOdsYq37h3l5I0An}">
+        <field name="SPEED">115200</field>
+      </block>
+    </statement>
+    <next>
+      <block type="initializes_loop" id="1">
+        <statement name="CONTENT">
+          <block type="serial_println" id="3B(^LXe5V2hQ4OZ]F%ap">
+            <value name="CONTENT">
+              <block type="esp32_pinread" id="qqe^G$%Og.l-5;A3[l.a">
+                <field name="type">digitalRead</field>
+                <value name="pin">
+                  <block type="math_number" id="CbFfIJsP~AT]@|WBE%XB">
+                    <field name="NUM">5</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="delay_custom" id="1|bQpiqo.20V)![+.{Hy">
+                <value name="DELAY_TIME">
+                  <block type="math_number" id="QUP6pKx-SNSKT`/^EK*P">
+                    <field name="NUM">100</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </next>
+  </block>
+</xml>

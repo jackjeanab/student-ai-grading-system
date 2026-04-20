@@ -1,0 +1,190 @@
+<xml version="F2" board="NodeMCU-32S" xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="]jopR$)PTCd@N-R/1*Jc">T</variable>
+    <variable id="$~+gz@0(fh8rnYpE1]To">H</variable>
+  </variables>
+  <block type="board_initializes_setup" id="0" x="100" y="50">
+    <field name="BOARD_TYPE">ESP32</field>
+    <statement name="CONTENT">
+      <block type="esp32_bluetooth_initial" id="){$_.i)l,UO_y/lB[o$p">
+        <field name="baudrate">115200</field>
+        <value name="blename">
+          <block type="text" id="YO:!n[t#MeVVR]y3D]Yz">
+            <field name="TEXT">ESP32 BLE</field>
+          </block>
+        </value>
+        <next>
+          <block type="fu_oled_initial" id="s%t`b6epFExbJU6X-xIz">
+            <field name="format">U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, /* reset=*/ U8X8_PIN_NONE);</field>
+            <field name="display">U8G2_R0</field>
+            <field name="utf8">1</field>
+            <next>
+              <block type="fu_oled_setFont_chinese" id="c(Az=$|DQ_ihHrV|_JQ1">
+                <field name="font">u8g2_font_unifont_t_chinese1</field>
+                <next>
+                  <block type="variables_set" id="5q{_OqNl$VMY-|c7p-L,">
+                    <field name="POSITION">global</field>
+                    <field name="TYPE">int</field>
+                    <field name="VAR" id="]jopR$)PTCd@N-R/1*Jc">T</field>
+                    <value name="VALUE">
+                      <shadow type="math_number" id="-Wxn|[-?y0(KTIe[y?36">
+                        <field name="NUM">0</field>
+                      </shadow>
+                    </value>
+                    <next>
+                      <block type="variables_set" id="4(aj,4m:ywy?+b={A[to">
+                        <field name="POSITION">global</field>
+                        <field name="TYPE">int</field>
+                        <field name="VAR" id="$~+gz@0(fh8rnYpE1]To">H</field>
+                        <value name="VALUE">
+                          <shadow type="math_number" id="ilBKW]=hXy7?r[Y_vY*n">
+                            <field name="NUM">0</field>
+                          </shadow>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <next>
+      <block type="initializes_loop" id="1">
+        <statement name="CONTENT">
+          <block type="variables_set3" id=".Z1j8[O8Oq:O1r[%Hl2K">
+            <field name="VAR" id="]jopR$)PTCd@N-R/1*Jc">T</field>
+            <value name="DELTA">
+              <shadow type="math_number" id="=cen3rRwNwnJ7R1p|ja2">
+                <field name="NUM">0</field>
+              </shadow>
+              <block type="fu_ez_dht11" id="E60h,G@*G{OP(XMe5LMW">
+                <field name="type">temperature</field>
+              </block>
+            </value>
+            <next>
+              <block type="variables_set3" id="UyW9w+A!PxWuEZYh7MgV">
+                <field name="VAR" id="$~+gz@0(fh8rnYpE1]To">H</field>
+                <value name="DELTA">
+                  <shadow type="math_number">
+                    <field name="NUM">0</field>
+                  </shadow>
+                  <block type="fu_ez_dht11" id="2*LQ:K:AW)954GOS4qj$">
+                    <field name="type">humidity</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="servermodule_bluetooth_feedback_newline" id="(1.EQ7vCkW43rB_vu|tE">
+                    <value name="text">
+                      <block type="text_join" id="[FOR?056GE(?Tf_hY-#L">
+                        <mutation items="3"></mutation>
+                        <value name="ADD0">
+                          <block type="variables_get" id="=p!+F{$B7S)BBfee#{]l">
+                            <field name="VAR" id="]jopR$)PTCd@N-R/1*Jc">T</field>
+                          </block>
+                        </value>
+                        <value name="ADD1">
+                          <block type="text" id="z#sJB_?S07O^jA27,hWX">
+                            <field name="TEXT">,</field>
+                          </block>
+                        </value>
+                        <value name="ADD2">
+                          <block type="variables_get" id="rWC1SCcxV|xre_us,LZ#">
+                            <field name="VAR" id="$~+gz@0(fh8rnYpE1]To">H</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="fu_oled_nextPage" id="*cV1yCI2L*}O`vC(?045">
+                        <statement name="draw">
+                          <block type="fu_oled_drawUTF8" id="#c|JgH^@^$-^ua:6bLX_">
+                            <value name="x">
+                              <shadow type="math_number" id="*w-0@-y8v+Pl*^#SWf%e">
+                                <field name="NUM">0</field>
+                              </shadow>
+                            </value>
+                            <value name="y">
+                              <shadow type="math_number" id="m`*7|6oTopQ4ks;t+?.R">
+                                <field name="NUM">14</field>
+                              </shadow>
+                            </value>
+                            <value name="str">
+                              <block type="text_join" id="{9PsKeoa(DCRFjPqFF{P">
+                                <mutation items="3"></mutation>
+                                <value name="ADD0">
+                                  <block type="text" id="YlC=4c.+YeeUW#+|FeL1">
+                                    <field name="TEXT">溫度:</field>
+                                  </block>
+                                </value>
+                                <value name="ADD1">
+                                  <block type="variables_get" id="[XuJL/WX|.EXH-uB+L.c">
+                                    <field name="VAR" id="]jopR$)PTCd@N-R/1*Jc">T</field>
+                                  </block>
+                                </value>
+                                <value name="ADD2">
+                                  <block type="text" id="Xx?z}q!x6Jp{gz{;33Cw">
+                                    <field name="TEXT">度</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="fu_oled_drawUTF8" id="QL8dJJ{Y${f7ErUgo(_W">
+                                <value name="x">
+                                  <shadow type="math_number" id="R1:oJRsI2Y+tNVCVSab|">
+                                    <field name="NUM">0</field>
+                                  </shadow>
+                                </value>
+                                <value name="y">
+                                  <shadow type="math_number" id="g7eN@pN)_rS@D-j;P8t/">
+                                    <field name="NUM">30</field>
+                                  </shadow>
+                                </value>
+                                <value name="str">
+                                  <block type="text_join" id="8L0p6^ZabCskn_HBJtnz">
+                                    <mutation items="3"></mutation>
+                                    <value name="ADD0">
+                                      <block type="text" id="Ywz.`}B-ghU/UCRo#ykB">
+                                        <field name="TEXT">相對濕度:</field>
+                                      </block>
+                                    </value>
+                                    <value name="ADD1">
+                                      <block type="variables_get" id="JQO/kty24D|0%z0$Y[u*">
+                                        <field name="VAR" id="$~+gz@0(fh8rnYpE1]To">H</field>
+                                      </block>
+                                    </value>
+                                    <value name="ADD2">
+                                      <block type="text" id="A43[u6s:bB~|ST_^I$mk">
+                                        <field name="TEXT">%</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                        <next>
+                          <block type="delay_custom" id="HJZP$,D4;C7O4a;hgoQW">
+                            <value name="DELAY_TIME">
+                              <block type="math_number" id="#=Fpx#:BeRrkiG^IJAD%">
+                                <field name="NUM">1000</field>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </next>
+  </block>
+</xml>

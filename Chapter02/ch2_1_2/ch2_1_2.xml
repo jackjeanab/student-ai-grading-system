@@ -1,0 +1,87 @@
+<xml version="F2" board="NodeMCU-32S" xmlns="https://developers.google.com/blockly/xml">
+  <block type="board_initializes_setup" id="0" x="410" y="70">
+    <field name="BOARD_TYPE">ESP32</field>
+    <next>
+      <block type="initializes_loop" id="1">
+        <statement name="CONTENT">
+          <block type="esp32_digitalwrite" id="7A18kNNkrWbuudl3pmC|">
+            <field name="val">HIGH</field>
+            <value name="pin">
+              <block type="math_number" id="bU#W7O#n]Rnd-XBbs/AT">
+                <field name="NUM">16</field>
+              </block>
+            </value>
+            <next>
+              <block type="esp32_digitalwrite" id="xPys;BBe{bKq;m,Q^R6h">
+                <field name="val">HIGH</field>
+                <value name="pin">
+                  <block type="math_number" id="HFCoNbn8jrXtyzPeyC{$">
+                    <field name="NUM">12</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="esp32_digitalwrite" id="Y,/35~.M_j3-!xDh7[6I">
+                    <field name="val">HIGH</field>
+                    <value name="pin">
+                      <block type="math_number" id="LcLPD8Le?v~UH^N3C3j[">
+                        <field name="NUM">13</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="delay_custom" id="Ixe:aY8bL9_15-`$nTvC">
+                        <value name="DELAY_TIME">
+                          <block type="math_number" id=";?ZIZp%rh;(oV-y`%{^#">
+                            <field name="NUM">1000</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="esp32_digitalwrite" id="7orXTn]$zb4g{)?m5nn9">
+                            <field name="val">LOW</field>
+                            <value name="pin">
+                              <block type="math_number" id="XRh(E*Z:.9)[+!)L04*P">
+                                <field name="NUM">16</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="esp32_digitalwrite" id="IQ2F8KSRKiCk*6;r]@*Z">
+                                <field name="val">LOW</field>
+                                <value name="pin">
+                                  <block type="math_number" id="(4gde{ZO=r!6blr|5YIn">
+                                    <field name="NUM">12</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="esp32_digitalwrite" id="8f+p0uf=[Y`gVfmyP~a@">
+                                    <field name="val">LOW</field>
+                                    <value name="pin">
+                                      <block type="math_number" id="/h=RKM;BkMK1)+_6cwxH">
+                                        <field name="NUM">13</field>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="delay_custom" id="Z/wIZu{`.E_#YKUt{0k1">
+                                        <value name="DELAY_TIME">
+                                          <block type="math_number" id="fFdc#C$rv!,HmAFSTAVu">
+                                            <field name="NUM">1000</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </next>
+  </block>
+</xml>

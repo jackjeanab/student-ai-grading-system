@@ -1,0 +1,130 @@
+<xml version="F2" board="NodeMCU-32S" xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="=!{^P{qv@A|O(NJ6%BP@">Token</variable>
+  </variables>
+  <block type="board_initializes_setup" id="0" x="-110" y="-70">
+    <field name="BOARD_TYPE">ESP32</field>
+    <statement name="CONTENT">
+      <block type="variables_set" id="^PV9:J!q5Kf:bK%FP8mp">
+        <field name="POSITION">global</field>
+        <field name="TYPE">String</field>
+        <field name="VAR" id="=!{^P{qv@A|O(NJ6%BP@">Token</field>
+        <value name="VALUE">
+          <shadow type="math_number" id="+I7^*uOm=52MuZSD+GOg">
+            <field name="NUM">0CGaXyuadSFUOlfebScU6zPk97alMYwGp5r8hxMCCod</field>
+          </shadow>
+          <block type="text" id="%v@~Wmz-;Ci2c/cnDEw`">
+            <field name="TEXT">你的LINE權杖</field>
+          </block>
+        </value>
+        <next>
+          <block type="linkit_wifi_wait_until_ready" id="Mmx=KA83}#W5qBe^g=G2">
+            <value name="SSID">
+              <block type="text" id="[Uf_Fq2]ps@1xzu~Q*ip">
+                <field name="TEXT">你的WiF熱點帳號</field>
+              </block>
+            </value>
+            <value name="PASSWORD">
+              <block type="text" id="=n`3QsfI)Dv*T8a;x2N3">
+                <field name="TEXT">你的WiF熱點帳號</field>
+              </block>
+            </value>
+            <next>
+              <block type="inout_buildin_led" id=",bLvtI!xwB?gzrgV3[/a">
+                <field name="STAT">HIGH</field>
+                <next>
+                  <block type="linenotify_all" id="$uDNqs%ELD2iO5``mRp-">
+                    <field name="type_">text</field>
+                    <value name="token_">
+                      <block type="variables_get" id="(P`_AI5lK$6Yz3]S,n,f">
+                        <field name="VAR" id="=!{^P{qv@A|O(NJ6%BP@">Token</field>
+                      </block>
+                    </value>
+                    <value name="text_">
+                      <block type="text_join" id="=mi-LeHEQ%=dJe$77,;6">
+                        <mutation items="3"></mutation>
+                        <value name="ADD0">
+                          <block type="text" id="K|1tpC$a:UCZ|;LjD*/#">
+                            <field name="TEXT">您好!</field>
+                          </block>
+                        </value>
+                        <value name="ADD1">
+                          <block type="linenotify_esp32_br" id="3=(37Li-]0YRoTC.{gJV">
+                            <field name="newline">\n</field>
+                          </block>
+                        </value>
+                        <value name="ADD2">
+                          <block type="text" id="qM*2TaxH`ujdG4EGd8d?">
+                            <field name="TEXT">這是測試訊息</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <value name="packageId_">
+                      <block type="math_number" id=")p_S!SD=x;!C%=U?2JV/">
+                        <field name="NUM">1</field>
+                      </block>
+                    </value>
+                    <value name="stickerId_">
+                      <block type="math_number" id="Tq$#@$eeH!5faAHzK}Dc">
+                        <field name="NUM">2</field>
+                      </block>
+                    </value>
+                    <value name="originalContentUrl_">
+                      <block type="text" id="H=_WkL8wbx)$kW7Ck,F`">
+                        <field name="TEXT"></field>
+                      </block>
+                    </value>
+                    <value name="previewImageUrl_">
+                      <block type="text" id="p,r9fLM;0,zxX9g3X{#r">
+                        <field name="TEXT"></field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="linenotify_all" id="~PM11mNcSiiUw,VAk4!5" inline="false">
+                        <field name="type_">sticker</field>
+                        <value name="token_">
+                          <block type="variables_get" id="!_ZoYb+2ZL`^L#T})E4z">
+                            <field name="VAR" id="=!{^P{qv@A|O(NJ6%BP@">Token</field>
+                          </block>
+                        </value>
+                        <value name="text_">
+                          <block type="text" id="y(]O*6`(II4yGP*=/yo*">
+                            <field name="TEXT">嗨!</field>
+                          </block>
+                        </value>
+                        <value name="packageId_">
+                          <block type="math_number" id="PR//ej.l--aggL*s$ZHq">
+                            <field name="NUM">1</field>
+                          </block>
+                        </value>
+                        <value name="stickerId_">
+                          <block type="math_number" id="=vDXxnJBlStdjrLvF#3/">
+                            <field name="NUM">2</field>
+                          </block>
+                        </value>
+                        <value name="originalContentUrl_">
+                          <block type="text" id="{@!}Rf5r4H+o+HAhwIvI">
+                            <field name="TEXT"></field>
+                          </block>
+                        </value>
+                        <value name="previewImageUrl_">
+                          <block type="text" id="BI:.=V[|Fy7{Cc[{r:=C">
+                            <field name="TEXT"></field>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <next>
+      <block type="initializes_loop" id="1"></block>
+    </next>
+  </block>
+</xml>

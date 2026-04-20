@@ -1,0 +1,282 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="wHUM,Pu?OyIzZdK)Xgzv">T4F</variable>
+    <variable id="^?Aa:H=vul[A$(coKKDF">H4F</variable>
+    <variable id="(LKR1DM~N+l)[dlpCgGq">T</variable>
+    <variable id="aR(e{R2_OS,V;dZA6mDx">H</variable>
+  </variables>
+  <block type="board_initializes_setup" id="0" x="-110" y="-50">
+    <field name="BOARD_TYPE">ESP32</field>
+    <statement name="CONTENT">
+      <block type="serial_init" id=",y1Yz`Ev]B-R1/1(/jSM">
+        <field name="SPEED">115200</field>
+        <next>
+          <block type="ljj_esp32_ble_init" id="9Qabi:J42h=:,.ja$a^+">
+            <value name="BLE_NAME">
+              <block type="text" id="U@^hX-0#A!FISyOE%8K5">
+                <field name="TEXT">ESP32_BLE</field>
+              </block>
+            </value>
+            <value name="UUID">
+              <block type="text" id="V=0h3*fE;tA8LbY6Qt+v">
+                <field name="TEXT">6E400001-B5A3-F393-E0A9-E50E24DCCA9E</field>
+              </block>
+            </value>
+            <next>
+              <block type="dht11_pin" id="E$sh$]Hr3qv}rLQ;Pazj">
+                <value name="pin">
+                  <block type="math_number" id="h]N)cj6jP2^r9G*3A4Ny">
+                    <field name="NUM">15</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="variables_set" id=",xLY?{ackB|#5.q$s^g4">
+                    <field name="POSITION">global</field>
+                    <field name="TYPE">int</field>
+                    <field name="VAR" id="(LKR1DM~N+l)[dlpCgGq">T</field>
+                    <value name="VALUE">
+                      <shadow type="math_number" id="L:XtqwtX%JTM17VmWq{i">
+                        <field name="NUM">0</field>
+                      </shadow>
+                    </value>
+                    <next>
+                      <block type="variables_set" id="v3@~U+q3)(iv9R^%T70,">
+                        <field name="POSITION">global</field>
+                        <field name="TYPE">int</field>
+                        <field name="VAR" id="aR(e{R2_OS,V;dZA6mDx">H</field>
+                        <value name="VALUE">
+                          <shadow type="math_number" id="oa_aeyJ@64[47-Dg72Tl">
+                            <field name="NUM">0</field>
+                          </shadow>
+                        </value>
+                        <next>
+                          <block type="fu_oled_initial" id="K`=XQTMboa,=CAf1S[]M">
+                            <field name="format">U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, /* reset=*/ U8X8_PIN_NONE);</field>
+                            <field name="display">U8G2_R0</field>
+                            <field name="utf8">0</field>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <next>
+      <block type="initializes_loop" id="1">
+        <statement name="CONTENT">
+          <block type="dht11_read" id="_?Wd;QwZ`h.dWgm*`by3">
+            <next>
+              <block type="variables_set3" id="o(9GF+==5mFS2di%T(x_">
+                <field name="VAR" id="(LKR1DM~N+l)[dlpCgGq">T</field>
+                <value name="DELTA">
+                  <shadow type="math_number">
+                    <field name="NUM">0</field>
+                  </shadow>
+                  <block type="dht11_get" id="G!6[]oZ(Z;FiL{*vI4@%">
+                    <field name="type">temperature</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="variables_set3" id="v#R-ZY~~c#OYyneB58zM">
+                    <field name="VAR" id="aR(e{R2_OS,V;dZA6mDx">H</field>
+                    <value name="DELTA">
+                      <shadow type="math_number">
+                        <field name="NUM">0</field>
+                      </shadow>
+                      <block type="dht11_get" id="EfxY%Z/zA]eYC+`CiifL">
+                        <field name="type">humidity</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="procedures_callnoreturn" id="h3YR{_n=9_6/{aZJ=Z:L">
+                        <mutation xmlns="http://www.w3.org/1999/xhtml" name="Display"></mutation>
+                        <value name="VAR">
+                          <block type="lists_create_with" id="j8:BuB##2mep(mBg%w`V">
+                            <mutation items="2"></mutation>
+                            <value name="ADD0">
+                              <block type="variables_get" id="CIHoJ3A*9+,)?r$0bn[A">
+                                <field name="VAR" id="(LKR1DM~N+l)[dlpCgGq">T</field>
+                              </block>
+                            </value>
+                            <value name="ADD1">
+                              <block type="variables_get" id="(,lL3z8`4Tcy3a_yONnf">
+                                <field name="VAR" id="aR(e{R2_OS,V;dZA6mDx">H</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="ljj_esp32_ble_send" id="Trf;fo,ObA60PXn}Qcji">
+                            <field name="LINE">FALSE</field>
+                            <value name="MESSAGE">
+                              <block type="text_join" id="]qvO+POM0E?HZ]NLKZ?1">
+                                <mutation items="3"></mutation>
+                                <value name="ADD0">
+                                  <block type="variables_get" id="k,)KdE/VAv`r#90FZ8?o">
+                                    <field name="VAR" id="(LKR1DM~N+l)[dlpCgGq">T</field>
+                                  </block>
+                                </value>
+                                <value name="ADD1">
+                                  <block type="text" id="0ANIwX11_5Vb9NjEQN]S">
+                                    <field name="TEXT">,</field>
+                                  </block>
+                                </value>
+                                <value name="ADD2">
+                                  <block type="variables_get" id="l7u:P=;uG9Vuo;1AOHj#">
+                                    <field name="VAR" id="aR(e{R2_OS,V;dZA6mDx">H</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="delay_custom" id="R{;7pM^Fix9p[5iUur31">
+                                <value name="DELAY_TIME">
+                                  <block type="math_number" id="Ou+?s$o+)lo6oN3NB[A`">
+                                    <field name="NUM">1000</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </next>
+  </block>
+  <block type="ljj_esp32_ble_onConnected" id="vC;bHC@$!i.aZplwhxiD" x="530" y="70">
+    <field name="STATUS">connected</field>
+    <statement name="STATEMENT">
+      <block type="servermodule_pinwrite" id="}[TytP^RG2c_;GSN:9S,">
+        <value name="pin">
+          <block type="math_number" id="x9})8EAcb+0meOIHig0z">
+            <field name="NUM">2</field>
+          </block>
+        </value>
+        <value name="val">
+          <block type="math_number" id="nN*?6-%=j7|r`:$aZWYy">
+            <field name="NUM">1</field>
+          </block>
+        </value>
+      </block>
+    </statement>
+  </block>
+  <block type="ljj_esp32_ble_onConnected" id=")fDv+U$qdnjD[-^L0Wv}" x="530" y="170">
+    <field name="STATUS">disconnected</field>
+    <statement name="STATEMENT">
+      <block type="servermodule_pinwrite" id="k$D|jw!Y@oxHIO^Tsg2X">
+        <value name="pin">
+          <block type="math_number" id="aB#{DX8L.-E`GEP89id~">
+            <field name="NUM">2</field>
+          </block>
+        </value>
+        <value name="val">
+          <block type="math_number" id="bXsXTX,CE^jpy@s_}.H+">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
+    </statement>
+  </block>
+  <block type="procedures_defnoreturn" id="v#tdT|b!KK+[Ml)lq:FB" x="530" y="270">
+    <field name="NAME">Display</field>
+    <value name="VAR">
+      <shadow type="lists_create_with" inline="1">
+        <mutation items="0"></mutation>
+      </shadow>
+      <block type="lists_create_with" id="~H*A57E8K$SX67!E#a8=" inline="false">
+        <mutation items="2"></mutation>
+        <value name="ADD0">
+          <block type="variables_set2" id="xQT#Bq[?@Jw)ocl2mVSt">
+            <field name="TYPE">int</field>
+            <field name="VAR" id="wHUM,Pu?OyIzZdK)Xgzv">T4F</field>
+          </block>
+        </value>
+        <value name="ADD1">
+          <block type="variables_set2" id="iuV|B_s,1SIuvE~[wdLd">
+            <field name="TYPE">int</field>
+            <field name="VAR" id="^?Aa:H=vul[A$(coKKDF">H4F</field>
+          </block>
+        </value>
+      </block>
+    </value>
+    <statement name="STACK">
+      <block type="fu_oled_setFont_all" id=":T^-@PE(Um3/~Tp|V^@Y">
+        <field name="font">u8g2_font_10x20_me</field>
+        <next>
+          <block type="fu_oled_nextPage" id="V55X8a}QRWZ$0x_XN^hz">
+            <statement name="draw">
+              <block type="fu_oled_drawStr" id="ff5e%}bq/$`dj(#j$wOh">
+                <value name="x">
+                  <shadow type="math_number" id=",rB{zoH%I*t[[wc/XNIz">
+                    <field name="NUM">0</field>
+                  </shadow>
+                </value>
+                <value name="y">
+                  <shadow type="math_number" id="gARSaDPz%IaO}%MjO=8^">
+                    <field name="NUM">14</field>
+                  </shadow>
+                </value>
+                <value name="str">
+                  <block type="text_join" id="p-4tHa6u1{x]sAvJTl5I">
+                    <mutation items="2"></mutation>
+                    <value name="ADD0">
+                      <block type="text" id="isjmizn2aa:z1?H+6AFX">
+                        <field name="TEXT">T:</field>
+                      </block>
+                    </value>
+                    <value name="ADD1">
+                      <block type="variables_get" id="C,960YY/rFscA`]C8;+e">
+                        <field name="VAR" id="wHUM,Pu?OyIzZdK)Xgzv">T4F</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="fu_oled_drawStr" id="9;6$0*^UxLOm@zjao]I6">
+                    <value name="x">
+                      <shadow type="math_number" id="(DG:oID[urwi-QXN+*Pk">
+                        <field name="NUM">0</field>
+                      </shadow>
+                    </value>
+                    <value name="y">
+                      <shadow type="math_number" id="vQwhI*{j}5llf3}i5Ef%">
+                        <field name="NUM">30</field>
+                      </shadow>
+                    </value>
+                    <value name="str">
+                      <block type="text_join" id="rECGi}k9Y`{3P2Zdn4C^">
+                        <mutation items="2"></mutation>
+                        <value name="ADD0">
+                          <block type="text" id="Y#vMXFW4+c:_Fr*S1qNp">
+                            <field name="TEXT">H:</field>
+                          </block>
+                        </value>
+                        <value name="ADD1">
+                          <block type="variables_get" id="v!~]{Id2_:)oIKaj=6rL">
+                            <field name="VAR" id="^?Aa:H=vul[A$(coKKDF">H4F</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </statement>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>

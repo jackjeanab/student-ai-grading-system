@@ -1,0 +1,103 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="tGe@9r7O5X4[}RoS~_nk">VR</variable>
+  </variables>
+  <block type="board_initializes_setup" id="0" x="70" y="170">
+    <field name="BOARD_TYPE">ESP32</field>
+    <statement name="CONTENT">
+      <block type="serial_init" id="g2]J+B(@7$=X#!.X^)4K">
+        <field name="SPEED">115200</field>
+        <next>
+          <block type="linkit_wifi_wait_until_ready" id="l%aN7rVmIyNRGHG05jJv">
+            <value name="SSID">
+              <block type="text" id="?76yX8X)$zdF]:g+f+4@">
+                <field name="TEXT">你的WiF熱點帳號</field>
+              </block>
+            </value>
+            <value name="PASSWORD">
+              <block type="text" id="S`%xRN|*6nAwVhI)2=m5">
+                <field name="TEXT">你的WiF熱點密碼</field>
+              </block>
+            </value>
+            <next>
+              <block type="inout_buildin_led" id="l}Gi4o9v8dkh3W.+0h63">
+                <field name="STAT">HIGH</field>
+                <next>
+                  <block type="variables_set" id="x/e@D[U6a^vLI+;n#!2m">
+                    <field name="POSITION">global</field>
+                    <field name="TYPE">int</field>
+                    <field name="VAR" id="tGe@9r7O5X4[}RoS~_nk">VR</field>
+                    <value name="VALUE">
+                      <shadow type="math_number" id=".n{K4Oh^JW-L#Py;U9pS">
+                        <field name="NUM">0</field>
+                      </shadow>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <next>
+      <block type="initializes_loop" id="1">
+        <statement name="CONTENT">
+          <block type="variables_set3" id="}u.l*W|^x$AMJQF]N(s~">
+            <field name="VAR" id="tGe@9r7O5X4[}RoS~_nk">VR</field>
+            <value name="DELTA">
+              <shadow type="math_number" id="BjzV[19UIhy4fjsNh@o|">
+                <field name="NUM">0</field>
+              </shadow>
+              <block type="fu_ez_analogread_potentiometer" id="aW|5URo7Epike_5c8Exu"></block>
+            </value>
+            <next>
+              <block type="serial_println" id="f3+T2vywoWH0B3ubOk#P">
+                <value name="CONTENT">
+                  <block type="variables_get" id="$w(AOd{=2AHpFqtYy?~M">
+                    <field name="VAR" id="tGe@9r7O5X4[}RoS~_nk">VR</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="controls_spreadsheet" id="Y/luB,F1Jg$4{L9?A)4M">
+                    <mutation all="1"></mutation>
+                    <field name="func">insertlast</field>
+                    <value name="spreadsheeturl">
+                      <block type="text" id="pQ)#XeKtBSGdZUFkCdTX">
+                        <field name="TEXT">你的Google試算表網址</field>
+                      </block>
+                    </value>
+                    <value name="spreadsheetname">
+                      <block type="text" id="cMUFq?FkyF[QxH7;#h-{">
+                        <field name="TEXT">工作表1</field>
+                      </block>
+                    </value>
+                    <value name="VALUE">
+                      <block type="controls_spreadsheet_datetime" id="%`VV$p{qL+#v3IjbH1?#">
+                        <field name="datetime">gmt_datetime</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="variables_get" id="aLz=+OnJLOk+sUzytc.@">
+                        <field name="VAR" id="tGe@9r7O5X4[}RoS~_nk">VR</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="delay_custom" id="r,e6TnHx@ckZnkYllpN+">
+                        <value name="DELAY_TIME">
+                          <block type="math_number" id="ID)!5^JMlmZ)PhUKxYFW">
+                            <field name="NUM">20000</field>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </next>
+  </block>
+</xml>

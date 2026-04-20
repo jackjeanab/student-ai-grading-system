@@ -1,0 +1,48 @@
+<xml version="F2" board="NodeMCU-32S" xmlns="https://developers.google.com/blockly/xml">
+  <block type="board_initializes_setup" id="0" x="100" y="50">
+    <field name="BOARD_TYPE">ESP32</field>
+    <statement name="CONTENT">
+      <block type="serial_init" id="qTeT_6GHw.MG`4*ij(r_">
+        <field name="SPEED">115200</field>
+        <next>
+          <block type="webbit_mooncar_sonar_pin" id="f!Su+0yT[g3z+Puk?ilj">
+            <field name="index">0</field>
+            <value name="TRIG">
+              <block type="math_number" id="NGYF$ngANuSB8ck)qtUA">
+                <field name="NUM">12</field>
+              </block>
+            </value>
+            <value name="ECHO">
+              <block type="math_number" id="4~q8qBx~!hPr,LCq}/g%">
+                <field name="NUM">16</field>
+              </block>
+            </value>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <next>
+      <block type="initializes_loop" id="1">
+        <statement name="CONTENT">
+          <block type="serial_println" id="m*m,;2cVPz3*Q!|kdWEA">
+            <value name="CONTENT">
+              <block type="webbit_mooncar_sonar" id="ooM+^oJF}]75E!yk(YlY">
+                <field name="unit">1</field>
+                <field name="index">0</field>
+              </block>
+            </value>
+            <next>
+              <block type="delay_custom" id="]w|ylZd3`q29SVv0N)sn">
+                <value name="DELAY_TIME">
+                  <block type="math_number" id="t3RLddujLpxq;anZbjP[">
+                    <field name="NUM">200</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </next>
+  </block>
+</xml>

@@ -1,0 +1,197 @@
+<xml version="F2" board="NodeMCU-32S" xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id=")1vV3FcA.a$J4Oe@XQS4">i</variable>
+  </variables>
+  <block type="board_initializes_setup" id="0" x="270" y="90">
+    <field name="BOARD_TYPE">ESP32</field>
+    <statement name="CONTENT">
+      <block type="BitMatrixLed_matrix_pin" id="F(V%D/uA7EUnuDC%4-/H">
+        <value name="pin">
+          <block type="math_number" id="12+:i[8oPs}-3HMibFy4">
+            <field name="NUM">26</field>
+          </block>
+        </value>
+        <value name="leds">
+          <block type="math_number" id="aCIz/a{]19oXvm9||_9i">
+            <field name="NUM">3</field>
+          </block>
+        </value>
+        <next>
+          <block type="BitMatrixLed_matrix_brightness" id="yv2EWP*I4o$NUuns=]/{">
+            <value name="brightness">
+              <block type="math_number" id="w.GsOiho1Tm2VqoBx^LS">
+                <field name="NUM">100</field>
+              </block>
+            </value>
+            <next>
+              <block type="BitMatrixLed_matrix_clear" id="By_[x2D_A23jAv.!el=j"></block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <next>
+      <block type="initializes_loop" id="1">
+        <statement name="CONTENT">
+          <block type="controls_for" id="OX;cQV4u,[XQ9/Sm:W;+">
+            <field name="VAR" id=")1vV3FcA.a$J4Oe@XQS4">i</field>
+            <value name="FROM">
+              <block type="math_number" id="^ij!+C+U6m!(vB/l/.`j">
+                <field name="NUM">1</field>
+              </block>
+            </value>
+            <value name="TO">
+              <block type="math_number" id="H0/a)gt*SvAO|w-w+LN,">
+                <field name="NUM">3</field>
+              </block>
+            </value>
+            <value name="BY">
+              <block type="math_number" id="mue.:C{E`cS!`a|3:_e+">
+                <field name="NUM">1</field>
+              </block>
+            </value>
+            <statement name="DO">
+              <block type="BitMatrixLed_matrix_rgb_one_n" id="vXBa3Xlm]+)8F?_,wx|L">
+                <value name="N">
+                  <block type="variables_get" id="|(56y9(TFGVJi#zq?h!)">
+                    <field name="VAR" id=")1vV3FcA.a$J4Oe@XQS4">i</field>
+                  </block>
+                </value>
+                <value name="R">
+                  <block type="math_number" id="p7*+(m-{neHXjp87z/L:">
+                    <field name="NUM">255</field>
+                  </block>
+                </value>
+                <value name="G">
+                  <block type="math_number" id="|a]+Eb5V0O`Z:QZ[t5PM">
+                    <field name="NUM">0</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="math_number" id="*H$SR7UU-A-vDgK~2b7g">
+                    <field name="NUM">0</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="delay_custom" id="Q9z3#{qs6WE|MpRjl,=I">
+                    <value name="DELAY_TIME">
+                      <block type="math_number" id="|_b|Yc/-saolR{08Q37*">
+                        <field name="NUM">1000</field>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <next>
+              <block type="controls_for" id="H9qS2EABD]uq1ss?UP1z">
+                <field name="VAR" id=")1vV3FcA.a$J4Oe@XQS4">i</field>
+                <value name="FROM">
+                  <block type="math_number" id="#_Th=8F3r89,FV6-q=@*">
+                    <field name="NUM">1</field>
+                  </block>
+                </value>
+                <value name="TO">
+                  <block type="math_number" id="a?z~6c(K|;/1ZS^M-!f@">
+                    <field name="NUM">3</field>
+                  </block>
+                </value>
+                <value name="BY">
+                  <block type="math_number" id="H2UDpEhF$ES8Sp)ZHfFO">
+                    <field name="NUM">1</field>
+                  </block>
+                </value>
+                <statement name="DO">
+                  <block type="BitMatrixLed_matrix_rgb_one_n" id="pBM)bW#p4sG)yG^H!d=X">
+                    <value name="N">
+                      <block type="variables_get" id="8d.]ipu)Sj_]*%8j`GnD">
+                        <field name="VAR" id=")1vV3FcA.a$J4Oe@XQS4">i</field>
+                      </block>
+                    </value>
+                    <value name="R">
+                      <block type="math_number" id="wj!NEe{nouk@)aVf,g88">
+                        <field name="NUM">0</field>
+                      </block>
+                    </value>
+                    <value name="G">
+                      <block type="math_number" id="-K%vCMniqBk{=9gjBy:D">
+                        <field name="NUM">255</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="math_number" id="(h3an:!6]WDgVi+:kl9j">
+                        <field name="NUM">0</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="delay_custom" id="gYf~TD,uIXPY4R7=M_T9">
+                        <value name="DELAY_TIME">
+                          <block type="math_number" id=":5+7,w4I#KUsS3U,,7UO">
+                            <field name="NUM">1000</field>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+                <next>
+                  <block type="controls_for" id="rl*7Rl`h!~O9q|4gdu}g">
+                    <field name="VAR" id=")1vV3FcA.a$J4Oe@XQS4">i</field>
+                    <value name="FROM">
+                      <block type="math_number" id="fEh5`azI8Z)}7Ss=zF?|">
+                        <field name="NUM">1</field>
+                      </block>
+                    </value>
+                    <value name="TO">
+                      <block type="math_number" id="E^S(uzB#]g`*(-NJ~Q56">
+                        <field name="NUM">3</field>
+                      </block>
+                    </value>
+                    <value name="BY">
+                      <block type="math_number" id="LdK)@tPBiAc!hlvQ4d}%">
+                        <field name="NUM">1</field>
+                      </block>
+                    </value>
+                    <statement name="DO">
+                      <block type="BitMatrixLed_matrix_rgb_one_n" id="(l%9IZ]:U_YWB.F%aK?y">
+                        <value name="N">
+                          <block type="variables_get" id="U~uw6ec;Ry:L5mUc,@St">
+                            <field name="VAR" id=")1vV3FcA.a$J4Oe@XQS4">i</field>
+                          </block>
+                        </value>
+                        <value name="R">
+                          <block type="math_number" id="D,p6DohOR#ADga7JGVJ]">
+                            <field name="NUM">0</field>
+                          </block>
+                        </value>
+                        <value name="G">
+                          <block type="math_number" id="X$`AK+)olCFo7i3)mFx)">
+                            <field name="NUM">0</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="math_number" id=")I[n(ongq~fS:~zsE7u2">
+                            <field name="NUM">255</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="delay_custom" id="E=3uXS_`i[@``c:=WbgW">
+                            <value name="DELAY_TIME">
+                              <block type="math_number" id="O{Mo-{R6/sK!4e(}6vDF">
+                                <field name="NUM">1000</field>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </statement>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </next>
+  </block>
+</xml>

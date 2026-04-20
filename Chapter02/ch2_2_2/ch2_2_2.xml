@@ -1,0 +1,54 @@
+<xml version="F2" board="NodeMCU-32S" xmlns="https://developers.google.com/blockly/xml">
+  <block type="board_initializes_setup" id="0" x="430" y="150">
+    <field name="BOARD_TYPE">ESP32</field>
+    <next>
+      <block type="initializes_loop" id="1">
+        <statement name="CONTENT">
+          <block type="controls_if" id="U0AA8ls5uM+s0B=_=q]/">
+            <mutation else="1"></mutation>
+            <value name="IF0">
+              <block type="logic_compare" id="~iqihoNNR.={+qL@A17Q">
+                <field name="OP">EQ</field>
+                <value name="A">
+                  <block type="esp32_pinread" id="qqe^G$%Og.l-5;A3[l.a">
+                    <field name="type">digitalRead</field>
+                    <value name="pin">
+                      <block type="math_number" id="CbFfIJsP~AT]@|WBE%XB">
+                        <field name="NUM">5</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="math_number" id="r``Sf{9)I/oI7+LJtDzd">
+                    <field name="NUM">0</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="esp32_digitalwrite" id="`o#:{EVzjnG-E~5YWVI6">
+                <field name="val">HIGH</field>
+                <value name="pin">
+                  <block type="math_number" id="Q;hE-M3ppyoLkni@~lxK">
+                    <field name="NUM">16</field>
+                  </block>
+                </value>
+              </block>
+            </statement>
+            <statement name="ELSE">
+              <block type="esp32_digitalwrite" id="OnePk/j(ht)9GmJ.05Z9">
+                <field name="val">LOW</field>
+                <value name="pin">
+                  <block type="math_number" id="IKv0uWXv]JDwMMb)w-*;">
+                    <field name="NUM">16</field>
+                  </block>
+                </value>
+              </block>
+            </statement>
+          </block>
+        </statement>
+      </block>
+    </next>
+  </block>
+</xml>

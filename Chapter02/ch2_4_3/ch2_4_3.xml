@@ -1,0 +1,65 @@
+<xml version="F2" board="NodeMCU-32S" xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="ATKd*:FQ0JC!!{_Su[wK">Light</variable>
+  </variables>
+  <block type="board_initializes_setup" id="0" x="350" y="150">
+    <field name="BOARD_TYPE">ESP32</field>
+    <statement name="CONTENT">
+      <block type="serial_init" id=".p8c((+(PLSW%PIQ6%0b">
+        <field name="SPEED">115200</field>
+        <next>
+          <block type="variables_set" id="ycm5cLvpM9Nqiun:kfnQ">
+            <field name="POSITION">global</field>
+            <field name="TYPE">int</field>
+            <field name="VAR" id="ATKd*:FQ0JC!!{_Su[wK">Light</field>
+            <value name="VALUE">
+              <shadow type="math_number" id="HZco!+*W;}6@6rh!SxLs">
+                <field name="NUM">0</field>
+              </shadow>
+            </value>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <next>
+      <block type="initializes_loop" id="1">
+        <statement name="CONTENT">
+          <block type="variables_set3" id="JbMcIGOx]eV]@]wmS6DZ">
+            <field name="VAR" id="ATKd*:FQ0JC!!{_Su[wK">Light</field>
+            <value name="DELTA">
+              <shadow type="math_number" id="QOSuRlWEbKB!Ozb,dq.P">
+                <field name="NUM">0</field>
+              </shadow>
+              <block type="esp32_pinread" id="TbENNrB~G@di#5R]l@j3">
+                <field name="type">analogRead</field>
+                <value name="pin">
+                  <block type="math_number" id="VR_dSFb9lNekj!6j{!KC">
+                    <field name="NUM">39</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="serial_println" id="$aG]:ok{}@uy{Eo!tdcd">
+                <value name="CONTENT">
+                  <block type="variables_get" id="xwnM7K73BOW^hSWAOV`D">
+                    <field name="VAR" id="ATKd*:FQ0JC!!{_Su[wK">Light</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="delay_custom" id="7U#95[=0g*1`|?-na7dd">
+                    <value name="DELAY_TIME">
+                      <block type="math_number" id="w0A-;^ZG1T/C/IaHR[ei">
+                        <field name="NUM">200</field>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </next>
+  </block>
+</xml>

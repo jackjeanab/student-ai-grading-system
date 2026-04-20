@@ -1,0 +1,257 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="wHUM,Pu?OyIzZdK)Xgzv">T4F</variable>
+    <variable id="^?Aa:H=vul[A$(coKKDF">H4F</variable>
+    <variable id="(LKR1DM~N+l)[dlpCgGq">T</variable>
+    <variable id="aR(e{R2_OS,V;dZA6mDx">H</variable>
+  </variables>
+  <block type="board_initializes_setup" id="0" x="290" y="230">
+    <field name="BOARD_TYPE">ESP32</field>
+    <statement name="CONTENT">
+      <block type="serial_init" id="yXk{dWafjUx215I3FPHL">
+        <field name="SPEED">115200</field>
+        <next>
+          <block type="dht11_pin" id="NR_]h4Z(OKDTeWP7d3nQ">
+            <value name="pin">
+              <block type="math_number" id="]ZAW*6qW[R0*9ES4eWhF">
+                <field name="NUM">15</field>
+              </block>
+            </value>
+            <next>
+              <block type="fu_oled_initial" id="|(~e;0aVt`B6O@[vW+//">
+                <field name="format">U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, /* reset=*/ U8X8_PIN_NONE);</field>
+                <field name="display">U8G2_R0</field>
+                <field name="utf8">1</field>
+                <next>
+                  <block type="variables_set" id=")S?z{K/mbe1[}5ruo_|D">
+                    <field name="POSITION">global</field>
+                    <field name="TYPE">int</field>
+                    <field name="VAR" id="(LKR1DM~N+l)[dlpCgGq">T</field>
+                    <value name="VALUE">
+                      <shadow type="math_number" id="yc`h:Z^IP:u2Hn^|N1=,">
+                        <field name="NUM">0</field>
+                      </shadow>
+                    </value>
+                    <next>
+                      <block type="variables_set" id="too-t,nH7|K9FXpk~(.}">
+                        <field name="POSITION">global</field>
+                        <field name="TYPE">int</field>
+                        <field name="VAR" id="aR(e{R2_OS,V;dZA6mDx">H</field>
+                        <value name="VALUE">
+                          <shadow type="math_number" id="BO^Hu6aSY2UJVMoj]c{X">
+                            <field name="NUM">0</field>
+                          </shadow>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <next>
+      <block type="initializes_loop" id="1">
+        <statement name="CONTENT">
+          <block type="dht11_read" id="MWaVT$#P0l=:Q)5#O2e{">
+            <next>
+              <block type="variables_set3" id="QI38lg_kHiiP*Zph5#}Z">
+                <field name="VAR" id="(LKR1DM~N+l)[dlpCgGq">T</field>
+                <value name="DELTA">
+                  <shadow type="math_number" id="~(Buhb7wf,iLwty7szL~">
+                    <field name="NUM">0</field>
+                  </shadow>
+                  <block type="dht11_get" id="Fu}SlQQ#a~n@NWX|8*#Z">
+                    <field name="type">temperature</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="variables_set3" id="Q?^:kF839eC9an+`jEXM">
+                    <field name="VAR" id="aR(e{R2_OS,V;dZA6mDx">H</field>
+                    <value name="DELTA">
+                      <shadow type="math_number">
+                        <field name="NUM">0</field>
+                      </shadow>
+                      <block type="dht11_get" id="OYsqE`ku;FGX~{D^?8*9">
+                        <field name="type">humidity</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="serial_println" id="U[Q+T:3)/[PFMS0CW,Vx">
+                        <value name="CONTENT">
+                          <block type="text_join" id="JD@oFnkY@Y=lG7D^`K[t">
+                            <mutation items="2"></mutation>
+                            <value name="ADD0">
+                              <block type="text" id="k:e?LpE6[7_e:8ucg]H(">
+                                <field name="TEXT">溫度：</field>
+                              </block>
+                            </value>
+                            <value name="ADD1">
+                              <block type="variables_get" id="Eo`ckgaw`|5Cs:k?5L$7">
+                                <field name="VAR" id="(LKR1DM~N+l)[dlpCgGq">T</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="serial_println" id="a%e-R9k.k61PW*UyK4bl">
+                            <value name="CONTENT">
+                              <block type="text_join" id="0DBeCODyWh0:cl(-5=8o">
+                                <mutation items="2"></mutation>
+                                <value name="ADD0">
+                                  <block type="text" id="GQ-!@HNW]+,p6wJ.{|+O">
+                                    <field name="TEXT">相對濕度：</field>
+                                  </block>
+                                </value>
+                                <value name="ADD1">
+                                  <block type="variables_get" id="=y?`vm?ZB:PYM-Wf*lr[">
+                                    <field name="VAR" id="aR(e{R2_OS,V;dZA6mDx">H</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="procedures_callnoreturn" id="3xeq|QIN?wv{EJDpX)5r">
+                                <mutation xmlns="http://www.w3.org/1999/xhtml" name="Display"></mutation>
+                                <value name="VAR">
+                                  <block type="lists_create_with" id="J$#e/k)rN,},=8$}:bAA">
+                                    <mutation items="2"></mutation>
+                                    <value name="ADD0">
+                                      <block type="variables_get" id="Ezv=-?~IOWbIn^.kwo!Y">
+                                        <field name="VAR" id="(LKR1DM~N+l)[dlpCgGq">T</field>
+                                      </block>
+                                    </value>
+                                    <value name="ADD1">
+                                      <block type="variables_get" id="(d^ZRWlhWNu]7[Iz71Sq">
+                                        <field name="VAR" id="aR(e{R2_OS,V;dZA6mDx">H</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="delay_custom" id="E(~Y`%hj/,8#;k+;62TZ">
+                                    <value name="DELAY_TIME">
+                                      <block type="math_number" id="W825_*A#-VDH+;=R/DUX">
+                                        <field name="NUM">1000</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </next>
+  </block>
+  <block type="procedures_defnoreturn" id="7;_d2n(@UystV80N[Y(F" x="890" y="370">
+    <field name="NAME">Display</field>
+    <value name="VAR">
+      <shadow type="lists_create_with" inline="true">
+        <mutation items="0"></mutation>
+      </shadow>
+      <block type="lists_create_with" id="|t|ck;0yMYIfy5)E~3U6" inline="true">
+        <mutation items="2"></mutation>
+        <value name="ADD0">
+          <block type="variables_set2" id="!Fp8!)nddwQ|gNn3c#wQ">
+            <field name="TYPE">int</field>
+            <field name="VAR" id="wHUM,Pu?OyIzZdK)Xgzv">T4F</field>
+          </block>
+        </value>
+        <value name="ADD1">
+          <block type="variables_set2" id="NsSm.9(K78PWns:~i*-E">
+            <field name="TYPE">int</field>
+            <field name="VAR" id="^?Aa:H=vul[A$(coKKDF">H4F</field>
+          </block>
+        </value>
+      </block>
+    </value>
+    <statement name="STACK">
+      <block type="fu_oled_setFont_chinese" id="#5#0r2g2q|#u9!j}fo*Z">
+        <field name="font">u8g2_font_unifont_t_chinese1</field>
+        <next>
+          <block type="fu_oled_nextPage" id="0LgvO0nwj6l*BkoxNylV">
+            <statement name="draw">
+              <block type="fu_oled_drawUTF8" id="}2*%mpgcNzXRoZ,%J.3~">
+                <value name="x">
+                  <shadow type="math_number" id="y#:,(x3k[7l4O_)5_.oU">
+                    <field name="NUM">0</field>
+                  </shadow>
+                </value>
+                <value name="y">
+                  <shadow type="math_number" id="P/A@#C{|AgF%%vNM|.8w">
+                    <field name="NUM">14</field>
+                  </shadow>
+                </value>
+                <value name="str">
+                  <block type="text_join" id="E|%i:!=yZwd7?Ea2oX?v">
+                    <mutation items="3"></mutation>
+                    <value name="ADD0">
+                      <block type="text" id="$`(P@n/k}_U*+*!/(HRj">
+                        <field name="TEXT">溫度：</field>
+                      </block>
+                    </value>
+                    <value name="ADD1">
+                      <block type="variables_get" id="O$?H/,wUnA]S0T:e4*=I">
+                        <field name="VAR" id="wHUM,Pu?OyIzZdK)Xgzv">T4F</field>
+                      </block>
+                    </value>
+                    <value name="ADD2">
+                      <block type="text" id="[s85LUr]p2/c[w~hRNHK">
+                        <field name="TEXT">度</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="fu_oled_drawUTF8" id="^R`nmm|ht`$}Ab@MzK?9">
+                    <value name="x">
+                      <shadow type="math_number" id="K-}|ou^XzF.![/M02L=N">
+                        <field name="NUM">0</field>
+                      </shadow>
+                    </value>
+                    <value name="y">
+                      <shadow type="math_number" id="k6jA[Xh;sw/Z5F(A37Gq">
+                        <field name="NUM">32</field>
+                      </shadow>
+                    </value>
+                    <value name="str">
+                      <block type="text_join" id=".O55nN7I^Cyq5uY;|r!R">
+                        <mutation items="3"></mutation>
+                        <value name="ADD0">
+                          <block type="text" id="Lt[XIL++yM+q-3Lhm3^p">
+                            <field name="TEXT">相對濕度：</field>
+                          </block>
+                        </value>
+                        <value name="ADD1">
+                          <block type="variables_get" id=":)CS^!{-1yT-i@3C#axH">
+                            <field name="VAR" id="^?Aa:H=vul[A$(coKKDF">H4F</field>
+                          </block>
+                        </value>
+                        <value name="ADD2">
+                          <block type="text" id="-pSi-#JEdlqE?j3(WAi@">
+                            <field name="TEXT">%</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </statement>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>

@@ -1,0 +1,157 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="{-(*Z{[.@}y1i8pOwyYb">RX_String</variable>
+  </variables>
+  <block type="board_initializes_setup" id="0" x="-50" y="10">
+    <field name="BOARD_TYPE">ESP32</field>
+    <statement name="CONTENT">
+      <block type="serial_init" id=",y1Yz`Ev]B-R1/1(/jSM">
+        <field name="SPEED">115200</field>
+        <next>
+          <block type="ljj_esp32_ble_init" id="9Qabi:J42h=:,.ja$a^+">
+            <value name="BLE_NAME">
+              <block type="text" id="U@^hX-0#A!FISyOE%8K5">
+                <field name="TEXT">ESP32_BLE</field>
+              </block>
+            </value>
+            <value name="UUID">
+              <block type="text" id="V=0h3*fE;tA8LbY6Qt+v">
+                <field name="TEXT">6E400001-B5A3-F393-E0A9-E50E24DCCA9E</field>
+              </block>
+            </value>
+            <next>
+              <block type="variables_set" id="(oZz]7$+R,F#?QAcxWB2">
+                <field name="POSITION">global</field>
+                <field name="TYPE">String</field>
+                <field name="VAR" id="{-(*Z{[.@}y1i8pOwyYb">RX_String</field>
+                <value name="VALUE">
+                  <shadow type="math_number" id="{`_c]sZcQ/lBSu4fuBGp">
+                    <field name="NUM">0</field>
+                  </shadow>
+                  <block type="text" id="$bk(gZbAoZEr2ddjVv*Z">
+                    <field name="TEXT"></field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <next>
+      <block type="initializes_loop" id="1">
+        <statement name="CONTENT">
+          <block type="ljj_esp32_ble_recv_avalable" id="A1vN71o7}_BiAk}wy7Ok">
+            <statement name="STATEMENT">
+              <block type="variables_set3" id="lv^]Tt`NAm}tZ:{bcN=;">
+                <field name="VAR" id="{-(*Z{[.@}y1i8pOwyYb">RX_String</field>
+                <value name="DELTA">
+                  <shadow type="math_number" id="#E2lVNXjVPgwM~[du0t1">
+                    <field name="NUM">0</field>
+                  </shadow>
+                  <block type="ljj_esp32_ble_read_result" id="4UcCy;k,.Z:O{4^`}nXk"></block>
+                </value>
+                <next>
+                  <block type="serial_println" id="28E3+|{FX(EQ5Mm^zI+q">
+                    <value name="CONTENT">
+                      <block type="variables_get" id="-bgj*9V_EK$2J[na7yp4">
+                        <field name="VAR" id="{-(*Z{[.@}y1i8pOwyYb">RX_String</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="controls_if" id="D4OPf~M2$K5Pxmfv^Jl*">
+                        <mutation elseif="1"></mutation>
+                        <value name="IF0">
+                          <block type="logic_compare" id="tA1VTfjYvXHY:N4mI[]w">
+                            <field name="OP">EQ</field>
+                            <value name="A">
+                              <block type="variables_get" id="!W~kle3]OF])^@cRf=;D">
+                                <field name="VAR" id="{-(*Z{[.@}y1i8pOwyYb">RX_String</field>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <block type="text" id="5?4Q!@L2=$3LZgQEtHzg">
+                                <field name="TEXT">ON</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <statement name="DO0">
+                          <block type="fu_ez_digitalwrite_input_relay" id="QECgtUJhf5L^J@I/P%sp">
+                            <value name="value">
+                              <shadow type="math_number" id="_5CgTNgs~8yinaUo/Ng.">
+                                <field name="NUM">1</field>
+                              </shadow>
+                            </value>
+                          </block>
+                        </statement>
+                        <value name="IF1">
+                          <block type="logic_compare" id="RC7=ci,GrPY1~qg^7TqU">
+                            <field name="OP">EQ</field>
+                            <value name="A">
+                              <block type="variables_get" id="tu+R|bwdm!_GWkScYHgg">
+                                <field name="VAR" id="{-(*Z{[.@}y1i8pOwyYb">RX_String</field>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <block type="text" id="~6v=B/T(:@?_G(?+5R[}">
+                                <field name="TEXT">OFF</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <statement name="DO1">
+                          <block type="fu_ez_digitalwrite_input_relay" id="|`TT6s?v*c2D|Sp5B8)|">
+                            <value name="value">
+                              <shadow type="math_number" id=".x)c#oO=UO9mg8f72Es6">
+                                <field name="NUM">0</field>
+                              </shadow>
+                            </value>
+                          </block>
+                        </statement>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </statement>
+          </block>
+        </statement>
+      </block>
+    </next>
+  </block>
+  <block type="ljj_esp32_ble_onConnected" id="hRD#b7[?$fS~8-r-ja+m" x="510" y="210">
+    <field name="STATUS">connected</field>
+    <statement name="STATEMENT">
+      <block type="servermodule_pinwrite" id="Dw+*62Gxo]b/VTqYxj0W">
+        <value name="pin">
+          <block type="math_number" id=",x}qr+HjY#5*(YVk$2(1">
+            <field name="NUM">2</field>
+          </block>
+        </value>
+        <value name="val">
+          <block type="math_number" id="eWb4L+klc{3_u74]hsrL">
+            <field name="NUM">1</field>
+          </block>
+        </value>
+      </block>
+    </statement>
+  </block>
+  <block type="ljj_esp32_ble_onConnected" id="c]1DTC_UBtL}ZbW2-qN|" x="510" y="310">
+    <field name="STATUS">disconnected</field>
+    <statement name="STATEMENT">
+      <block type="servermodule_pinwrite" id="J2NF)J1Tdj}g!4YHi7_Z">
+        <value name="pin">
+          <block type="math_number" id=":GD+(v{a!cC%DnxlLMaG">
+            <field name="NUM">2</field>
+          </block>
+        </value>
+        <value name="val">
+          <block type="math_number" id="@QSPnw0T!irPPpj;b4+;">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
+    </statement>
+  </block>
+</xml>

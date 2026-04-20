@@ -1,0 +1,56 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <block type="board_initializes_setup" id="0" x="-50" y="50">
+    <field name="BOARD_TYPE">ESP32</field>
+    <statement name="CONTENT">
+      <block type="ljj_esp32_ble_init" id="9Qabi:J42h=:,.ja$a^+">
+        <value name="BLE_NAME">
+          <block type="text" id="U@^hX-0#A!FISyOE%8K5">
+            <field name="TEXT">ESP32_BLE</field>
+          </block>
+        </value>
+        <value name="UUID">
+          <block type="text" id="V=0h3*fE;tA8LbY6Qt+v">
+            <field name="TEXT">6E400001-B5A3-F393-E0A9-E50E24DCCA9E</field>
+          </block>
+        </value>
+      </block>
+    </statement>
+    <next>
+      <block type="initializes_loop" id="1"></block>
+    </next>
+  </block>
+  <block type="ljj_esp32_ble_onConnected" id="hRD#b7[?$fS~8-r-ja+m" x="-50" y="210">
+    <field name="STATUS">connected</field>
+    <statement name="STATEMENT">
+      <block type="fu_ez_digitalwrite_input" id="rZ/TdC2@wr.*AVK201;u">
+        <field name="led">0</field>
+        <value name="value">
+          <shadow type="math_number" id=";h?hlyFDyeEC(Hm4yzZZ">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+      </block>
+    </statement>
+  </block>
+  <block type="fu_ez_digitalwrite_input" id="-K+Jg_ele^sT?T#${oUX" x="390" y="230">
+    <field name="led">0</field>
+    <value name="value">
+      <shadow type="math_number" id="U8?W?uU0qMg8!PoMkQAS">
+        <field name="NUM">1</field>
+      </shadow>
+    </value>
+  </block>
+  <block type="ljj_esp32_ble_onConnected" id="c]1DTC_UBtL}ZbW2-qN|" x="-50" y="310">
+    <field name="STATUS">disconnected</field>
+    <statement name="STATEMENT">
+      <block type="fu_ez_digitalwrite_input" id="pGI:|}O,#QAnq8RwDB5c">
+        <field name="led">0</field>
+        <value name="value">
+          <shadow type="math_number" id="oY@M#f}0aXc}k-@.*6pm">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+      </block>
+    </statement>
+  </block>
+</xml>

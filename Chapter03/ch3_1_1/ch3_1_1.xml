@@ -1,0 +1,43 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <block type="board_initializes_setup" id="0" x="430" y="130">
+    <field name="BOARD_TYPE">ESP32</field>
+    <statement name="CONTENT">
+      <block type="fu_oled_initial" id="co79wsrJ:S(i3.yYsnt2">
+        <field name="format">U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, /* reset=*/ U8X8_PIN_NONE);</field>
+        <field name="display">U8G2_R0</field>
+        <field name="utf8">0</field>
+        <next>
+          <block type="fu_oled_setFont_all" id="s`31ks45+[*sHU+*-H-B">
+            <field name="font">u8g2_font_10x20_me</field>
+            <next>
+              <block type="fu_oled_nextPage" id="Rcz6/S~u+j425J=.GA^+">
+                <statement name="draw">
+                  <block type="fu_oled_drawStr" id="B@f4K~[]?|LHsUbAj_ps">
+                    <value name="x">
+                      <shadow type="math_number" id="4qn(?j,XG+[QMrL%wcO-">
+                        <field name="NUM">0</field>
+                      </shadow>
+                    </value>
+                    <value name="y">
+                      <shadow type="math_number" id="|oxWUbQZtq;L!O]1)VE*">
+                        <field name="NUM">14</field>
+                      </shadow>
+                    </value>
+                    <value name="str">
+                      <block type="text" id="W?If^%@Q~3c.m7N|MOzP">
+                        <field name="TEXT">Hello World!</field>
+                      </block>
+                    </value>
+                  </block>
+                </statement>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <next>
+      <block type="initializes_loop" id="1"></block>
+    </next>
+  </block>
+</xml>

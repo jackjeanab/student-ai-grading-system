@@ -1,0 +1,102 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <block type="board_initializes_setup" id="0" x="-110" y="-50">
+    <field name="BOARD_TYPE">ESP32</field>
+    <statement name="CONTENT">
+      <block type="serial_init" id=",y1Yz`Ev]B-R1/1(/jSM">
+        <field name="SPEED">115200</field>
+        <next>
+          <block type="ljj_esp32_ble_init" id="9Qabi:J42h=:,.ja$a^+">
+            <value name="BLE_NAME">
+              <block type="text" id="U@^hX-0#A!FISyOE%8K5">
+                <field name="TEXT">ESP32_BLE</field>
+              </block>
+            </value>
+            <value name="UUID">
+              <block type="text" id="V=0h3*fE;tA8LbY6Qt+v">
+                <field name="TEXT">6E400001-B5A3-F393-E0A9-E50E24DCCA9E</field>
+              </block>
+            </value>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <next>
+      <block type="initializes_loop" id="1">
+        <statement name="CONTENT">
+          <block type="startPlus_button" id="BcLYka7:{%6Btf9aiB6-">
+            <field name="AB_BUTTON">A</field>
+            <statement name="MSG_BUTTON_CALL">
+              <block type="ljj_esp32_ble_send" id="Trf;fo,ObA60PXn}Qcji">
+                <field name="LINE">FALSE</field>
+                <value name="MESSAGE">
+                  <block type="text_join" id="]qvO+POM0E?HZ]NLKZ?1">
+                    <mutation items="3"></mutation>
+                    <value name="ADD0">
+                      <block type="math_random_max_min" id="ROed.I+A~}-`@!)aH|M-">
+                        <value name="MIN">
+                          <block type="math_number" id="lCb4_~4S+1o+-*m3)k|$">
+                            <field name="NUM">0</field>
+                          </block>
+                        </value>
+                        <value name="MAX">
+                          <block type="math_number" id="[jFDA*q{aZ`p@p.^`2L;">
+                            <field name="NUM">100</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <value name="ADD1">
+                      <block type="text" id="0ANIwX11_5Vb9NjEQN]S">
+                        <field name="TEXT">,</field>
+                      </block>
+                    </value>
+                    <value name="ADD2">
+                      <block type="math_random_max_min" id="YD![FSOXPuvp-jl3}C=T">
+                        <value name="MIN">
+                          <block type="math_number" id="KmQJm~v?ScR!,s`cInA4">
+                            <field name="NUM">0</field>
+                          </block>
+                        </value>
+                        <value name="MAX">
+                          <block type="math_number" id="0YA+bu38_:/?rAo9/i,W">
+                            <field name="NUM">100</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </statement>
+          </block>
+        </statement>
+      </block>
+    </next>
+  </block>
+  <block type="ljj_esp32_ble_onConnected" id="hRD#b7[?$fS~8-r-ja+m" x="730" y="90">
+    <field name="STATUS">connected</field>
+    <statement name="STATEMENT">
+      <block type="fu_ez_digitalwrite_input" id="rZ/TdC2@wr.*AVK201;u">
+        <field name="led">0</field>
+        <value name="value">
+          <shadow type="math_number" id=";h?hlyFDyeEC(Hm4yzZZ">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+      </block>
+    </statement>
+  </block>
+  <block type="ljj_esp32_ble_onConnected" id="c]1DTC_UBtL}ZbW2-qN|" x="730" y="190">
+    <field name="STATUS">disconnected</field>
+    <statement name="STATEMENT">
+      <block type="fu_ez_digitalwrite_input" id="pGI:|}O,#QAnq8RwDB5c">
+        <field name="led">0</field>
+        <value name="value">
+          <shadow type="math_number" id="oY@M#f}0aXc}k-@.*6pm">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+      </block>
+    </statement>
+  </block>
+</xml>

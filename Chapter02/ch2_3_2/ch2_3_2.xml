@@ -1,0 +1,84 @@
+<xml version="F2" board="NodeMCU-32S" xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id=";;bc_*ozS~Zo-CX1jf#D">i</variable>
+  </variables>
+  <block type="board_initializes_setup" id="0" x="350" y="150">
+    <field name="BOARD_TYPE">ESP32</field>
+    <statement name="CONTENT">
+      <block type="serial_init" id=".p8c((+(PLSW%PIQ6%0b">
+        <field name="SPEED">115200</field>
+      </block>
+    </statement>
+    <next>
+      <block type="initializes_loop" id="1">
+        <statement name="CONTENT">
+          <block type="controls_for" id="Og@SEatkOkJTDyO%:pqq">
+            <field name="VAR" id=";;bc_*ozS~Zo-CX1jf#D">i</field>
+            <value name="FROM">
+              <block type="math_number" id=":;J0hBN%29sxBa$)hMJO">
+                <field name="NUM">0</field>
+              </block>
+            </value>
+            <value name="TO">
+              <block type="math_number" id="^2_OujHs5B4jELEJm1@+">
+                <field name="NUM">255</field>
+              </block>
+            </value>
+            <value name="BY">
+              <block type="math_number" id=",WaNyUV{?o^b?sZu(Blq">
+                <field name="NUM">5</field>
+              </block>
+            </value>
+            <statement name="DO">
+              <block type="serial_println" id="a2msC)_`!;maSF#bwz|2">
+                <value name="CONTENT">
+                  <block type="text_join" id="QLNf_F#H){%%`_C]_*yr">
+                    <mutation items="2"></mutation>
+                    <value name="ADD0">
+                      <block type="text" id="A1,M{5zl(aF)VJG=g`)L">
+                        <field name="TEXT">i = </field>
+                      </block>
+                    </value>
+                    <value name="ADD1">
+                      <block type="variables_get" id=",e?%mH164)@5s#J$k2Qu">
+                        <field name="VAR" id=";;bc_*ozS~Zo-CX1jf#D">i</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="esp32_analogwrite" id="c`H(gl;,~ml}xV*$md6q">
+                    <value name="pin">
+                      <block type="math_number" id="UJ8eaV9[Zjja$F*sa,W;">
+                        <field name="NUM">16</field>
+                      </block>
+                    </value>
+                    <value name="val">
+                      <block type="variables_get" id="k{x2sf%SYv[8)]XF/Ilk">
+                        <field name="VAR" id=";;bc_*ozS~Zo-CX1jf#D">i</field>
+                      </block>
+                    </value>
+                    <value name="channel">
+                      <block type="math_number" id="=)F:lcWFb+nHAs;Q{{~.">
+                        <field name="NUM">1</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="delay_custom" id="xh7!{aAbilkk8}d,x1n-">
+                        <value name="DELAY_TIME">
+                          <block type="math_number" id="cuTe#P]GoqYH{t(~=w/?">
+                            <field name="NUM">200</field>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </statement>
+          </block>
+        </statement>
+      </block>
+    </next>
+  </block>
+</xml>

@@ -1,0 +1,107 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <block type="board_initializes_setup" id="0" x="550" y="70">
+    <field name="BOARD_TYPE">ESP32</field>
+    <statement name="CONTENT">
+      <block type="BitMatrixLed_matrix_pin" id="F(V%D/uA7EUnuDC%4-/H">
+        <value name="pin">
+          <block type="math_number" id="12+:i[8oPs}-3HMibFy4">
+            <field name="NUM">26</field>
+          </block>
+        </value>
+        <value name="leds">
+          <block type="math_number" id="aCIz/a{]19oXvm9||_9i">
+            <field name="NUM">3</field>
+          </block>
+        </value>
+        <next>
+          <block type="BitMatrixLed_matrix_brightness" id="yv2EWP*I4o$NUuns=]/{">
+            <value name="brightness">
+              <block type="math_number" id="w.GsOiho1Tm2VqoBx^LS">
+                <field name="NUM">100</field>
+              </block>
+            </value>
+            <next>
+              <block type="BitMatrixLed_matrix_clear" id="By_[x2D_A23jAv.!el=j">
+                <next>
+                  <block type="BitMatrixLed_matrix_rgb_one_n" id="vXBa3Xlm]+)8F?_,wx|L">
+                    <value name="N">
+                      <block type="math_number" id="*M7V~:g9P9mEOz$$Yq2O">
+                        <field name="NUM">1</field>
+                      </block>
+                    </value>
+                    <value name="R">
+                      <block type="math_number" id="p7*+(m-{neHXjp87z/L:">
+                        <field name="NUM">255</field>
+                      </block>
+                    </value>
+                    <value name="G">
+                      <block type="math_number" id="|a]+Eb5V0O`Z:QZ[t5PM">
+                        <field name="NUM">0</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="math_number" id="*H$SR7UU-A-vDgK~2b7g">
+                        <field name="NUM">0</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="BitMatrixLed_matrix_rgb_one_n" id="Nv/=vA8uNl(mmM1f82cF">
+                        <value name="N">
+                          <block type="math_number" id="BLcO#X]FP.Z@IVCd[FY_">
+                            <field name="NUM">2</field>
+                          </block>
+                        </value>
+                        <value name="R">
+                          <block type="math_number" id="nr2}7ORjZ:o:%SK=[UGG">
+                            <field name="NUM">0</field>
+                          </block>
+                        </value>
+                        <value name="G">
+                          <block type="math_number" id="7btW)J%s0W!Ij=!MxuyJ">
+                            <field name="NUM">255</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="math_number" id="#~sZ3)[xZdk$TYNQ2pU7">
+                            <field name="NUM">0</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="BitMatrixLed_matrix_rgb_one_n" id="X;1Q2p=yBdYz)^}?R%vR">
+                            <value name="N">
+                              <block type="math_number" id="b]4`CfcG,F}isz~[/[uB">
+                                <field name="NUM">3</field>
+                              </block>
+                            </value>
+                            <value name="R">
+                              <block type="math_number" id="MZy~VWOen.tzCh(s|KaY">
+                                <field name="NUM">0</field>
+                              </block>
+                            </value>
+                            <value name="G">
+                              <block type="math_number" id="ZZz)oKE:W9W.Di7Mtu]N">
+                                <field name="NUM">0</field>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <block type="math_number" id="%{eEJ^7z*:1}.4:OLyBO">
+                                <field name="NUM">255</field>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <next>
+      <block type="initializes_loop" id="1"></block>
+    </next>
+  </block>
+</xml>

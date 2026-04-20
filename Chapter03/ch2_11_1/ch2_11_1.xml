@@ -1,0 +1,94 @@
+<xml version="F2" board="NodeMCU-32S" xmlns="https://developers.google.com/blockly/xml">
+  <block type="board_initializes_setup" id="0" x="310" y="130">
+    <field name="BOARD_TYPE">ESP32</field>
+    <statement name="CONTENT">
+      <block type="serial_init" id="`2,u/~EZK5RZ3hYbtj?z">
+        <field name="SPEED">115200</field>
+      </block>
+    </statement>
+    <next>
+      <block type="initializes_loop" id="1">
+        <statement name="CONTENT">
+          <block type="adxl345_getdata" id="h2gmbC)/o)WR7Rl9j,@4">
+            <next>
+              <block type="serial_print" id="}.|/nK_X~+2QW.5HLi$l">
+                <value name="CONTENT">
+                  <block type="text_join" id="VfFT;#5dB!ef*^KgUJ)n">
+                    <mutation items="3"></mutation>
+                    <value name="ADD0">
+                      <block type="text" id=",Y[Pt#BA%qc_eelE/Qvb">
+                        <field name="TEXT">X軸: </field>
+                      </block>
+                    </value>
+                    <value name="ADD1">
+                      <block type="adxl345_get" id="~M[Gh7H6J(`N.!puHREE">
+                        <field name="acceleration">x</field>
+                      </block>
+                    </value>
+                    <value name="ADD2">
+                      <block type="text" id="w3@w~6)~IzC[THcxZ#P%">
+                        <field name="TEXT">   </field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="serial_print" id="P{`siWNCdiYn]0lB1mWn">
+                    <value name="CONTENT">
+                      <block type="text_join" id="yGg+)D2gO2qU1WiG08rV">
+                        <mutation items="3"></mutation>
+                        <value name="ADD0">
+                          <block type="text" id="$|uE*T|ge(!~oO--%W9a">
+                            <field name="TEXT">Y軸: </field>
+                          </block>
+                        </value>
+                        <value name="ADD1">
+                          <block type="adxl345_get" id="4pK%~;ke2|uNcl@BpIY;">
+                            <field name="acceleration">y</field>
+                          </block>
+                        </value>
+                        <value name="ADD2">
+                          <block type="text" id="#XvMV-r/l{pO}+USd##!">
+                            <field name="TEXT">   </field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="serial_println" id="bZ#Nb`$bj~^h^p=UqPE0">
+                        <value name="CONTENT">
+                          <block type="text_join" id="[eRuXuW(KfHY7fiH8Q:V">
+                            <mutation items="2"></mutation>
+                            <value name="ADD0">
+                              <block type="text" id="kIcNh*Vu@+s7fL70[K^M">
+                                <field name="TEXT">Z軸: </field>
+                              </block>
+                            </value>
+                            <value name="ADD1">
+                              <block type="adxl345_get" id="9H9LE!w^IOx~Pt`Y=0X4">
+                                <field name="acceleration">z</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="delay_custom" id="OddjwK6e:MZzyLW]n[8b">
+                            <value name="DELAY_TIME">
+                              <block type="math_number" id="|#-.aDR`x#-taLH#{%?D">
+                                <field name="NUM">100</field>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </next>
+  </block>
+</xml>

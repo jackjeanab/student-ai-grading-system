@@ -1,0 +1,10 @@
+.vercel
+.tools/
+frontend/node_modules/
+frontend/dist/
+backend/.pytest_cache/
+backend/pytest-cache-files-*/
+**/__pycache__/
+**/*.pyc
+.env
+backend/.env

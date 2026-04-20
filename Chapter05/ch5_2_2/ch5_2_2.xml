@@ -1,0 +1,277 @@
+<xml version="F2" board="NodeMCU-32S" xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="tGe@9r7O5X4[}RoS~_nk">Date</variable>
+    <variable id="wHUM,Pu?OyIzZdK)Xgzv">Date4F</variable>
+    <variable id="^?Aa:H=vul[A$(coKKDF">Time4F</variable>
+    <variable id="9;4_tPE4QBeCogpEg3tb">Time</variable>
+  </variables>
+  <block type="board_initializes_setup" id="0" x="100" y="50">
+    <field name="BOARD_TYPE">ESP32</field>
+    <statement name="CONTENT">
+      <block type="serial_init" id="g2]J+B(@7$=X#!.X^)4K">
+        <field name="SPEED">115200</field>
+        <next>
+          <block type="linkit_wifi_wait_until_ready" id="l%aN7rVmIyNRGHG05jJv">
+            <value name="SSID">
+              <block type="text" id="?76yX8X)$zdF]:g+f+4@">
+                <field name="TEXT">JackJean</field>
+              </block>
+            </value>
+            <value name="PASSWORD">
+              <block type="text" id="S`%xRN|*6nAwVhI)2=m5">
+                <field name="TEXT">0226852016</field>
+              </block>
+            </value>
+            <next>
+              <block type="inout_buildin_led" id="l}Gi4o9v8dkh3W.+0h63">
+                <field name="STAT">HIGH</field>
+                <next>
+                  <block type="set_ntp_time" id="5+SxN)aMm-{KxTCO4:$_">
+                    <field name="TZ">8</field>
+                    <next>
+                      <block type="variables_set" id="x/e@D[U6a^vLI+;n#!2m">
+                        <field name="POSITION">global</field>
+                        <field name="TYPE">String</field>
+                        <field name="VAR" id="tGe@9r7O5X4[}RoS~_nk">Date</field>
+                        <value name="VALUE">
+                          <shadow type="math_number" id=".n{K4Oh^JW-L#Py;U9pS">
+                            <field name="NUM">0</field>
+                          </shadow>
+                          <block type="text" id="DnLN7z6ZB}Oj??I(gek/">
+                            <field name="TEXT"></field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="variables_set" id="%/[6Dx[@#}~mC}a(l.2H">
+                            <field name="POSITION">global</field>
+                            <field name="TYPE">String</field>
+                            <field name="VAR" id="9;4_tPE4QBeCogpEg3tb">Time</field>
+                            <value name="VALUE">
+                              <shadow type="math_number" id="svPdcm=-(6iNY[N::~:m">
+                                <field name="NUM">0</field>
+                              </shadow>
+                              <block type="text" id="ry@}?1P0x|~ySE3duMcF">
+                                <field name="TEXT"></field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="fu_oled_initial" id="FpSPW1fYo~Bt2#dbO4QS">
+                                <field name="format">U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, /* reset=*/ U8X8_PIN_NONE);</field>
+                                <field name="display">U8G2_R0</field>
+                                <field name="utf8">0</field>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <next>
+      <block type="initializes_loop" id="1">
+        <statement name="CONTENT">
+          <block type="variables_set3" id="}u.l*W|^x$AMJQF]N(s~">
+            <field name="VAR" id="tGe@9r7O5X4[}RoS~_nk">Date</field>
+            <value name="DELTA">
+              <shadow type="math_number" id="BjzV[19UIhy4fjsNh@o|">
+                <field name="NUM">0</field>
+              </shadow>
+              <block type="text_join" id="p`t1ks`BY@BJH,Mi4kPn">
+                <mutation items="5"></mutation>
+                <value name="ADD0">
+                  <block type="get_RTC_field" id="f9pg^4zLYH-Gy!#|1wls">
+                    <field name="FIELDTYPE">0</field>
+                  </block>
+                </value>
+                <value name="ADD1">
+                  <block type="text" id=".!(-Wj{6P1@@}aFlDhN5">
+                    <field name="TEXT">/</field>
+                  </block>
+                </value>
+                <value name="ADD2">
+                  <block type="get_RTC_field" id="a.^eF;[$yEh[a!se_+h6">
+                    <field name="FIELDTYPE">1</field>
+                  </block>
+                </value>
+                <value name="ADD3">
+                  <block type="text" id="|^~5*Dn.EeguILi7d6wd">
+                    <field name="TEXT">/</field>
+                  </block>
+                </value>
+                <value name="ADD4">
+                  <block type="get_RTC_field" id="*wE[:E58Mv9_{@M`ra3w">
+                    <field name="FIELDTYPE">2</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="variables_set3" id="^_Cx$-ULtB|TD%pkh7q9">
+                <field name="VAR" id="9;4_tPE4QBeCogpEg3tb">Time</field>
+                <value name="DELTA">
+                  <shadow type="math_number" id="UVw^bYjN+vLLK~e^`-N-">
+                    <field name="NUM">0</field>
+                  </shadow>
+                  <block type="text_join" id="o)Bz5whyqYR}5f^h~DTa">
+                    <mutation items="5"></mutation>
+                    <value name="ADD0">
+                      <block type="get_RTC_field" id="FX-ZGe(2UicGJejNp*s2">
+                        <field name="FIELDTYPE">3</field>
+                      </block>
+                    </value>
+                    <value name="ADD1">
+                      <block type="text" id="Hz!XwM2BTXYA(,a.?.[n">
+                        <field name="TEXT">:</field>
+                      </block>
+                    </value>
+                    <value name="ADD2">
+                      <block type="get_RTC_field" id="vom-6N@#2!]%m1$x0q0c">
+                        <field name="FIELDTYPE">4</field>
+                      </block>
+                    </value>
+                    <value name="ADD3">
+                      <block type="text" id="CCrfr,LR7nwgl9_y!RV1">
+                        <field name="TEXT">:</field>
+                      </block>
+                    </value>
+                    <value name="ADD4">
+                      <block type="get_RTC_field" id="iQTA8@Q3K3Ytkb|VBp/i">
+                        <field name="FIELDTYPE">5</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="serial_println" id="f3+T2vywoWH0B3ubOk#P">
+                    <value name="CONTENT">
+                      <block type="variables_get" id="$w(AOd{=2AHpFqtYy?~M">
+                        <field name="VAR" id="tGe@9r7O5X4[}RoS~_nk">Date</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="serial_println" id="ddV*w7_sX6-;56vqcN~|">
+                        <value name="CONTENT">
+                          <block type="variables_get" id="VHFKeInSRU-dK;^}m$`p">
+                            <field name="VAR" id="9;4_tPE4QBeCogpEg3tb">Time</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="procedures_callnoreturn" id="1Vg?a[`n6I7J]M|6)E(6">
+                            <mutation xmlns="http://www.w3.org/1999/xhtml" name="Display"></mutation>
+                            <value name="VAR">
+                              <block type="lists_create_with" id="hUF0nW9BkJ~8()HD@9f,">
+                                <mutation items="2"></mutation>
+                                <value name="ADD0">
+                                  <block type="variables_get" id="v;qOEq-kvt0!e,oMi.NM">
+                                    <field name="VAR" id="tGe@9r7O5X4[}RoS~_nk">Date</field>
+                                  </block>
+                                </value>
+                                <value name="ADD1">
+                                  <block type="variables_get" id="8(;Ioq/YY/0LJoIt9i$Y">
+                                    <field name="VAR" id="9;4_tPE4QBeCogpEg3tb">Time</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="delay_custom" id="r,e6TnHx@ckZnkYllpN+">
+                                <value name="DELAY_TIME">
+                                  <block type="math_number" id="ID)!5^JMlmZ)PhUKxYFW">
+                                    <field name="NUM">1000</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </next>
+  </block>
+  <block type="procedures_defnoreturn" id="^=n*=AUodN@|z49/P|%`" x="630" y="210">
+    <field name="NAME">Display</field>
+    <value name="VAR">
+      <shadow type="lists_create_with" inline="1">
+        <mutation items="0"></mutation>
+      </shadow>
+      <block type="lists_create_with" id="`apV}$,C/#6~pc;aVguw" inline="false">
+        <mutation items="2"></mutation>
+        <value name="ADD0">
+          <block type="variables_set2" id="kPl4YQm_EJ|mKL^W%;.`">
+            <field name="TYPE">String</field>
+            <field name="VAR" id="wHUM,Pu?OyIzZdK)Xgzv">Date4F</field>
+          </block>
+        </value>
+        <value name="ADD1">
+          <block type="variables_set2" id="3|Mxh6^i$y|s!I_2h1y)">
+            <field name="TYPE">String</field>
+            <field name="VAR" id="^?Aa:H=vul[A$(coKKDF">Time4F</field>
+          </block>
+        </value>
+      </block>
+    </value>
+    <statement name="STACK">
+      <block type="fu_oled_setFont_all" id="upaEa0;$`C:yzQ[aQHv%">
+        <field name="font">u8g2_font_10x20_me</field>
+        <next>
+          <block type="fu_oled_nextPage" id="H`1;t2M+=Un$.TBt2J!A">
+            <statement name="draw">
+              <block type="fu_oled_drawStr" id="jcGWmuWXB}?;oxKtcp7e">
+                <value name="x">
+                  <shadow type="math_number" id=":?a$n#Da7A`Tp:Jsm!!9">
+                    <field name="NUM">0</field>
+                  </shadow>
+                </value>
+                <value name="y">
+                  <shadow type="math_number" id="q{:aL8K4IKP~z+Sb}dhG">
+                    <field name="NUM">14</field>
+                  </shadow>
+                </value>
+                <value name="str">
+                  <block type="variables_get" id="}]m+WOGvzqTRpCg_dl+a">
+                    <field name="VAR" id="wHUM,Pu?OyIzZdK)Xgzv">Date4F</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="fu_oled_drawStr" id="hnkIzGVsqxP{!Dij`0.b">
+                    <value name="x">
+                      <shadow type="math_number" id="z?zeHvtb(#uri5fBl;s7">
+                        <field name="NUM">0</field>
+                      </shadow>
+                    </value>
+                    <value name="y">
+                      <shadow type="math_number" id="{+,PP3-^=r9!#f*V!opq">
+                        <field name="NUM">30</field>
+                      </shadow>
+                    </value>
+                    <value name="str">
+                      <block type="variables_get" id="wQx/zhZS6FXP9p2Avr=!">
+                        <field name="VAR" id="^?Aa:H=vul[A$(coKKDF">Time4F</field>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </statement>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="text" id="$5myZ/NiLmT{TZIVoa-J" x="396" y="511">
+    <field name="TEXT"> </field>
+  </block>
+</xml>
