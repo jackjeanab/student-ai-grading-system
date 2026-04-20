@@ -10,6 +10,8 @@ services:
     envVars:
       - key: APP_NAME
         value: Student AI Grading System
+      - key: FRONTEND_ORIGINS
+        value: https://frontend-aaa14.vercel.app,https://frontend-czk66leg5-aaa14.vercel.app
       - key: DATABASE_URL
         sync: false
       - key: GEMINI_API_KEY
