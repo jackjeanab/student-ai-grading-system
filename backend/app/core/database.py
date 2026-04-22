@@ -1,4 +1,5 @@
 from functools import lru_cache
+from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
 from sqlalchemy import create_engine
 from sqlalchemy.engine import Engine
@@ -18,8 +19,26 @@ def get_engine() -> Engine:
 
 def normalize_database_url(database_url: str) -> str:
     if database_url.startswith("postgresql://"):
-        return database_url.replace("postgresql://", "postgresql+psycopg://", 1)
-    return database_url
+        database_url = database_url.replace("postgresql://", "postgresql+psycopg://", 1)
+
+    parsed = urlsplit(database_url)
+    if parsed.scheme not in {"postgresql+psycopg", "postgresql"}:
+        return database_url
+
+    query = [
+        (key, value)
+        for key, value in parse_qsl(parsed.query, keep_blank_values=True)
+        if key != "pgbouncer"
+    ]
+    return urlunsplit(
+        (
+            parsed.scheme,
+            parsed.netloc,
+            parsed.path,
+            urlencode(query),
+            parsed.fragment,
+        )
+    )
 
 
 SessionLocal = sessionmaker(

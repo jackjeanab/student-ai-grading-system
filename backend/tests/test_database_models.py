@@ -25,3 +25,13 @@ def test_normalize_database_url_uses_psycopg_driver_for_postgres() -> None:
     normalized = normalize_database_url(url)
 
     assert normalized == "postgresql+psycopg://postgres:secret@example.supabase.co:5432/postgres"
+
+
+def test_normalize_database_url_removes_supabase_pgbouncer_flag() -> None:
+    url = "postgresql://postgres:secret@example.pooler.supabase.com:6543/postgres?pgbouncer=true&sslmode=require"
+
+    normalized = normalize_database_url(url)
+
+    assert normalized == (
+        "postgresql+psycopg://postgres:secret@example.pooler.supabase.com:6543/postgres?sslmode=require"
+    )
