@@ -6,5 +6,6 @@ backend/.pytest_cache/
 backend/pytest-cache-files-*/
 **/__pycache__/
 **/*.pyc
+*.egg-info/
 .env
 backend/.env

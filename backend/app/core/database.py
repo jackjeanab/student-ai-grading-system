@@ -26,3 +26,7 @@ SessionLocal = sessionmaker(
 def get_session_local() -> sessionmaker:
     SessionLocal.configure(bind=get_engine())
     return SessionLocal
+
+
+def create_db_tables() -> None:
+    Base.metadata.create_all(bind=get_engine())
