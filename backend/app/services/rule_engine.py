@@ -9,6 +9,7 @@ def evaluate_rules(parsed: dict, rules: dict) -> dict:
             "missing_blocks": missing_blocks,
             "final_light": "red",
             "final_grade": "待加強",
+            "feedback": f"Missing required blocks: {', '.join(missing_blocks)}",
         }
 
     return {
@@ -16,4 +17,5 @@ def evaluate_rules(parsed: dict, rules: dict) -> dict:
         "missing_blocks": [],
         "final_light": None,
         "final_grade": None,
+        "feedback": "",
     }
