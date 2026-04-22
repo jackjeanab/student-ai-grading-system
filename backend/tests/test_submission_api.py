@@ -53,3 +53,66 @@ def test_orchestrates_parser_rules_ai_and_final_decision(monkeypatch) -> None:
 
     assert result["final_result"]["source"] == "ai"
     assert [step[0] for step in calls] == ["parser", "rule_engine", "llm_init", "ai", "decide"]
+
+
+def test_create_submission_saves_evaluation_without_exposing_api_key(monkeypatch) -> None:
+    client = TestClient(app)
+    calls: list[tuple] = []
+
+    class FakeSession:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, exc_type, exc, traceback) -> None:
+            return None
+
+    def fake_get_assignment_prompt(session, assignment_id: int) -> str:
+        calls.append(("prompt", assignment_id))
+        return "Teacher configured prompt"
+
+    def fake_orchestrate(xml_content: str, assignment_prompt: str, rules=None) -> dict[str, object]:
+        calls.append(("orchestrate", xml_content, assignment_prompt, rules))
+        return {
+            "final_result": {
+                "light": "blue",
+                "grade": "良",
+                "feedback": "Good first pass.",
+                "source": "gemini",
+            }
+        }
+
+    def fake_save_submission_evaluation(session, payload, evaluation_payload, student_id: int) -> dict[str, object]:
+        calls.append(("save", payload.assignment_id, evaluation_payload["final_result"], student_id))
+        return {
+            "submission_id": 55,
+            "activity_id": payload.activity_id,
+            "assignment_id": payload.assignment_id,
+            "light": "blue",
+            "grade": "良",
+            "feedback": "Good first pass.",
+            "source": "gemini",
+        }
+
+    monkeypatch.setattr(submissions, "get_assignment_prompt", fake_get_assignment_prompt)
+    monkeypatch.setattr(submissions, "_orchestrate_submission_evaluation", fake_orchestrate)
+    monkeypatch.setattr(submissions, "save_submission_evaluation", fake_save_submission_evaluation)
+    monkeypatch.setattr(submissions, "get_session_local", lambda: FakeSession)
+
+    response = client.post(
+        "/api/submissions",
+        json={
+            "assignment_id": 101,
+            "activity_id": 1,
+            "xml_content": '<xml xmlns="https://developers.google.com/blockly/xml" />',
+        },
+        headers={"Authorization": "Bearer student-token"},
+    )
+
+    body = response.json()
+    assert response.status_code == 202
+    assert body["status"] == "evaluated"
+    assert body["submission_id"] == 55
+    assert body["feedback"] == "Good first pass."
+    assert "api_key" not in body
+    assert "GEMINI_API_KEY" not in str(body)
+    assert [call[0] for call in calls] == ["prompt", "orchestrate", "save"]
