@@ -3,9 +3,11 @@ from __future__ import annotations
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
+from app.models.activity import ClassActivity
 from app.models.assignment import Assignment
 from app.models.evaluation import Evaluation
 from app.models.submission import Submission
+from app.models.user import User
 from app.schemas.submission import SubmissionCreate
 
 
@@ -28,6 +30,7 @@ def save_submission_evaluation(
     if not isinstance(final_result, dict):
         raise ValueError("final_result must be a dictionary")
 
+    _ensure_demo_relations(session, payload, student_id)
     submission = Submission(
         student_id=student_id,
         activity_id=payload.activity_id,
@@ -51,6 +54,54 @@ def save_submission_evaluation(
     session.refresh(evaluation)
 
     return _to_evaluation_response(submission, evaluation)
+
+
+def _ensure_demo_relations(
+    session: Session,
+    payload: SubmissionCreate,
+    student_id: int,
+) -> None:
+    if session.get(User, student_id) is None:
+        session.add(
+            User(
+                id=student_id,
+                email=f"student-{student_id}@example.local",
+                full_name="Demo Student",
+                role="student",
+            )
+        )
+
+    teacher_id = 999
+    if session.get(User, teacher_id) is None:
+        session.add(
+            User(
+                id=teacher_id,
+                email="teacher@example.local",
+                full_name="Demo Teacher",
+                role="teacher",
+            )
+        )
+
+    if session.get(Assignment, payload.assignment_id) is None:
+        session.add(
+            Assignment(
+                id=payload.assignment_id,
+                title=f"Assignment {payload.assignment_id}",
+                description="Auto-created assignment placeholder.",
+            )
+        )
+
+    if session.get(ClassActivity, payload.activity_id) is None:
+        session.add(
+            ClassActivity(
+                id=payload.activity_id,
+                title=f"Activity {payload.activity_id}",
+                status="active",
+                teacher_id=teacher_id,
+            )
+        )
+
+    session.flush()
 
 
 def get_submission_evaluation(

@@ -3,7 +3,9 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import StaticPool
 
 from app.core.database import Base
+from app.models.activity import ClassActivity
 from app.models.assignment import Assignment
+from app.models.user import User
 from app.schemas.submission import SubmissionCreate
 from app.services.evaluation_record_service import (
     get_assignment_prompt,
@@ -65,3 +67,28 @@ def test_save_and_query_submission_evaluation_does_not_expose_api_key() -> None:
     }
     assert "api_key" not in queried
     assert "GEMINI_API_KEY" not in str(queried)
+
+
+def test_save_submission_evaluation_creates_demo_relations_when_database_is_empty() -> None:
+    session = make_session()
+    payload = SubmissionCreate(
+        assignment_id=101,
+        activity_id=7,
+        xml_content="<xml xmlns=\"https://developers.google.com/blockly/xml\" />",
+    )
+    evaluation_payload = {
+        "final_result": {
+            "light": "green",
+            "grade": "優",
+            "feedback": "Ready.",
+            "source": "mock",
+        }
+    }
+
+    saved = save_submission_evaluation(session, payload, evaluation_payload, student_id=3)
+
+    assert saved["status"] == "evaluated"
+    assert session.get(User, 3) is not None
+    assert session.get(User, 999) is not None
+    assert session.get(Assignment, 101) is not None
+    assert session.get(ClassActivity, 7) is not None

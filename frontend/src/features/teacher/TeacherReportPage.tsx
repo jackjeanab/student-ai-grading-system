@@ -1,54 +1,74 @@
-type ReportSummary = {
-  label: string;
-  value: string;
-  note: string;
-};
+import { useEffect, useState } from "react";
 
-const sampleReportSummaries: readonly ReportSummary[] = [
-  { label: "平均通過率", value: "82%", note: "較上次課程提升 6%" },
-  { label: "需修正比例", value: "11%", note: "多數集中在步驟順序" },
-  { label: "待補交比例", value: "7%", note: "已通知 2 位學生" },
-];
+import { getAssignmentReport, type AssignmentReport } from "../../lib/api";
 
-const sampleDistribution: readonly { label: string; count: number; tone: "red" | "yellow" | "green" | "blue" }[] = [
-  { label: "紅燈", count: 3, tone: "red" },
-  { label: "黃燈", count: 5, tone: "yellow" },
-  { label: "綠燈", count: 18, tone: "green" },
-  { label: "藍燈", count: 4, tone: "blue" },
-];
+const DEFAULT_ASSIGNMENT_ID = 101;
 
 export function TeacherReportPage() {
+  const [report, setReport] = useState<AssignmentReport | null>(null);
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    let ignore = false;
+
+    async function loadReport() {
+      try {
+        const nextReport = await getAssignmentReport(DEFAULT_ASSIGNMENT_ID);
+        if (!ignore) {
+          setReport(nextReport);
+        }
+      } catch (caught) {
+        if (!ignore) {
+          setError(caught instanceof Error ? caught.message : "Failed to load report.");
+        }
+      } finally {
+        if (!ignore) {
+          setIsLoading(false);
+        }
+      }
+    }
+
+    void loadReport();
+
+    return () => {
+      ignore = true;
+    };
+  }, []);
+
+  if (isLoading) {
+    return <p>Loading grading report...</p>;
+  }
+
+  if (error) {
+    return <p role="alert">{error}</p>;
+  }
+
+  if (!report) {
+    return <p>No report data.</p>;
+  }
+
+  const distribution = [
+    { label: "Green", count: report.summary.green, tone: "green" },
+    { label: "Blue", count: report.summary.blue, tone: "blue" },
+    { label: "Yellow", count: report.summary.yellow, tone: "yellow" },
+    { label: "Red", count: report.summary.red, tone: "red" },
+  ] as const;
+
   return (
     <section style={{ display: "grid", gap: 16 }}>
       <header>
-        <p style={{ color: "#6b7280", margin: 0 }}>老師端工作區</p>
-        <h1 style={{ margin: "6px 0 0" }}>報表</h1>
+        <p style={{ color: "#6b7280", margin: 0 }}>Teacher report</p>
+        <h1 style={{ margin: "6px 0 0" }}>Assignment {report.assignment_id}</h1>
         <p style={{ color: "#4b5563", lineHeight: 1.6 }}>
-          呈現課後成果、燈號分布與可追蹤的班級統計。
+          {report.summary.evaluated} of {report.summary.total} submissions evaluated.
         </p>
       </header>
 
-      <div style={{ display: "grid", gap: 12, gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))" }}>
-        {sampleReportSummaries.map((item) => (
-          <article
-            key={item.label}
-            style={{
-              border: "1px solid #e5e7eb",
-              borderRadius: 18,
-              padding: 18,
-            }}
-          >
-            <p style={{ margin: 0, color: "#6b7280" }}>{item.label}</p>
-            <h2 style={{ margin: "8px 0 0" }}>{item.value}</h2>
-            <p style={{ margin: "8px 0 0", color: "#4b5563" }}>{item.note}</p>
-          </article>
-        ))}
-      </div>
-
-      <section aria-label="燈號分布" style={{ border: "1px solid #e5e7eb", borderRadius: 18, padding: 18 }}>
-        <h2 style={{ marginTop: 0 }}>課後結果分布</h2>
+      <section aria-label="Light distribution" style={{ border: "1px solid #e5e7eb", borderRadius: 18, padding: 18 }}>
+        <h2 style={{ marginTop: 0 }}>Light distribution</h2>
         <div style={{ display: "grid", gap: 12 }}>
-          {sampleDistribution.map((item) => (
+          {distribution.map((item) => (
             <div key={item.label} style={{ display: "grid", gap: 6 }}>
               <div style={{ display: "flex", justifyContent: "space-between", gap: 12 }}>
                 <span>{item.label}</span>
@@ -59,13 +79,28 @@ export function TeacherReportPage() {
                   style={{
                     background: barColor[item.tone],
                     height: "100%",
-                    width: `${item.count * 4}%`,
+                    width: `${Math.min(item.count * 12, 100)}%`,
                   }}
                 />
               </div>
             </div>
           ))}
         </div>
+      </section>
+
+      <section aria-label="Submission feedback" style={{ border: "1px solid #e5e7eb", borderRadius: 18, padding: 18 }}>
+        <h2 style={{ marginTop: 0 }}>Submission feedback</h2>
+        {report.rows.length === 0 ? (
+          <p>No submissions yet.</p>
+        ) : (
+          <ul>
+            {report.rows.map((row) => (
+              <li key={row.submission_id}>
+                Student {row.student_id}: {row.light} / {row.grade} - {row.feedback}
+              </li>
+            ))}
+          </ul>
+        )}
       </section>
     </section>
   );
@@ -77,3 +112,4 @@ const barColor: Record<"red" | "yellow" | "green" | "blue", string> = {
   green: "#16a34a",
   blue: "#2563eb",
 };
+

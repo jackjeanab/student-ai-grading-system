@@ -9,13 +9,13 @@ import { TeacherReportPage } from "./features/teacher/TeacherReportPage";
 
 const sampleAssignments: readonly StudentAssignment[] = [
   {
-    id: "A1",
+    id: "101",
     title: "LED 控制任務",
     dueDate: "2026-04-24",
     status: "待繳交",
   },
   {
-    id: "A2",
+    id: "102",
     title: "感測器讀值",
     dueDate: "2026-04-26",
     status: "AI 檢查中",

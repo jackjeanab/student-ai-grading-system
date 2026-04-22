@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import { FeedbackCard } from "../../components/FeedbackCard";
+import { submitAssignmentXml, type SubmissionEvaluation } from "../../lib/api";
 import type { StudentAssignment } from "./StudentAssignmentsPage";
 
 type StudentSubmissionPageProps = {
@@ -8,25 +9,44 @@ type StudentSubmissionPageProps = {
   onBackToAssignments: () => void;
 };
 
+const DEFAULT_ACTIVITY_ID = 1;
+
 export function StudentSubmissionPage({ assignment, onBackToAssignments }: StudentSubmissionPageProps) {
   const [xmlCode, setXmlCode] = useState("");
-  const [submitted, setSubmitted] = useState(false);
+  const [evaluation, setEvaluation] = useState<SubmissionEvaluation | null>(null);
+  const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setError("");
+    setEvaluation(null);
+    setIsSubmitting(true);
+
+    try {
+      const result = await submitAssignmentXml({
+        assignmentId: Number.parseInt(assignment.id, 10),
+        activityId: DEFAULT_ACTIVITY_ID,
+        xmlContent: xmlCode,
+      });
+      setEvaluation(result);
+    } catch (caught) {
+      setError(caught instanceof Error ? caught.message : "Submission failed.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
 
   return (
     <section>
       <h1>{assignment.title}</h1>
-      <p>請直接貼上 Arduino Blockly XML 文字，再按送出作業。</p>
+      <p>Paste Arduino Blockly XML and submit it for AI grading.</p>
       <button type="button" onClick={onBackToAssignments}>
-        返回作業列表
+        Back to assignments
       </button>
 
-      <form
-        onSubmit={(event) => {
-          event.preventDefault();
-          setSubmitted(true);
-        }}
-      >
-        <label htmlFor="xml-code">XML 程式碼</label>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="xml-code">XML content</label>
         <textarea
           id="xml-code"
           name="xml-code"
@@ -35,17 +55,26 @@ export function StudentSubmissionPage({ assignment, onBackToAssignments }: Stude
           rows={12}
         />
 
-        <button type="submit">送出作業</button>
+        <button type="submit" disabled={isSubmitting || xmlCode.trim().length === 0}>
+          {isSubmitting ? "Submitting..." : "Submit for AI grading"}
+        </button>
       </form>
 
-      {submitted ? (
+      {error ? <p role="alert">{error}</p> : null}
+
+      {evaluation ? (
         <FeedbackCard
-          title="提交完成"
-          summary="AI 已完成初步評閱，請查看以下回饋。"
-          status="已送出"
-          points={["XML 格式可讀", "程式流程清楚", "可再補充註解說明"]}
+          title="AI grading result"
+          summary={evaluation.feedback}
+          status={`${evaluation.light} / ${evaluation.grade}`}
+          points={[
+            `Submission ID: ${evaluation.submission_id}`,
+            `Source: ${evaluation.source}`,
+            `Status: ${evaluation.status}`,
+          ]}
         />
       ) : null}
     </section>
   );
 }
+

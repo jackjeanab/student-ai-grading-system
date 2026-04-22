@@ -1,28 +1,55 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/vitest";
-import { expect, test } from "vitest";
+import { afterEach, expect, test, vi } from "vitest";
 
 import { StudentSubmissionPage } from "../features/student/StudentSubmissionPage";
 import type { StudentAssignment } from "../features/student/StudentAssignmentsPage";
 
-test("renders xml submission fields", () => {
+afterEach(() => {
+  vi.restoreAllMocks();
+});
+
+test("submits xml to backend and renders ai feedback", async () => {
   const assignment: StudentAssignment = {
-    id: "A1",
-    title: "LED 閃爍控制",
+    id: "101",
+    title: "LED blink",
     dueDate: "2026-04-24",
-    status: "待提交",
+    status: "open",
   };
+  const fetchMock = vi.spyOn(globalThis, "fetch").mockResolvedValue(
+    new Response(
+      JSON.stringify({
+        submission_id: 55,
+        activity_id: 1,
+        assignment_id: 101,
+        status: "evaluated",
+        light: "green",
+        grade: "優",
+        feedback: "Looks ready.",
+        source: "gemini",
+      }),
+      { status: 202 },
+    ),
+  );
 
   render(<StudentSubmissionPage assignment={assignment} onBackToAssignments={() => undefined} />);
 
-  expect(screen.getByLabelText("XML 程式碼")).toBeInTheDocument();
-  expect(screen.getByRole("button", { name: "送出作業" })).toBeInTheDocument();
-
-  fireEvent.change(screen.getByLabelText("XML 程式碼"), {
-    target: { value: "<xml />" },
+  fireEvent.change(screen.getByLabelText("XML content"), {
+    target: { value: '<xml xmlns="https://developers.google.com/blockly/xml" />' },
   });
-  fireEvent.click(screen.getByRole("button", { name: "送出作業" }));
+  fireEvent.click(screen.getByRole("button", { name: "Submit for AI grading" }));
 
-  expect(screen.getByText("提交完成")).toBeInTheDocument();
-  expect(screen.getByText("AI 已完成初步評閱，請查看以下回饋。")).toBeInTheDocument();
+  expect(await screen.findByText("AI grading result")).toBeInTheDocument();
+  expect(screen.getByText("Looks ready.")).toBeInTheDocument();
+  expect(fetchMock).toHaveBeenCalledWith(
+    "https://student-ai-grading-backend.onrender.com/api/submissions",
+    expect.objectContaining({
+      method: "POST",
+      body: JSON.stringify({
+        assignment_id: 101,
+        activity_id: 1,
+        xml_content: '<xml xmlns="https://developers.google.com/blockly/xml" />',
+      }),
+    }),
+  );
 });
