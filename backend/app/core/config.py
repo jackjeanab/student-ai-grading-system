@@ -9,6 +9,7 @@ class Settings(BaseSettings):
     frontend_origins: str = "http://localhost:5173"
     gemini_api_key: str = ""
     gemini_model: str = "gemini-2.5-flash-lite"
+    rate_limit_per_minute: int = 30
     supabase_url: str = ""
     supabase_service_role_key: str = ""
 

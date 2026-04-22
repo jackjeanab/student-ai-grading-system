@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.core.config import settings
+from app.core.rate_limit import InMemoryRateLimitMiddleware
 from app.api.reports import router as reports_router
 from app.api.teacher import router as teacher_router
 from app.api.activities import router as activities_router
@@ -11,6 +12,10 @@ from app.api.submissions import router as submissions_router
 from app import models as _models
 
 app = FastAPI(title="Student AI Grading System")
+app.add_middleware(
+    InMemoryRateLimitMiddleware,
+    requests_per_minute=settings.rate_limit_per_minute,
+)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
