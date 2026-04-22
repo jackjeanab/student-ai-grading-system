@@ -1,7 +1,8 @@
 from app.models.activity import ClassActivity
 from app.models.assignment import Assignment
 from app.models.submission import Submission
-from app.core.database import normalize_database_url
+from app.core import database
+from app.core.database import get_engine, normalize_database_url
 
 
 def test_submission_belongs_to_activity_and_assignment() -> None:
@@ -35,3 +36,21 @@ def test_normalize_database_url_removes_supabase_pgbouncer_flag() -> None:
     assert normalized == (
         "postgresql+psycopg://postgres:secret@example.pooler.supabase.com:6543/postgres?sslmode=require"
     )
+
+
+def test_get_engine_disables_psycopg_prepared_statements(monkeypatch) -> None:
+    calls: list[dict] = []
+
+    def fake_create_engine(*args, **kwargs):
+        calls.append({"args": args, "kwargs": kwargs})
+        return object()
+
+    get_engine.cache_clear()
+    monkeypatch.setattr(database.settings, "database_url", "postgresql://example.com/postgres")
+    monkeypatch.setattr(database, "create_engine", fake_create_engine)
+
+    get_engine()
+
+    assert calls[0]["kwargs"]["connect_args"] == {"prepare_threshold": None}
+    assert calls[0]["kwargs"]["future"] is True
+    get_engine.cache_clear()
