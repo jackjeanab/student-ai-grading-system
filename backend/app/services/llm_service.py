@@ -31,6 +31,8 @@ class LLMService:
     def build_prompt(self, parsed: dict, assignment_prompt: str) -> str:
         block_types = ", ".join(parsed.get("all_block_types", [])) or "none"
         root_block_types = ", ".join(parsed.get("root_block_types", [])) or "none"
+        xml_content = str(parsed.get("xml_content", "")).strip()
+        xml_context = xml_content[:12000] if xml_content else "(not provided)"
         return "\n".join(
             [
                 "You are grading a student's Arduino Blockly XML submission.",
@@ -43,6 +45,7 @@ class LLMService:
                 f"Assignment prompt: {assignment_prompt or '(missing)'}",
                 f"Root block types: {root_block_types}",
                 f"All detected block types: {block_types}",
+                f"Submitted XML: {xml_context}",
             ]
         )
 

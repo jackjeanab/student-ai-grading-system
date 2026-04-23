@@ -250,12 +250,12 @@ const eyebrowStyle = {
 const statsGridStyle = {
   display: "grid",
   gap: 12,
-  gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+  gridTemplateColumns: "repeat(auto-fit, minmax(130px, 1fr))",
 } as const;
 
 const layoutStyle = {
   alignItems: "start",
   display: "grid",
   gap: 20,
-  gridTemplateColumns: "minmax(0, 1.6fr) minmax(280px, 0.8fr)",
+  gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 320px), 1fr))",
 } as const;

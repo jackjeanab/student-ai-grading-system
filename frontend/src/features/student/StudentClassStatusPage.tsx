@@ -80,6 +80,7 @@ export function StudentClassStatusPage({ statusLights }: StudentClassStatusPageP
               background: "#fff",
               border: selectedStatus?.key === light.key ? "2px solid #111827" : "1px solid #d1d5db",
               borderRadius: 999,
+              color: "#17211b",
               display: "inline-flex",
               gap: 8,
               marginBottom: 8,

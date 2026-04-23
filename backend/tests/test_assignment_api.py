@@ -50,3 +50,44 @@ def test_teacher_can_create_assignment_prompt(monkeypatch) -> None:
         "description": "請設計 LED 每 1 秒閃爍一次。",
     }
     assert fake_session.assignment.title == "LED 控制任務"
+
+
+def test_lists_assignments_for_students(monkeypatch) -> None:
+    client = TestClient(app)
+
+    class FakeScalarResult:
+        def all(self):
+            return [
+                type(
+                    "AssignmentStub",
+                    (),
+                    {
+                        "id": 101,
+                        "title": "LED 控制任務",
+                        "description": "請設計 LED 每 1 秒閃爍一次。",
+                    },
+                )()
+            ]
+
+    class FakeSession:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, exc_type, exc, traceback) -> None:
+            return None
+
+        def scalars(self, statement):
+            return FakeScalarResult()
+
+    monkeypatch.setattr(assignments, "get_session_local", lambda: lambda: FakeSession())
+
+    response = client.get("/api/assignments")
+
+    assert response.status_code == 200
+    assert response.json() == [
+        {
+            "id": 101,
+            "title": "LED 控制任務",
+            "description": "請設計 LED 每 1 秒閃爍一次。",
+        }
+    ]

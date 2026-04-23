@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { StudentAssignmentsPage, type StudentAssignment } from "./features/student/StudentAssignmentsPage";
 import { StudentClassStatusPage, sampleStatusLights } from "./features/student/StudentClassStatusPage";
@@ -6,6 +6,7 @@ import { StudentSubmissionPage } from "./features/student/StudentSubmissionPage"
 import { TeacherActivitiesPage } from "./features/teacher/TeacherActivitiesPage";
 import { TeacherDashboardPage } from "./features/teacher/TeacherDashboardPage";
 import { TeacherReportPage } from "./features/teacher/TeacherReportPage";
+import { getAssignments } from "./lib/api";
 
 const sampleAssignments: readonly StudentAssignment[] = [
   {
@@ -34,11 +35,40 @@ export function App() {
   const [showClassStatus, setShowClassStatus] = useState(false);
   const [teacherView, setTeacherView] = useState<TeacherView>("dashboard");
 
+  useEffect(() => {
+    let ignore = false;
+
+    async function loadAssignments() {
+      try {
+        const remoteAssignments = await getAssignments();
+        if (!ignore && remoteAssignments.length > 0) {
+          setAssignments(
+            remoteAssignments.map((assignment) => ({
+              id: String(assignment.id),
+              title: assignment.title,
+              description: assignment.description ?? "",
+              dueDate: "2026-04-24",
+              status: "已開放",
+            })),
+          );
+        }
+      } catch {
+        // 保留預設作業，讓教室現場即使網路短暫不穩也能展示畫面。
+      }
+    }
+
+    void loadAssignments();
+
+    return () => {
+      ignore = true;
+    };
+  }, []);
+
   return (
-    <main>
-      <header>
-        <h1>學生作業 AI 評分與即時進度燈號顯示系統</h1>
-        <nav aria-label="角色切換">
+    <main className="app-shell">
+      <header className="app-header">
+        <h1 className="app-title">學生作業 AI 評分與即時進度燈號顯示系統</h1>
+        <nav className="app-nav" aria-label="角色切換">
           <button type="button" onClick={() => setRole("student")} aria-pressed={role === "student"}>
             學生端
           </button>
@@ -49,7 +79,7 @@ export function App() {
       </header>
 
       {role === "student" ? (
-        <section aria-label="學生端">
+        <section className="workspace" aria-label="學生端">
           <header>
             <button type="button" onClick={() => setShowClassStatus((current) => !current)}>
               {showClassStatus ? "返回作業列表" : "查看班級燈號"}
@@ -68,8 +98,8 @@ export function App() {
           )}
         </section>
       ) : (
-        <section aria-label="老師端">
-          <nav aria-label="老師端頁面切換">
+        <section className="workspace" aria-label="老師端">
+          <nav className="view-nav" aria-label="老師端頁面切換">
             <button
               type="button"
               onClick={() => setTeacherView("activities")}

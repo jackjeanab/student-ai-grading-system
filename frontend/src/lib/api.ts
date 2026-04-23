@@ -79,6 +79,12 @@ export async function createAssignment(params: {
   });
 }
 
+export async function getAssignments(): Promise<AssignmentResponse[]> {
+  return request<AssignmentResponse[]>("/api/assignments", {
+    headers: {},
+  });
+}
+
 export async function getAssignmentReport(assignmentId: number): Promise<AssignmentReport> {
   return request<AssignmentReport>(`/api/reports/assignments/${assignmentId}`, {
     headers: {

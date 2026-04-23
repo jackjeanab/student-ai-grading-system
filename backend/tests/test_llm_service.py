@@ -35,6 +35,19 @@ def test_build_prompt_requires_taiwan_traditional_chinese_teacher_voice() -> Non
     assert "鼓勵" in prompt
 
 
+def test_build_prompt_includes_submitted_xml_when_available() -> None:
+    prompt = LLMService(api_key="test-key").build_prompt(
+        {
+            "all_block_types": ["board_initializes_setup"],
+            "xml_content": '<xml><block type="board_initializes_setup" /></xml>',
+        },
+        "讓 LED 閃爍。",
+    )
+
+    assert "Submitted XML" in prompt
+    assert '<block type="board_initializes_setup"' in prompt
+
+
 def test_evaluate_with_gemini_client_parses_json_response() -> None:
     calls: dict[str, str] = {}
 

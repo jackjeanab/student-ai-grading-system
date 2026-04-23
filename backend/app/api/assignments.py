@@ -1,10 +1,25 @@
 from fastapi import APIRouter, Header, HTTPException, status
+from sqlalchemy import select
 
 from app.core.database import get_session_local
 from app.models.assignment import Assignment
 from app.schemas.assignment import AssignmentCreate, AssignmentResponse
 
 router = APIRouter(prefix="/api/assignments", tags=["assignments"])
+
+
+@router.get("", response_model=list[AssignmentResponse])
+def list_assignments() -> list[AssignmentResponse]:
+    with get_session_local()() as session:
+        assignments = session.scalars(select(Assignment).order_by(Assignment.id)).all()
+        return [
+            AssignmentResponse(
+                id=assignment.id,
+                title=assignment.title,
+                description=assignment.description,
+            )
+            for assignment in assignments
+        ]
 
 
 @router.post("", response_model=AssignmentResponse, status_code=status.HTTP_201_CREATED)

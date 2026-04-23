@@ -34,6 +34,7 @@ def _orchestrate_submission_evaluation(
     rules: dict[str, object] | None = None,
 ) -> dict[str, object]:
     parsed = parse_blockly_xml(xml_content)
+    parsed["xml_content"] = xml_content
     rule_result = evaluate_rules(parsed, rules or {})
     ai_result = LLMService().evaluate(parsed, assignment_prompt)
     final_result = decide_final_result(rule_result, ai_result)
