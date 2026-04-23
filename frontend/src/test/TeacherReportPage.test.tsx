@@ -30,7 +30,7 @@ test("loads assignment report from backend", async () => {
             status: "evaluated",
             light: "green",
             grade: "優",
-            feedback: "Good work.",
+            feedback: "同學做得很好。",
             source: "gemini",
           },
         ],
@@ -41,9 +41,9 @@ test("loads assignment report from backend", async () => {
 
   render(<TeacherReportPage />);
 
-  expect(await screen.findByRole("heading", { name: "Assignment 101" })).toBeInTheDocument();
-  expect(screen.getByText("1 of 1 submissions evaluated.")).toBeInTheDocument();
-  expect(screen.getByText("Student 1: green / 優 - Good work.")).toBeInTheDocument();
+  expect(await screen.findByRole("heading", { name: "作業 101" })).toBeInTheDocument();
+  expect(screen.getByText("已完成 1 份評分，共 1 份提交。")).toBeInTheDocument();
+  expect(screen.getByText("學生 1：綠燈 / 優 - 同學做得很好。")).toBeInTheDocument();
   expect(fetchMock).toHaveBeenCalledWith(
     "https://student-ai-grading-backend.onrender.com/api/reports/assignments/101",
     expect.objectContaining({

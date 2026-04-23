@@ -60,7 +60,10 @@ def create_submission(
         raise HTTPException(status_code=400, detail=str(exc)) from exc
 
     with get_session_local()() as session:
-        assignment_prompt = get_assignment_prompt(session, payload.assignment_id)
+        assignment_prompt = (payload.assignment_prompt or "").strip() or get_assignment_prompt(
+            session,
+            payload.assignment_id,
+        )
         evaluation_payload = _orchestrate_submission_evaluation(
             payload.xml_content,
             assignment_prompt,

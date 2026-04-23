@@ -1,8 +1,17 @@
+import { useState } from "react";
+
+import { createAssignment } from "../../lib/api";
+import type { StudentAssignment } from "../student/StudentAssignmentsPage";
+
 type TeacherActivity = {
   className: string;
   courseTitle: string;
   progress: string;
   nextStep: string;
+};
+
+type TeacherActivitiesPageProps = {
+  onAssignmentCreated?: (assignment: StudentAssignment) => void;
 };
 
 const sampleActivities: readonly TeacherActivity[] = [
@@ -26,7 +35,38 @@ const sampleActivities: readonly TeacherActivity[] = [
   },
 ];
 
-export function TeacherActivitiesPage() {
+export function TeacherActivitiesPage({ onAssignmentCreated }: TeacherActivitiesPageProps) {
+  const [title, setTitle] = useState("LED 控制任務");
+  const [description, setDescription] = useState("請設計 LED 每 1 秒閃爍一次。");
+  const [message, setMessage] = useState("");
+  const [isSaving, setIsSaving] = useState(false);
+
+  async function handleCreateAssignment(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setMessage("");
+    setIsSaving(true);
+
+    try {
+      const assignment = await createAssignment({
+        id: 101,
+        title,
+        description,
+      });
+      onAssignmentCreated?.({
+        id: String(assignment.id),
+        title: assignment.title,
+        description: assignment.description ?? "",
+        dueDate: "2026-04-24",
+        status: "已開放",
+      });
+      setMessage("題目已儲存，學生提交時會一起送給 AI 評分。");
+    } catch (caught) {
+      setMessage(caught instanceof Error ? caught.message : "題目儲存失敗。");
+    } finally {
+      setIsSaving(false);
+    }
+  }
+
   return (
     <section style={{ display: "grid", gap: 16 }}>
       <header>
@@ -36,6 +76,38 @@ export function TeacherActivitiesPage() {
           集中檢視各班目前的作業批次、追蹤進度與後續待辦。
         </p>
       </header>
+
+      <form
+        onSubmit={handleCreateAssignment}
+        style={{
+          border: "1px solid #d1d5db",
+          borderRadius: 18,
+          display: "grid",
+          gap: 12,
+          padding: 18,
+        }}
+      >
+        <h2 style={{ margin: 0 }}>教師設定作業題目</h2>
+        <label htmlFor="assignment-title">作業名稱</label>
+        <input
+          id="assignment-title"
+          value={title}
+          onChange={(event) => setTitle(event.target.value)}
+        />
+
+        <label htmlFor="assignment-description">題目說明</label>
+        <textarea
+          id="assignment-description"
+          rows={4}
+          value={description}
+          onChange={(event) => setDescription(event.target.value)}
+        />
+
+        <button type="submit" disabled={isSaving || title.trim().length === 0}>
+          {isSaving ? "儲存中..." : "儲存題目"}
+        </button>
+        {message ? <p role="status">{message}</p> : null}
+      </form>
 
       <div style={{ display: "grid", gap: 12 }}>
         {sampleActivities.map((activity) => (

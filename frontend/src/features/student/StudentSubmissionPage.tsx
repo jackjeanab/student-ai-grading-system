@@ -10,6 +10,12 @@ type StudentSubmissionPageProps = {
 };
 
 const DEFAULT_ACTIVITY_ID = 1;
+const lightLabels: Record<SubmissionEvaluation["light"], string> = {
+  green: "綠燈",
+  blue: "藍燈",
+  yellow: "黃燈",
+  red: "紅燈",
+};
 
 export function StudentSubmissionPage({ assignment, onBackToAssignments }: StudentSubmissionPageProps) {
   const [xmlCode, setXmlCode] = useState("");
@@ -27,11 +33,12 @@ export function StudentSubmissionPage({ assignment, onBackToAssignments }: Stude
       const result = await submitAssignmentXml({
         assignmentId: Number.parseInt(assignment.id, 10),
         activityId: DEFAULT_ACTIVITY_ID,
+        assignmentPrompt: [assignment.title, assignment.description].filter(Boolean).join("\n"),
         xmlContent: xmlCode,
       });
       setEvaluation(result);
     } catch (caught) {
-      setError(caught instanceof Error ? caught.message : "Submission failed.");
+      setError(caught instanceof Error ? caught.message : "作業送出失敗。");
     } finally {
       setIsSubmitting(false);
     }
@@ -40,13 +47,14 @@ export function StudentSubmissionPage({ assignment, onBackToAssignments }: Stude
   return (
     <section>
       <h1>{assignment.title}</h1>
-      <p>Paste Arduino Blockly XML and submit it for AI grading.</p>
+      {assignment.description ? <p>{assignment.description}</p> : null}
+      <p>請貼上 Arduino Blockly XML，系統會依照老師設定的題目進行 AI 評分。</p>
       <button type="button" onClick={onBackToAssignments}>
-        Back to assignments
+        返回作業列表
       </button>
 
       <form onSubmit={handleSubmit}>
-        <label htmlFor="xml-code">XML content</label>
+        <label htmlFor="xml-code">XML 內容</label>
         <textarea
           id="xml-code"
           name="xml-code"
@@ -56,7 +64,7 @@ export function StudentSubmissionPage({ assignment, onBackToAssignments }: Stude
         />
 
         <button type="submit" disabled={isSubmitting || xmlCode.trim().length === 0}>
-          {isSubmitting ? "Submitting..." : "Submit for AI grading"}
+          {isSubmitting ? "送出中..." : "送出給 AI 評分"}
         </button>
       </form>
 
@@ -64,17 +72,16 @@ export function StudentSubmissionPage({ assignment, onBackToAssignments }: Stude
 
       {evaluation ? (
         <FeedbackCard
-          title="AI grading result"
+          title="AI 評分結果"
           summary={evaluation.feedback}
-          status={`${evaluation.light} / ${evaluation.grade}`}
+          status={`${lightLabels[evaluation.light]} / ${evaluation.grade}`}
           points={[
-            `Submission ID: ${evaluation.submission_id}`,
-            `Source: ${evaluation.source}`,
-            `Status: ${evaluation.status}`,
+            `提交編號：${evaluation.submission_id}`,
+            `評分來源：AI`,
+            `處理狀態：已完成評分`,
           ]}
         />
       ) : null}
     </section>
   );
 }
-

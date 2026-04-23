@@ -11,12 +11,14 @@ const sampleAssignments: readonly StudentAssignment[] = [
   {
     id: "101",
     title: "LED 控制任務",
+    description: "請設計 LED 每 1 秒閃爍一次。",
     dueDate: "2026-04-24",
     status: "待繳交",
   },
   {
     id: "102",
     title: "感測器讀值",
+    description: "請使用感測器積木讀取數值，並依照條件控制輸出。",
     dueDate: "2026-04-26",
     status: "AI 檢查中",
   },
@@ -27,6 +29,7 @@ type TeacherView = "activities" | "dashboard" | "report";
 
 export function App() {
   const [role, setRole] = useState<AppRole>("student");
+  const [assignments, setAssignments] = useState<readonly StudentAssignment[]>(sampleAssignments);
   const [selectedAssignment, setSelectedAssignment] = useState<StudentAssignment | null>(null);
   const [showClassStatus, setShowClassStatus] = useState(false);
   const [teacherView, setTeacherView] = useState<TeacherView>("dashboard");
@@ -61,7 +64,7 @@ export function App() {
               onBackToAssignments={() => setSelectedAssignment(null)}
             />
           ) : (
-            <StudentAssignmentsPage assignments={sampleAssignments} onSelectAssignment={setSelectedAssignment} />
+            <StudentAssignmentsPage assignments={assignments} onSelectAssignment={setSelectedAssignment} />
           )}
         </section>
       ) : (
@@ -91,7 +94,14 @@ export function App() {
           </nav>
 
           {teacherView === "activities" ? (
-            <TeacherActivitiesPage />
+            <TeacherActivitiesPage
+              onAssignmentCreated={(assignment) =>
+                setAssignments((current) => [
+                  assignment,
+                  ...current.filter((candidate) => candidate.id !== assignment.id),
+                ])
+              }
+            />
           ) : teacherView === "report" ? (
             <TeacherReportPage />
           ) : (

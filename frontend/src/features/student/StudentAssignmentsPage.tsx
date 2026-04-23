@@ -1,6 +1,7 @@
 export type StudentAssignment = {
   id: string;
   title: string;
+  description?: string;
   dueDate: string;
   status: string;
 };
@@ -21,6 +22,7 @@ export function StudentAssignmentsPage({ assignments, onSelectAssignment }: Stud
           <li key={assignment.id}>
             <article>
               <h2>{assignment.title}</h2>
+              {assignment.description ? <p>{assignment.description}</p> : null}
               <p>截止日：{assignment.dueDate}</p>
               <p>狀態：{assignment.status}</p>
               <button type="button" onClick={() => onSelectAssignment(assignment)}>

@@ -26,6 +26,12 @@ export type AssignmentReport = {
   rows: AssignmentReportRow[];
 };
 
+export type AssignmentResponse = {
+  id: number;
+  title: string;
+  description: string | null;
+};
+
 const DEFAULT_API_BASE_URL = "https://student-ai-grading-backend.onrender.com";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? DEFAULT_API_BASE_URL;
 
@@ -36,6 +42,7 @@ export function getApiBaseUrl(): string {
 export async function submitAssignmentXml(params: {
   assignmentId: number;
   activityId: number;
+  assignmentPrompt?: string;
   xmlContent: string;
 }): Promise<SubmissionEvaluation> {
   return request<SubmissionEvaluation>("/api/submissions", {
@@ -47,7 +54,27 @@ export async function submitAssignmentXml(params: {
     body: JSON.stringify({
       assignment_id: params.assignmentId,
       activity_id: params.activityId,
+      assignment_prompt: params.assignmentPrompt,
       xml_content: params.xmlContent,
+    }),
+  });
+}
+
+export async function createAssignment(params: {
+  id?: number;
+  title: string;
+  description?: string;
+}): Promise<AssignmentResponse> {
+  return request<AssignmentResponse>("/api/assignments", {
+    method: "POST",
+    headers: {
+      Authorization: "Bearer dev-token",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      id: params.id,
+      title: params.title,
+      description: params.description,
     }),
   });
 }
@@ -64,7 +91,7 @@ async function request<T>(path: string, init: RequestInit): Promise<T> {
   const response = await fetch(`${getApiBaseUrl()}${path}`, init);
   if (!response.ok) {
     const message = await response.text();
-    throw new Error(message || `Request failed with status ${response.status}`);
+    throw new Error(message || `請求失敗，狀態碼：${response.status}`);
   }
   return response.json() as Promise<T>;
 }

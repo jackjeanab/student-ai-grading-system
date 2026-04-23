@@ -116,3 +116,63 @@ def test_create_submission_saves_evaluation_without_exposing_api_key(monkeypatch
     assert "api_key" not in body
     assert "GEMINI_API_KEY" not in str(body)
     assert [call[0] for call in calls] == ["prompt", "orchestrate", "save"]
+
+
+def test_create_submission_uses_prompt_sent_with_student_answer(monkeypatch) -> None:
+    client = TestClient(app)
+    calls: list[tuple] = []
+
+    class FakeSession:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, exc_type, exc, traceback) -> None:
+            return None
+
+    def fake_get_assignment_prompt(session, assignment_id: int) -> str:
+        calls.append(("prompt", assignment_id))
+        return "Database prompt should not be used"
+
+    def fake_orchestrate(xml_content: str, assignment_prompt: str, rules=None) -> dict[str, object]:
+        calls.append(("orchestrate", assignment_prompt))
+        return {
+            "final_result": {
+                "light": "blue",
+                "grade": "良",
+                "feedback": "同學有依照題目完成基本控制。",
+                "source": "gemini",
+            }
+        }
+
+    def fake_save_submission_evaluation(session, payload, evaluation_payload, student_id: int) -> dict[str, object]:
+        calls.append(("save", payload.assignment_prompt))
+        return {
+            "submission_id": 56,
+            "activity_id": payload.activity_id,
+            "assignment_id": payload.assignment_id,
+            "light": "blue",
+            "grade": "良",
+            "feedback": "同學有依照題目完成基本控制。",
+            "source": "gemini",
+        }
+
+    monkeypatch.setattr(submissions, "get_assignment_prompt", fake_get_assignment_prompt)
+    monkeypatch.setattr(submissions, "_orchestrate_submission_evaluation", fake_orchestrate)
+    monkeypatch.setattr(submissions, "save_submission_evaluation", fake_save_submission_evaluation)
+    monkeypatch.setattr(submissions, "get_session_local", lambda: FakeSession)
+
+    response = client.post(
+        "/api/submissions",
+        json={
+            "assignment_id": 101,
+            "activity_id": 1,
+            "assignment_prompt": "請設計 LED 每 1 秒閃爍一次。",
+            "xml_content": '<xml xmlns="https://developers.google.com/blockly/xml" />',
+        },
+        headers={"Authorization": "Bearer student-token"},
+    )
+
+    assert response.status_code == 202
+    assert ("prompt", 101) not in calls
+    assert ("orchestrate", "請設計 LED 每 1 秒閃爍一次。") in calls
+    assert ("save", "請設計 LED 每 1 秒閃爍一次。") in calls
