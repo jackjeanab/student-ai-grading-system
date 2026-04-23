@@ -9,6 +9,7 @@ def test_evaluate_without_api_key_uses_local_fallback() -> None:
     assert result["light"] == "green"
     assert result["source"] == "mock"
     assert result["feedback"]
+    assert "同學" in result["feedback"]
 
 
 def test_build_prompt_requires_json_and_includes_assignment_context() -> None:
@@ -21,6 +22,17 @@ def test_build_prompt_requires_json_and_includes_assignment_context() -> None:
     assert "green, blue, yellow, red" in prompt
     assert "Use Arduino blocks to blink an LED." in prompt
     assert "board_initializes_setup" in prompt
+
+
+def test_build_prompt_requires_taiwan_traditional_chinese_teacher_voice() -> None:
+    prompt = LLMService(api_key="test-key").build_prompt(
+        {"all_block_types": ["board_initializes_setup", "delay_custom"]},
+        "讓 LED 閃爍。",
+    )
+
+    assert "台灣繁體中文" in prompt
+    assert "國中資訊老師" in prompt
+    assert "鼓勵" in prompt
 
 
 def test_evaluate_with_gemini_client_parses_json_response() -> None:
@@ -69,5 +81,5 @@ def test_evaluate_falls_back_to_yellow_when_gemini_fails() -> None:
 
     assert result["light"] == "yellow"
     assert result["source"] == "fallback"
-    assert "AI grading is temporarily unavailable" in result["feedback"]
-
+    assert "老師" in result["feedback"]
+    assert "稍後" in result["feedback"]

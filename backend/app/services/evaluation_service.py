@@ -22,19 +22,19 @@ def mock_ai_evaluate(parsed: dict, assignment_prompt: str) -> dict:
         return {
             "light": "green",
             "grade": "優",
-            "feedback": "Local fallback: the submission contains enough Blockly blocks for a strong first pass.",
+            "feedback": "同學做得很好，你的程式已經放入足夠的 Blockly 積木，整體結構看起來很完整。接下來可以再檢查每個積木的順序與參數，讓 LED 控制更穩定。",
             "source": "mock",
         }
     if block_count >= 5:
         return {
             "light": "blue",
             "grade": "良",
-            "feedback": "Local fallback: the submission has several relevant blocks but may need teacher review.",
+            "feedback": "同學不錯喔，你已經使用了一些和任務有關的積木。可以再回頭確認是否有包含初始化、重複執行與延遲控制，讓程式更符合題目要求。",
             "source": "mock",
         }
     return {
         "light": "yellow",
         "grade": "可",
-        "feedback": "Local fallback: the submission is short and should be reviewed.",
+        "feedback": "同學已經完成提交，這是很好的開始。不過目前積木數量比較少，建議再檢查題目要求，把控制 LED 需要的初始化、輸出或延遲積木補完整。",
         "source": "mock",
     }

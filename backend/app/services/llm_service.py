@@ -35,6 +35,9 @@ class LLMService:
             [
                 "You are grading a student's Arduino Blockly XML submission.",
                 "Return JSON only with exactly these keys: light, grade, feedback.",
+                "feedback 必須使用台灣繁體中文。",
+                "feedback 請使用台灣國中資訊老師的口吻。",
+                "feedback 要鼓勵學生：先說做得好的地方，再用國中生聽得懂的方式說明可以改進的地方。",
                 "Allowed light values: green, blue, yellow, red.",
                 "Use green for excellent, blue for good, yellow for partially complete, red for serious issues.",
                 f"Assignment prompt: {assignment_prompt or '(missing)'}",
@@ -107,6 +110,6 @@ class LLMService:
         return {
             "light": "yellow",
             "grade": DEFAULT_GRADES["yellow"],
-            "feedback": "AI grading is temporarily unavailable; please review this submission manually.",
+            "feedback": "這次系統暫時無法完成 AI 評分，不過你已經完成提交了。老師會建議你稍後再試一次，或請老師協助確認作業內容。",
             "source": "fallback",
         }
