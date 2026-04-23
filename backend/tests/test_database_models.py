@@ -2,7 +2,9 @@ from app.models.activity import ClassActivity
 from app.models.assignment import Assignment
 from app.models.submission import Submission
 from app.core import database
-from app.core.database import get_engine, normalize_database_url
+from sqlalchemy import Column, ForeignKey, Integer, MetaData, String, Table, create_engine, inspect
+
+from app.core.database import ensure_schema_compatibility, get_engine, normalize_database_url
 
 
 def test_submission_belongs_to_activity_and_assignment() -> None:
@@ -54,3 +56,27 @@ def test_get_engine_disables_psycopg_prepared_statements(monkeypatch) -> None:
     assert calls[0]["kwargs"]["connect_args"] == {"prepare_threshold": None}
     assert calls[0]["kwargs"]["future"] is True
     get_engine.cache_clear()
+
+
+def test_ensure_schema_compatibility_adds_missing_evaluation_columns() -> None:
+    engine = create_engine("sqlite://", future=True)
+    metadata = MetaData()
+    Table(
+        "submissions",
+        metadata,
+        Column("id", Integer, primary_key=True),
+    )
+    Table(
+        "evaluations",
+        metadata,
+        Column("id", Integer, primary_key=True),
+        Column("submission_id", Integer, ForeignKey("submissions.id")),
+        Column("verdict", String(50)),
+    )
+    metadata.create_all(engine)
+
+    ensure_schema_compatibility(engine)
+
+    columns = {column["name"] for column in inspect(engine).get_columns("evaluations")}
+    assert "grade" in columns
+    assert "source" in columns

@@ -82,6 +82,9 @@ def _ensure_demo_relations(
             )
         )
 
+    # Ensure FK targets exist before creating activity/submission rows.
+    session.flush()
+
     if session.get(Assignment, payload.assignment_id) is None:
         session.add(
             Assignment(

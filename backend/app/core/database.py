@@ -1,7 +1,7 @@
 from functools import lru_cache
 from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, inspect, text
 from sqlalchemy.engine import Engine
 from sqlalchemy.orm import DeclarativeBase, sessionmaker
 
@@ -58,4 +58,26 @@ def get_session_local() -> sessionmaker:
 
 
 def create_db_tables() -> None:
-    Base.metadata.create_all(bind=get_engine())
+    engine = get_engine()
+    Base.metadata.create_all(bind=engine)
+    ensure_schema_compatibility(engine)
+
+
+def ensure_schema_compatibility(engine: Engine) -> None:
+    inspector = inspect(engine)
+    if "evaluations" not in inspector.get_table_names():
+        return
+
+    columns = {column["name"] for column in inspector.get_columns("evaluations")}
+    statements = []
+    if "grade" not in columns:
+        statements.append("ALTER TABLE evaluations ADD COLUMN grade VARCHAR(50)")
+    if "source" not in columns:
+        statements.append("ALTER TABLE evaluations ADD COLUMN source VARCHAR(50)")
+
+    if not statements:
+        return
+
+    with engine.begin() as connection:
+        for statement in statements:
+            connection.execute(text(statement))
